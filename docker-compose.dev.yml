@@ -1,0 +1,5 @@
+services:
+  db:
+    ports:
+    # Export port for debug only. The DB should be accessible only inside the docker network
+    - 127.0.0.1:${POSTGRES_PORT:-5432}:5432

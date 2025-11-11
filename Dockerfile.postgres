@@ -1,0 +1,43 @@
+# Keep this before the FROM (as args are scoped)
+ARG PG_VERSION="17.6"
+
+FROM postgres:$PG_VERSION
+
+# Keep these args after the FROM (as args are scoped)
+ARG PG_MAJOR="17"
+ARG PGVECTOR_VERSION="v0.8.1"
+ARG PGVECTORSCALE_VERSION="0.9.0"
+
+# Install build dependencies
+RUN apt-get update && \
+    apt-mark hold locales && \
+    apt-get install -y --no-install-recommends git jq curl build-essential gcc pkg-config ca-certificates libssl-dev libclang-dev postgresql-server-dev-$PG_MAJOR && \
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+
+# Install rust, to intall pgvectorscale
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Clone and install pgvector
+RUN cd /tmp && \
+    git clone --branch $PGVECTOR_VERSION https://github.com/pgvector/pgvector.git && \
+    cd /tmp/pgvector && \
+    make clean && \
+    make OPTFLAGS="" && \
+    make install && \
+    mkdir /usr/share/doc/pgvector && \
+    cp LICENSE README.md /usr/share/doc/pgvector && \
+    rm -r /tmp/pgvector
+
+# Install pgvectorscale
+RUN cd /tmp && \
+    git clone --branch $PGVECTORSCALE_VERSION https://github.com/timescale/pgvectorscale && \
+    cd pgvectorscale/pgvectorscale && \
+    cargo install --locked cargo-pgrx --version $(cargo metadata --format-version 1 | jq -r '.packages[] | select(.name == "pgrx") | .version') && \
+    cd /tmp/pgvectorscale/pgvectorscale && \
+    cd /tmp/pgvectorscale/pgvectorscale && cargo pgrx init --pg17 pg_config && \
+    cargo pgrx install --release
+
+# Clean apt
+RUN apt-mark unhold locales && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
