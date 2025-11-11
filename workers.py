@@ -1,23 +1,19 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import os
-from huey import RedisHuey, crontab
 
-import reflex as rx
-from observatoire.schema.locality import Locality
+from celery import Celery
 
-# Queues
-queue = RedisHuey(
-    "vue_ensemble_huey",
-    host=os.environ.get("REDIS_HOST", "localhost"),
-    port=int(os.environ.get("REDIS_PORT", "6379")),
+app = Celery(
+    "tasks",
+    broker=f"redis://{os.environ.get('REDIS_HOST')}:{os.environ.get('REDIS_PORT')}/0",
+    backend=f"redis://{os.environ.get('REDIS_HOST')}:{os.environ.get('REDIS_PORT')}/0",
 )
 
 
-@queue.task()
-def add_numbers(a, b):
-    ret = a + b
-
-    with rx.session() as session:
-        session.add(Locality(name=f"new locality {ret}"))
-        session.commit()
-
-    return ret
+@app.task
+def add(x, y):
+    print("adding ", x, y)
+    return x + y

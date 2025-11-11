@@ -8,7 +8,7 @@ run-app: migrate
 	uv run --env-file .env reflex run
 
 run-workers:
-	uv run huey_consumer.py workers.queue -w 2
+	uv run celery -A workers worker
 
 start-dev-services:
 	docker compose --env-file .env -f docker-compose.services.yml -f docker-compose.dev.yml up -d

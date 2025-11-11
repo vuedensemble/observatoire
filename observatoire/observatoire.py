@@ -14,8 +14,8 @@ class State(rx.State):
     rows: list[str] = []
 
     @rx.event
-    def test_huey(self):
-        workers.add_numbers(1, 2)
+    def test_queue(self):
+        workers.add.delay(1, 2)
 
     @rx.event
     def on_load(self):
@@ -47,9 +47,9 @@ def index() -> rx.Component:
                 is_external=True,
             ),
             rx.button(
-                "Test Huey",
+                "Test queue",
                 color_scheme="red",
-                on_click=State.test_huey,
+                on_click=State.test_queue,
             ),
             spacing="5",
             justify="center",
