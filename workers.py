@@ -15,7 +15,6 @@ queue = RedisHuey(
 @queue.task()
 def add_numbers(a, b):
     ret = a + b
-    print("running add_numbers", a, b, ret)
 
     with rx.session() as session:
         session.add(Locality(name=f"new locality {ret}"))

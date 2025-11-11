@@ -15,8 +15,7 @@ class State(rx.State):
 
     @rx.event
     def test_huey(self):
-        result = workers.add_numbers(1, 2)
-        print("result", result)
+        workers.add_numbers(1, 2)
 
     @rx.event
     def on_load(self):

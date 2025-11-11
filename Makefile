@@ -1,7 +1,10 @@
 format:
 	uv run ruff format
 
-run-app:
+migrate:
+	uv run reflex db migrate
+
+run-app: migrate
 	uv run --env-file .env reflex run
 
 run-workers:
