@@ -1,3 +1,8 @@
+TAILSCALE_IP=$(shell tailscale ip -4)
+
+jupyter:
+	uv run jupyter lab --NotebookApp.token='abcd1234' --ip ${TAILSCALE_IP}
+
 # Formatting
 format:
 	uv run ruff format

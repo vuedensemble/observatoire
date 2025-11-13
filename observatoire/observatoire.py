@@ -4,6 +4,8 @@ import reflex as rx
 from sqlmodel import select
 
 from observatoire.schema.locality import Locality
+from observatoire.schema.document import Document
+from observatoire.schema.documented_event import DocumentedEvent
 from rxconfig import config
 import workers
 
@@ -11,7 +13,7 @@ import workers
 class State(rx.State):
     """The app state."""
 
-    rows: list[str] = []
+    rows: list[dict[str, str]] = []
 
     @rx.event
     def test_queue(self):
@@ -19,13 +21,20 @@ class State(rx.State):
 
     @rx.event
     def on_load(self):
-        with rx.session() as session:
-            self.rows = session.exec(select(Locality.name)).all()
+        # with rx.session() as session:
+        #     self.rows = session.exec(select(Locality.name)).all()
+        self.rows = [
+            {"name": "Biarritz", "annees": "2020, 2021", "docs": 981},
+            {"name": "Bayonne", "annees": "2020, 2021, 2022, 2023", "docs": 420},
+        ]
 
 
-def row_display(value: str):
+def row_display(row: dict[str, str]):
+    print(row)
     return rx.table.row(
-        rx.table.row_header_cell(value),
+        rx.table.row_header_cell(row["name"]),
+        rx.table.cell(row["annees"]),
+        rx.table.cell(row["docs"]),
     )
 
 
@@ -33,42 +42,36 @@ def row_display(value: str):
 def index() -> rx.Component:
     # Welcome Page (Index)
     return rx.container(
-        rx.color_mode.button(position="top-right"),
-        rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
-            ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
-            ),
-            rx.button(
-                "Test queue",
-                color_scheme="red",
-                on_click=State.test_queue,
-            ),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
-        ),
-        rx.table.root(
-            rx.table.header(
-                rx.table.row(
-                    rx.table.column_header_cell("Name"),
+        rx.grid(
+            rx.color_mode.button(position="top-right"),
+            rx.vstack(
+                rx.heading("Observatoire", size="9"),
+                rx.text(
+                    "Bienvenue sur l'observatoire des villes du pays basque",
+                    size="5",
                 ),
+                spacing="5",
+                justify="center",
             ),
-            rx.table.body(
-                rx.foreach(
-                    State.rows,
-                    row_display,
-                )
+            rx.heading("Villes", size="7"),
+            rx.table.root(
+                rx.table.header(
+                    rx.table.row(
+                        rx.table.column_header_cell("Nom"),
+                        rx.table.column_header_cell("Années couvertes"),
+                        rx.table.column_header_cell("Nombre de documents"),
+                    )
+                ),
+                rx.table.body(
+                    rx.foreach(
+                        State.rows,
+                        row_display,
+                    )
+                ),
+                width="100%",
             ),
-            width="100%",
-        ),
+            spacing="8",
+        )
     )
 
 

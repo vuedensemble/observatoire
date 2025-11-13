@@ -7,3 +7,6 @@ assets/external/
 .env
 data
 .venv
+datasets
+.ipynb_checkpoints
+*.ipynb
