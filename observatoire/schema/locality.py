@@ -8,6 +8,8 @@ class Locality(rx.Model, table=True):
     """
     Localities (cities, regions, etc.)
     """
+
+    id: int | None = Field(default=None, primary_key=True)
     type: str = Field(sa_column=Column(TEXT), description="One of 'city', 'region'")
     name: str = Field(sa_column=Column(TEXT), description="Locality name")
     postcode: str = Field(

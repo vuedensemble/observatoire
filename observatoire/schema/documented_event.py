@@ -7,6 +7,8 @@ class DocumentedEvent(rx.Model, table=True):
     """
     In a Document, there can be multiple DocumentedEvent(s) that are reported within it, each with its own topic and summary
     """
+
+    id: int | None = Field(default=None, primary_key=True)
     document_id: int = Field(
         foreign_key="document.id", description="Relationship to the source document"
     )

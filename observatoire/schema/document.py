@@ -8,6 +8,8 @@ class Document(rx.Model, table=True):
     """
     Generic Document type, usually PDFs, with OCR content extraction to Markdown and events parsing
     """
+
+    id: int | None = Field(default=None, primary_key=True)
     locality_id: int = Field(
         foreign_key="locality.id", description="Link back to the locality, if any"
     )

@@ -16,4 +16,5 @@ dependencies = [
     "reflex>=0.8.19",
     "requests>=2.32.5",
     "ruff>=0.14.4",
+    "trafilatura>=2.0.0",
 ]
