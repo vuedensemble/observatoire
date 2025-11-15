@@ -1,5 +1,5 @@
 import reflex as rx
-from sqlmodel import select
+from sqlmodel import select, func
 
 from observatoire.schema.locality import Locality
 from observatoire.schema.document import Document
@@ -12,37 +12,48 @@ import workers
 class State(rx.State):
     loading: bool = True
     rows: list[Locality] = []
+    n_documents_per_locality: dict[str, int]
 
     @rx.event
     def on_load(self):
         with rx.session() as session:
             self.rows = session.exec(select(Locality)).all()
+            n_documents_per_locality = dict(
+                session.exec(
+                    select(Document.locality_id, func.count(Document.id)).group_by(Document.locality_id)
+                ).all()
+            )
+            self.n_documents_per_locality = n_documents_per_locality
+
             self.loading = False
 
 
-def row_display(row: Locality):
-    return rx.table.row(
-        rx.table.cell(
-            rx.flex(
-                rx.link(rx.icon("eye"), href=f"/localities/{row.id}"),
-                rx.dialog.root(
-                    rx.dialog.trigger(rx.icon("settings")),
-                    rx.dialog.content(
-                        rx.dialog.title("Paramètres"),
-                        rx.dialog.description(
-                            rx.markdown(row.administrative_reporting_setup)
-                        ),
-                        rx.dialog.close(
-                            rx.button("Fermer", size="3"),
+def build_row_display(n_documents_per_locality: dict[str, int]):
+    def row_display(row: Locality):
+        return rx.table.row(
+            rx.table.cell(
+                rx.flex(
+                    rx.link(rx.icon("eye"), href=f"/localities/{row.id}"),
+                    rx.dialog.root(
+                        rx.dialog.trigger(rx.icon("settings")),
+                        rx.dialog.content(
+                            rx.dialog.title("Paramètres"),
+                            rx.dialog.description(
+                                rx.markdown(row.administrative_reporting_setup)
+                            ),
+                            rx.dialog.close(
+                                rx.button("Fermer", size="3"),
+                            ),
                         ),
                     ),
-                ),
-                spacing="2",
-            )
-        ),
-        rx.table.cell(row.name),
-        rx.table.cell(rx.link(row.website, href=row.website, is_external=True)),
-    )
+                    spacing="2",
+                )
+            ),
+            rx.table.cell(row.name),
+            rx.table.cell(rx.link(row.website, href=row.website, is_external=True)),
+            rx.table.cell(n_documents_per_locality.get(row.id))
+        )
+    return row_display
 
 
 @rx.page(on_load=State.on_load, route="/")
@@ -78,7 +89,7 @@ def index() -> rx.Component:
                 rx.table.body(
                     rx.foreach(
                         State.rows,
-                        row_display,
+                        build_row_display(State.n_documents_per_locality),
                     )
                 ),
                 width="100%",

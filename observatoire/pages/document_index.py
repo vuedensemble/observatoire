@@ -20,7 +20,7 @@ class State(rx.State):
                 select(Document.id, Document.file_name, Document.i_md_from_ocr, Document.source_url).where(Document.id == self.did)
             ).one()
             self.document = Document(id=id, file_name=file_name, i_md_from_ocr=i_md_from_ocr, source_url=source_url)
-            self.document_md = extract_md(i_md_from_ocr)
+            self.document_md = extract_md(i_md_from_ocr, image_strategy="include_base64")
             self.loading = False
 
     @rx.event
