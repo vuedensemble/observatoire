@@ -100,19 +100,22 @@ class Document(rx.Model, table=True):
     )
 
 
-def extract_md(md_dict: dict | None, image_strategy: typing.Literal["include_base64", "remove"]):
+def extract_md(
+    md_dict: dict | None, image_strategy: typing.Literal["include_base64", "remove"]
+):
     if md_dict is None:
         return None
     s = ""
     for page in md_dict["pages"]:
-        page_images_by_id = dict([
-            (img["id"], img["image_base64"])
-            for img in page.get("images", [])
-        ])
+        page_images_by_id = dict(
+            [(img["id"], img["image_base64"]) for img in page.get("images", [])]
+        )
         page_md = page["markdown"]
         for img_id, img_base64 in page_images_by_id.items():
             if image_strategy == "include_base64":
-                page_md = page_md.replace(f"![{img_id}]({img_id})", f"![{img_id}]({img_base64})")
+                page_md = page_md.replace(
+                    f"![{img_id}]({img_id})", f"![{img_id}]({img_base64})"
+                )
             elif image_strategy == "remove":
                 page_md = page_md.replace(f"![{img_id}]({img_id})", "")
         s += page_md

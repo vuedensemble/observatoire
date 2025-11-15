@@ -154,7 +154,9 @@ def download_and_save_documents_for_locality(locality_id: int):
                     continue
                 files_for_all_urls.append((base_url, link))
 
-    print(f"Will run on {len(files_for_all_urls)} URLs / {len(already_extracted_urls)} unique docs in DB / {len(existing_document_source_urls)} docs in DB")
+    print(
+        f"Will run on {len(files_for_all_urls)} URLs / {len(already_extracted_urls)} unique docs in DB / {len(existing_document_source_urls)} docs in DB"
+    )
 
     headers = get_default_headers()
     output_folder = f"/tmp/observatoire/locality-{locality_id}"
@@ -179,7 +181,9 @@ def download_and_save_documents_for_locality(locality_id: int):
                     os.path.join(extract_to_folder, "**", "*.pdf"), recursive=True
                 )
                 for filepath_in_zip in filepaths:
-                    file_name, file_extension = split_name_and_extension(filepath_in_zip)
+                    file_name, file_extension = split_name_and_extension(
+                        filepath_in_zip
+                    )
                     new_doc = Document(
                         locality_id=locality_id,
                         file_name=file_name,

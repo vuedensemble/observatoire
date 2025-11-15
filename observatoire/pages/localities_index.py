@@ -20,7 +20,9 @@ class State(rx.State):
             self.rows = session.exec(select(Locality)).all()
             n_documents_per_locality = dict(
                 session.exec(
-                    select(Document.locality_id, func.count(Document.id)).group_by(Document.locality_id)
+                    select(Document.locality_id, func.count(Document.id)).group_by(
+                        Document.locality_id
+                    )
                 ).all()
             )
             self.n_documents_per_locality = n_documents_per_locality
@@ -51,14 +53,15 @@ def build_row_display(n_documents_per_locality: dict[str, int]):
             ),
             rx.table.cell(row.name),
             rx.table.cell(rx.link(row.website, href=row.website, is_external=True)),
-            rx.table.cell(n_documents_per_locality.get(row.id))
+            rx.table.cell(n_documents_per_locality.get(row.id)),
         )
+
     return row_display
 
 
 @rx.page(on_load=State.on_load, route="/")
 def index() -> rx.Component:
-    return rx.container(
+    return rx.box(
         navbar(),
         rx.grid(
             rx.color_mode.button(position="top-right"),
@@ -96,4 +99,5 @@ def index() -> rx.Component:
             ),
             spacing="8",
         ),
+        padding="2rem"
     )

@@ -20,13 +20,24 @@ class State(rx.State):
                 select(Locality).where(Locality.id == self.lid)
             ).one()
             documents_results = session.exec(
-                select(Document.id, Document.file_name, Document.source_url)
+                select(
+                    Document.id,
+                    Document.file_name,
+                    Document.source_url,
+                    Document.i_type,
+                    Document.i_topic,
+                    Document.i_title,
+                    Document.i_year,
+                    Document.i_month,
+                    Document.i_day_number,
+                )
                 .where(Document.locality_id == self.lid)
                 .order_by(Document.id)
             ).all()
             documents = [
-                Document(id=id, file_name=file_name, source_url=source_url)
-                for id, file_name, source_url in documents_results
+                Document(id=id, file_name=file_name, source_url=source_url,i_type=i_type, i_topic=i_topic, i_title=i_title, i_year=i_year, i_month=i_month, i_day_number=i_day_number)
+                for id, file_name, source_url, i_type, i_topic, i_title, i_year, i_month, i_day_number
+                in documents_results
             ]
             self.locality = locality
             self.documents = documents
@@ -44,8 +55,10 @@ def make_row_display_func(locality_id: int):
             rx.table.cell(
                 rx.link(rx.icon("eye"), href=row.source_url, is_external=True)
             ),
+            rx.table.cell(row.i_topic),
+            rx.table.cell(row.i_type),
             rx.table.cell(row.i_title),
-            rx.table.cell(""),
+            rx.table.cell(format_date(row)),
         )
 
     return row_display
@@ -53,7 +66,7 @@ def make_row_display_func(locality_id: int):
 
 @rx.page(on_load=State.on_load, route="/localities/[lid]")
 def index() -> rx.Component:
-    return rx.container(
+    return rx.box(
         navbar(),
         rx.cond(
             State.loading,
@@ -72,6 +85,8 @@ def index() -> rx.Component:
                             rx.table.column_header_cell("Nom"),
                             rx.table.column_header_cell("Source"),
                             rx.table.column_header_cell("Sujet"),
+                            rx.table.column_header_cell("Type"),
+                            rx.table.column_header_cell("Titre"),
                             rx.table.column_header_cell("Date"),
                         )
                     ),
@@ -86,5 +101,11 @@ def index() -> rx.Component:
                 spacing="8",
             ),
         ),
-        width="100%",
+        padding="2rem"
     )
+
+
+def format_date(row: Document):
+    if row.i_year is None:
+        return ""
+    return f"{row.i_day_number}/{row.i_month}/{row.i_year}"

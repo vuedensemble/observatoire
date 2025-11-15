@@ -17,10 +17,22 @@ class State(rx.State):
     def on_load(self):
         with rx.session() as session:
             id, file_name, i_md_from_ocr, source_url = session.exec(
-                select(Document.id, Document.file_name, Document.i_md_from_ocr, Document.source_url).where(Document.id == self.did)
+                select(
+                    Document.id,
+                    Document.file_name,
+                    Document.i_md_from_ocr,
+                    Document.source_url,
+                ).where(Document.id == self.did)
             ).one()
-            self.document = Document(id=id, file_name=file_name, i_md_from_ocr=i_md_from_ocr, source_url=source_url)
-            self.document_md = extract_md(i_md_from_ocr, image_strategy="include_base64")
+            self.document = Document(
+                id=id,
+                file_name=file_name,
+                i_md_from_ocr=i_md_from_ocr,
+                source_url=source_url,
+            )
+            self.document_md = extract_md(
+                i_md_from_ocr, image_strategy="include_base64"
+            )
             self.loading = False
 
     @rx.event
@@ -35,11 +47,9 @@ class State(rx.State):
             )
 
 
-@rx.page(
-    on_load=State.on_load, route="/localities/[lid]/documents/[did]"
-)
+@rx.page(on_load=State.on_load, route="/localities/[lid]/documents/[did]")
 def index() -> rx.Component:
-    return rx.container(
+    return rx.box(
         navbar(),
         rx.cond(
             State.loading,
@@ -54,22 +64,25 @@ def index() -> rx.Component:
                     ),
                     rx.text(State.document.file_name),
                     rx.flex(
-                        rx.link(rx.icon("eye"), href=State.document.source_url, is_external=True),
-                        rx.button(
-                            "Télécharger", on_click=State.download_pdf
+                        rx.link(
+                            rx.icon("eye"),
+                            href=State.document.source_url,
+                            is_external=True,
                         ),
-                        spacing="4"
+                        rx.button("Télécharger", on_click=State.download_pdf),
+                        spacing="4",
                     ),
                     rx.cond(
                         State.document_md,
                         rx.box(
                             rx.heading("Résultat OCR", size="6"),
-                            rx.markdown(State.document_md)
-                        )
+                            rx.markdown(State.document_md),
+                        ),
                     ),
                     spacing="5",
                     justify="center",
-                )
+                ),
             ),
         ),
+        padding="2rem"
     )
