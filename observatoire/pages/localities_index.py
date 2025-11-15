@@ -6,11 +6,13 @@ from sqlmodel import select
 from observatoire.schema.locality import Locality
 from observatoire.schema.document import Document
 from observatoire.schema.documented_event import DocumentedEvent
+from observatoire.components.navbar import navbar
 from rxconfig import config
 import workers
 
 
 class State(rx.State):
+    loading: bool = True
     rows: list[Locality] = []
 
     @rx.event
@@ -21,6 +23,7 @@ class State(rx.State):
     def on_load(self):
         with rx.session() as session:
             self.rows = session.exec(select(Locality)).all()
+            self.loading = False
 
 
 def row_display(row: Locality):
@@ -34,10 +37,16 @@ def row_display(row: Locality):
 @rx.page(on_load=State.on_load, route="/")
 def index() -> rx.Component:
     return rx.container(
+        navbar(),
         rx.grid(
             rx.color_mode.button(position="top-right"),
             rx.vstack(
-                rx.heading("Observatoire", size="9"),
+                rx.flex(
+                    rx.heading("Observatoire", size="9"),
+                    rx.cond(State.loading, rx.spinner()),
+                    align="center",
+                    spacing="4",
+                ),
                 rx.text(
                     "Bienvenue sur l'observatoire des villes du pays basque",
                     size="5",

@@ -6,10 +6,12 @@ from sqlmodel import select
 from observatoire.schema.locality import Locality
 from observatoire.schema.document import Document
 from observatoire.schema.documented_event import DocumentedEvent
+from observatoire.components.navbar import navbar
 from rxconfig import config
 
 
 class State(rx.State):
+    loading: bool = True
     locality: Locality | None = None
     rows: list[Document] = []
 
@@ -20,6 +22,7 @@ class State(rx.State):
                 select(Locality).where(Locality.id == self.id)
             ).one()
             self.locality = locality
+            self.loading = False
 
 
 def row_display(row: Document):
@@ -37,8 +40,10 @@ def row_display(row: Document):
 @rx.page(on_load=State.on_load, route="/localities/[id]")
 def index() -> rx.Component:
     return rx.container(
+        navbar(),
         rx.cond(
-            State.locality,
+            State.loading,
+            rx.spinner(),
             rx.grid(
                 rx.color_mode.button(position="top-right"),
                 rx.vstack(
@@ -67,6 +72,6 @@ def index() -> rx.Component:
                 ),
                 spacing="8",
             ),
-            rx.text("Loading")
-        )
+        ),
+        width="100%"
     )
