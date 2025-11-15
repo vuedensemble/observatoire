@@ -130,14 +130,15 @@ def download_and_save_documents_for_locality(locality_id: int):
         locality = session.exec(
             select(Locality).where(Locality.id == locality_id)
         ).one()
-        existing_documents = session.exec(
-            select(Document).where(Document.locality_id == locality_id).limit(10)
+        print("starting")
+        existing_document_source_urls = session.exec(
+            select(Document.source_url).where(Document.locality_id == locality_id)
         ).all()
         locality_administrative_setup: LocalityAdministrativeSetup = locality.administrative_reporting_setup
         
     already_extracted_urls = set()
-    for doc in existing_documents:
-        already_extracted_urls.add(doc.source_url)
+    for source_url in existing_document_source_urls:
+        already_extracted_urls.add(source_url)
 
     files_for_all_urls = []
     for _, year_urls in locality_administrative_setup["pages_by_year"].items():

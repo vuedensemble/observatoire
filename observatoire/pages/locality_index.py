@@ -21,28 +21,35 @@ class State(rx.State):
             locality = session.exec(
                 select(Locality).where(Locality.id == self.id)
             ).one()
-            documents = session.exec(
-                select(Document).where(Document.locality_id == self.id)
+            documents_results = session.exec(
+                select(Document.id, Document.file_name, Document.source_url).where(Document.locality_id == self.id).order_by(Document.id)
             ).all()
+            documents = [
+                Document(id=id, file_name=file_name, source_url=source_url)
+                for id, file_name, source_url
+                in documents_results
+            ]
             self.locality = locality
             self.documents = documents
             self.loading = False
 
 
-def row_display(row: Document):
-    return rx.table.row(
-        rx.table.cell(row.id),
-        rx.table.cell(
-            rx.link(
-                rx.icon("eye"), href=f"/localities/{row.locality_id}/documents/{row.id}"
-            )
-        ),
-        rx.table.cell(
-            rx.link(row.source_url, href=row.source_url, is_external=True)
-        ),
-        rx.table.cell(row.i_title),
-        rx.table.cell(""),
-    )
+def make_row_display_func(locality_id: int):
+    def row_display(row: Document):
+        return rx.table.row(
+            rx.table.cell(row.id),
+            rx.table.cell(
+                rx.link(
+                    row.file_name, href=f"/localities/{locality_id}/documents/{row.id}"
+                )
+            ),
+            rx.table.cell(
+                rx.link(rx.icon("eye"), href=row.source_url, is_external=True)
+            ),
+            rx.table.cell(row.i_title),
+            rx.table.cell(""),
+        )
+    return row_display
 
 
 @rx.page(on_load=State.on_load, route="/localities/[id]")
@@ -73,7 +80,7 @@ def index() -> rx.Component:
                     rx.table.body(
                         rx.foreach(
                             State.documents,
-                            row_display,
+                            make_row_display_func(State.locality.id),
                         )
                     ),
                     width="100%",
