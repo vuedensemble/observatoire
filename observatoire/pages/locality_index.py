@@ -1,6 +1,7 @@
 import reflex as rx
 from sqlmodel import select, func
 
+from observatoire.processors import exporters
 from observatoire.schema.locality import Locality
 from observatoire.schema.document import Document
 from observatoire.schema.documented_event import DocumentedEvent
@@ -27,6 +28,7 @@ class State(rx.State):
                     Document.i_type,
                     Document.i_topic,
                     Document.i_title,
+                    Document.i_summary,
                     Document.i_year,
                     Document.i_month,
                     Document.i_day_number,
@@ -35,13 +37,21 @@ class State(rx.State):
                 .order_by(Document.id)
             ).all()
             documents = [
-                Document(id=id, file_name=file_name, source_url=source_url,i_type=i_type, i_topic=i_topic, i_title=i_title, i_year=i_year, i_month=i_month, i_day_number=i_day_number)
-                for id, file_name, source_url, i_type, i_topic, i_title, i_year, i_month, i_day_number
+                Document(id=id, file_name=file_name, source_url=source_url,i_type=i_type, i_topic=i_topic, i_title=i_title, i_summary=i_summary, i_year=i_year, i_month=i_month, i_day_number=i_day_number)
+                for id, file_name, source_url, i_type, i_topic, i_title, i_summary, i_year, i_month, i_day_number
                 in documents_results
             ]
             self.locality = locality
             self.documents = documents
             self.loading = False
+
+    @rx.event
+    def download_csv(self):
+        csv_str = exporters.export_documents_for_localities([self.lid])
+        return rx.download(
+            data=csv_str,
+            filename=f"{self.locality.name}-export.csv",
+        )
 
 
 def make_row_display_func(locality_id: int):
@@ -58,6 +68,7 @@ def make_row_display_func(locality_id: int):
             rx.table.cell(row.i_topic),
             rx.table.cell(row.i_type),
             rx.table.cell(row.i_title),
+            rx.table.cell(row.i_summary),
             rx.table.cell(format_date(row)),
         )
 
@@ -73,10 +84,14 @@ def index() -> rx.Component:
             rx.spinner(),
             rx.grid(
                 rx.color_mode.button(position="top-right"),
-                rx.vstack(
-                    rx.heading(State.locality.name, size="9"),
-                    spacing="5",
-                    justify="center",
+                rx.flex(
+                    rx.vstack(
+                        rx.heading(State.locality.name, size="9"),
+                        spacing="5",
+                        justify="center",
+                    ),
+                    rx.button("Exporter CSV", on_click=State.download_csv),
+                    justify="between"
                 ),
                 rx.heading("Documents", size="7"),
                 rx.table.root(
@@ -87,6 +102,7 @@ def index() -> rx.Component:
                             rx.table.column_header_cell("Sujet"),
                             rx.table.column_header_cell("Type"),
                             rx.table.column_header_cell("Titre"),
+                            rx.table.column_header_cell("Résumé"),
                             rx.table.column_header_cell("Date"),
                         )
                     ),

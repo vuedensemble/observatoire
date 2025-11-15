@@ -4,7 +4,7 @@ import os
 import mistralai
 from pydantic import BaseModel, Field
 import reflex as rx
-from sqlmodel import select
+from sqlmodel import select, text
 
 from observatoire.schema.document import Document, extract_md
 from observatoire.schema.locality import Locality
@@ -41,11 +41,8 @@ def ocr_pdf(mistral_client: mistralai.Mistral, fp=None, bytes=None):
 
 def find_doc_ids_no_ocr(locality_id: int):
     with rx.session() as session:
-        existing_document_ids_no_ocr = session.exec(
-            select(Document.id).where(
-                Document.locality_id == locality_id and Document.i_md_from_ocr is None
-            ).order_by(Document.id)
-        ).all()
+        existing_document_ids_no_ocr_tuples = list(session.connection().execute(text("SELECT id FROM document WHERE locality_id=:locality_id AND i_md_from_ocr = '{}'"), {"locality_id": locality_id}))
+        existing_document_ids_no_ocr = [tup[0] for tup in existing_document_ids_no_ocr_tuples]
         return existing_document_ids_no_ocr
 
 
@@ -95,14 +92,11 @@ class DocumentDetails(BaseModel):
     )
 
 
-def find_doc_ids_ocr_but_no_detail(locality_id: int):
+def find_doc_ids_no_detail(locality_id: int):
     with rx.session() as session:
-        existing_document_ids_ocr_no_detail = session.exec(
-            select(Document.id).where(
-                Document.locality_id == locality_id and Document.i_md_from_ocr is not None and Document.i_title is None
-            ).order_by(Document.id)
-        ).all()
-        return existing_document_ids_ocr_no_detail
+        existing_document_ids_no_details_tuples = list(session.connection().execute(text("SELECT id FROM document WHERE locality_id=:locality_id AND i_title is null"), {"locality_id": locality_id}))
+        existing_document_ids_no_details = [tup[0] for tup in existing_document_ids_no_details_tuples]
+        return existing_document_ids_no_details
 
 
 def parse_document_details(
@@ -167,15 +161,15 @@ def process_locality_documents(locality_id: int):
     mistral_client = get_mistral_client()
 
     doc_ids_no_ocr = set(find_doc_ids_no_ocr(locality_id))
-    doc_ids_ocr_no_detail = set(find_doc_ids_ocr_but_no_detail(locality_id))
-    all_ids_sorted = sorted(doc_ids_no_ocr.union(doc_ids_ocr_no_detail))
+    doc_ids_no_detail = set(find_doc_ids_no_detail(locality_id))
+    all_ids_sorted = sorted(doc_ids_no_ocr.union(doc_ids_no_detail))
     count = len(all_ids_sorted)
     print(f"Will process {count} docs")
     for idx, doc_id in enumerate(all_ids_sorted):
         print(f"Processing {doc_id} | {idx + 1}/{count}")
         if doc_id in doc_ids_no_ocr:
             run_and_save_ocr(doc_id=doc_id, mistral_client=mistral_client)
-        if doc_id in doc_ids_ocr_no_detail:
+        if doc_id in doc_ids_no_detail:
             run_and_save_document_parsed_details(doc_id=doc_id, mistral_client=mistral_client)
 
 def process_all_localities_documents():
