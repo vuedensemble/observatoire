@@ -12,6 +12,7 @@ from sqlmodel import select
 from observatoire.schema.locality import Locality, LocalityAdministrativeSetup
 from observatoire.schema.document import Document
 
+
 def endswith_any(s: str, suffixes: list[str]):
     for suffix in suffixes:
         if s.endswith(suffix):
@@ -110,7 +111,10 @@ def download_pdfs_and_zips_and_unzip_them(
 
         try:
             download_file(
-                absolute_link=absolute_link, filepath=filepath, verbosity=verbosity, headers=headers
+                absolute_link=absolute_link,
+                filepath=filepath,
+                verbosity=verbosity,
+                headers=headers,
             )
             if filepath.endswith(".zip"):
                 print(f"Unzipping {filepath} to {output_folder}")
@@ -130,12 +134,13 @@ def download_and_save_documents_for_locality(locality_id: int):
         locality = session.exec(
             select(Locality).where(Locality.id == locality_id)
         ).one()
-        print("starting")
         existing_document_source_urls = session.exec(
             select(Document.source_url).where(Document.locality_id == locality_id)
         ).all()
-        locality_administrative_setup: LocalityAdministrativeSetup = locality.administrative_reporting_setup
-        
+        locality_administrative_setup: LocalityAdministrativeSetup = (
+            locality.administrative_reporting_setup
+        )
+
     already_extracted_urls = set()
     for source_url in existing_document_source_urls:
         already_extracted_urls.add(source_url)
@@ -169,29 +174,30 @@ def download_and_save_documents_for_locality(locality_id: int):
                     delete_after=True,
                 )
                 filepaths = glob.glob(
-                    os.path.join(extract_to_folder, "**", "*.pdf"),
-                    recursive=True
+                    os.path.join(extract_to_folder, "**", "*.pdf"), recursive=True
                 )
                 for filepath_in_zip in filepaths:
+                    file_name, file_extension = split_name_and_extension(filepath_in_zip)
                     new_doc = Document(
                         locality_id=locality_id,
-                        file_name=os.path.basename(filepath_in_zip),
-                        file_extension="pdf",
+                        file_name=file_name,
+                        file_extension=file_extension,
                         source_url=absolute_link,
                         base_url=base_url,
                         raw_content=load_raw_content(filepath_in_zip),
-                        gzipped=False
+                        gzipped=False,
                     )
                     new_documents.append(new_doc)
             else:
+                file_name, file_extension = split_name_and_extension(filepath)
                 new_doc = Document(
                     locality_id=locality_id,
-                    file_name=os.path.basename(filepath),
-                    file_extension="pdf",
+                    file_name=file_name,
+                    file_extension=file_extension,
                     source_url=absolute_link,
                     base_url=base_url,
                     raw_content=load_raw_content(filepath),
-                    gzipped=False
+                    gzipped=False,
                 )
                 new_documents.append(new_doc)
 
@@ -207,3 +213,11 @@ def download_and_save_documents_for_locality(locality_id: int):
 def load_raw_content(fp: str):
     with open(fp, "rb") as f:
         return f.read()
+
+
+def split_name_and_extension(fp: str):
+    p = pathlib.Path(fp)
+    fn = p.name
+    extension = ".".join([suffix.replace(".", "") for suffix in p.suffixes])
+    name = fn.removesuffix("".join(p.suffixes))
+    return name, extension

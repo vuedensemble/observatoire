@@ -27,5 +27,5 @@ def navbar() -> rx.Component:
         # z_index="5",
         width="100%",
         margin_bottom="2em",
-        border_radius="1em"
+        border_radius="1em",
     )

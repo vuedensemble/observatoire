@@ -5,6 +5,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 
 import pydantic
 
+
 class Locality(rx.Model, table=True):
     """
     Localities (cities, regions, etc.)

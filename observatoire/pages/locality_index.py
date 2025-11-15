@@ -1,5 +1,3 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
-
 import reflex as rx
 from sqlmodel import select, func
 
@@ -19,15 +17,16 @@ class State(rx.State):
     def on_load(self):
         with rx.session() as session:
             locality = session.exec(
-                select(Locality).where(Locality.id == self.id)
+                select(Locality).where(Locality.id == self.lid)
             ).one()
             documents_results = session.exec(
-                select(Document.id, Document.file_name, Document.source_url).where(Document.locality_id == self.id).order_by(Document.id)
+                select(Document.id, Document.file_name, Document.source_url)
+                .where(Document.locality_id == self.lid)
+                .order_by(Document.id)
             ).all()
             documents = [
                 Document(id=id, file_name=file_name, source_url=source_url)
-                for id, file_name, source_url
-                in documents_results
+                for id, file_name, source_url in documents_results
             ]
             self.locality = locality
             self.documents = documents
@@ -37,7 +36,6 @@ class State(rx.State):
 def make_row_display_func(locality_id: int):
     def row_display(row: Document):
         return rx.table.row(
-            rx.table.cell(row.id),
             rx.table.cell(
                 rx.link(
                     row.file_name, href=f"/localities/{locality_id}/documents/{row.id}"
@@ -49,10 +47,11 @@ def make_row_display_func(locality_id: int):
             rx.table.cell(row.i_title),
             rx.table.cell(""),
         )
+
     return row_display
 
 
-@rx.page(on_load=State.on_load, route="/localities/[id]")
+@rx.page(on_load=State.on_load, route="/localities/[lid]")
 def index() -> rx.Component:
     return rx.container(
         navbar(),
@@ -70,7 +69,6 @@ def index() -> rx.Component:
                 rx.table.root(
                     rx.table.header(
                         rx.table.row(
-                            rx.table.column_header_cell(""),
                             rx.table.column_header_cell("Nom"),
                             rx.table.column_header_cell("Source"),
                             rx.table.column_header_cell("Sujet"),
@@ -80,7 +78,7 @@ def index() -> rx.Component:
                     rx.table.body(
                         rx.foreach(
                             State.documents,
-                            make_row_display_func(State.locality.id),
+                            make_row_display_func(State.lid),
                         )
                     ),
                     width="100%",
@@ -88,5 +86,5 @@ def index() -> rx.Component:
                 spacing="8",
             ),
         ),
-        width="100%"
+        width="100%",
     )

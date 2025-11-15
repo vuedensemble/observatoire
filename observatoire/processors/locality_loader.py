@@ -39,7 +39,9 @@ def create_locality(
         return True, locality.model_dump()
 
 
-def update_locality_administrative_setup(id: int, new_administrative_reporting_setup: LocalityAdministrativeSetup):
+def update_locality_administrative_setup(
+    id: int, new_administrative_reporting_setup: LocalityAdministrativeSetup
+):
     with rx.session() as session:
         statement = select(Locality).where(Locality.id == id)
         locality: Locality = session.exec(statement).one()

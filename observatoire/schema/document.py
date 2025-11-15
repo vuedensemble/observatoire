@@ -26,7 +26,8 @@ class Document(rx.Model, table=True):
         sa_column=Column(TEXT), description="The URL of the document"
     )
     base_url: str = Field(
-        sa_column=Column(TEXT), description="The URL of the page where the source_url was found"
+        sa_column=Column(TEXT),
+        description="The URL of the page where the source_url was found",
     )
 
     raw_content: bytes = Field(
