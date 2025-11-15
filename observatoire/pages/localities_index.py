@@ -28,9 +28,26 @@ class State(rx.State):
 
 def row_display(row: Locality):
     return rx.table.row(
-        rx.table.cell(rx.link(rx.icon("eye"), href=f"/localities/{row.id}")),
+        rx.table.cell(
+            rx.flex(
+            rx.link(rx.icon("eye"), href=f"/localities/{row.id}"),
+            rx.dialog.root(
+                rx.dialog.trigger(rx.icon("settings")),
+                rx.dialog.content(
+                    rx.dialog.title("Paramètres"),
+                    rx.dialog.description(
+                        rx.markdown(row.administrative_reporting_setup)
+                    ),
+                    rx.dialog.close(
+                        rx.button("Fermer", size="3"),
+                    ),
+                ),
+            ),
+            spacing="2"
+            )
+        ),
         rx.table.cell(row.name),
-        rx.table.cell(rx.link(row.website, href=row.website, is_external=True)),
+        rx.table.cell(rx.link(row.website, href=row.website, is_external=True))
     )
 
 

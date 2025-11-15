@@ -1,4 +1,4 @@
-from observatoire.schema.locality import Locality
+from observatoire.schema.locality import Locality, LocalityAdministrativeSetup
 
 import reflex as rx
 from sqlmodel import delete, select
@@ -37,3 +37,12 @@ def create_locality(
         session.commit()
         print("ok", locality)
         return True, locality.model_dump()
+
+
+def update_locality_administrative_setup(id: int, new_administrative_reporting_setup: LocalityAdministrativeSetup):
+    with rx.session() as session:
+        statement = select(Locality).where(Locality.id == id)
+        locality: Locality = session.exec(statement).one()
+        locality.administrative_reporting_setup = new_administrative_reporting_setup
+        session.add(locality)
+        session.commit()

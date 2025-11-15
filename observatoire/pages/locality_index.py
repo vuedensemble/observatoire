@@ -1,7 +1,7 @@
 """Welcome to Reflex! This file outlines the steps to create a basic app."""
 
 import reflex as rx
-from sqlmodel import select
+from sqlmodel import select, func
 
 from observatoire.schema.locality import Locality
 from observatoire.schema.document import Document
@@ -13,7 +13,7 @@ from rxconfig import config
 class State(rx.State):
     loading: bool = True
     locality: Locality | None = None
-    rows: list[Document] = []
+    documents: list[Document] = 0
 
     @rx.event
     def on_load(self):
@@ -21,16 +21,24 @@ class State(rx.State):
             locality = session.exec(
                 select(Locality).where(Locality.id == self.id)
             ).one()
+            documents = session.exec(
+                select(Document).where(Document.locality_id == self.id)
+            ).all()
             self.locality = locality
+            self.documents = documents
             self.loading = False
 
 
 def row_display(row: Document):
     return rx.table.row(
+        rx.table.cell(row.id),
         rx.table.cell(
             rx.link(
                 rx.icon("eye"), href=f"/localities/{row.locality_id}/documents/{row.id}"
             )
+        ),
+        rx.table.cell(
+            rx.link(row.source_url, href=row.source_url, is_external=True)
         ),
         rx.table.cell(row.i_title),
         rx.table.cell(""),
@@ -64,7 +72,7 @@ def index() -> rx.Component:
                     ),
                     rx.table.body(
                         rx.foreach(
-                            State.rows,
+                            State.documents,
                             row_display,
                         )
                     ),

@@ -3,6 +3,7 @@ import reflex as rx
 from sqlmodel import Field, Column, TEXT
 from sqlalchemy.dialects.postgresql import JSONB
 
+import pydantic
 
 class Locality(rx.Model, table=True):
     """
@@ -26,3 +27,7 @@ class Locality(rx.Model, table=True):
         sa_column=Column(JSONB),
         description="A dictionary describing the reporting setup of that locality",
     )
+
+
+class LocalityAdministrativeSetup(pydantic.BaseModel):
+    pages_by_year: list[dict[str, list[str]]]

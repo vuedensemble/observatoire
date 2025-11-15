@@ -1,3 +1,4 @@
+import glob
 import os
 import pathlib
 from urllib.parse import urljoin
@@ -5,7 +6,11 @@ import zipfile
 
 import requests
 from bs4 import BeautifulSoup
+import reflex as rx
+from sqlmodel import select
 
+from observatoire.schema.locality import Locality, LocalityAdministrativeSetup
+from observatoire.schema.document import Document
 
 def endswith_any(s: str, suffixes: list[str]):
     for suffix in suffixes:
@@ -74,6 +79,7 @@ def unzip_file(zip_file_path: str, dest_parent_folder: str, delete_after: bool =
     if delete_after:
         os.remove(zip_file_path)
     print(f"Files extracted to: {extract_to_folder}")
+    return extract_to_folder
 
 
 def download_pdfs_and_zips_and_unzip_them(
@@ -104,7 +110,7 @@ def download_pdfs_and_zips_and_unzip_them(
 
         try:
             download_file(
-                absolute_link=absolute_link, filepath=filepath, verbosity=verbosity
+                absolute_link=absolute_link, filepath=filepath, verbosity=verbosity, headers=headers
             )
             if filepath.endswith(".zip"):
                 print(f"Unzipping {filepath} to {output_folder}")
@@ -117,3 +123,86 @@ def download_pdfs_and_zips_and_unzip_them(
             print(f"Error downloading {absolute_link}: {e}")
     if verbosity >= 1:
         print("Downloaded!")
+
+
+def download_and_save_documents_for_locality(locality_id: int):
+    with rx.session() as session:
+        locality = session.exec(
+            select(Locality).where(Locality.id == locality_id)
+        ).one()
+        existing_documents = session.exec(
+            select(Document).where(Document.locality_id == locality_id).limit(10)
+        ).all()
+        locality_administrative_setup: LocalityAdministrativeSetup = locality.administrative_reporting_setup
+        
+    already_extracted_urls = set()
+    for doc in existing_documents:
+        already_extracted_urls.add(doc.source_url)
+
+    files_for_all_urls = []
+    for _, year_urls in locality_administrative_setup["pages_by_year"].items():
+        for base_url in year_urls:
+            links = extract_files_from_url(base_url)
+            for link in links:
+                if link in already_extracted_urls:
+                    continue
+                files_for_all_urls.append((base_url, link))
+
+    headers = get_default_headers()
+    output_folder = f"/tmp/observatoire/locality-{locality_id}"
+    pathlib.Path(output_folder).mkdir(parents=True, exist_ok=True)
+
+    new_documents = []
+    for base_url, absolute_link in files_for_all_urls:
+        filepath = os.path.join(output_folder, os.path.basename(absolute_link))
+
+        try:
+            download_file(
+                absolute_link=absolute_link, filepath=filepath, headers=headers
+            )
+            if filepath.endswith(".zip"):
+                print(f"Unzipping {filepath} to {output_folder}")
+                extract_to_folder = unzip_file(
+                    zip_file_path=filepath,
+                    dest_parent_folder=output_folder,
+                    delete_after=True,
+                )
+                filepaths = glob.glob(
+                    os.path.join(extract_to_folder, "**", "*.pdf"),
+                    recursive=True
+                )
+                for filepath_in_zip in filepaths:
+                    new_doc = Document(
+                        locality_id=locality_id,
+                        file_name=os.path.basename(filepath_in_zip),
+                        file_extension="pdf",
+                        source_url=absolute_link,
+                        base_url=base_url,
+                        raw_content=load_raw_content(filepath_in_zip),
+                        gzipped=False
+                    )
+                    new_documents.append(new_doc)
+            else:
+                new_doc = Document(
+                    locality_id=locality_id,
+                    file_name=os.path.basename(filepath),
+                    file_extension="pdf",
+                    source_url=absolute_link,
+                    base_url=base_url,
+                    raw_content=load_raw_content(filepath),
+                    gzipped=False
+                )
+                new_documents.append(new_doc)
+
+        except Exception as e:
+            print(f"Error downloading {absolute_link}: {e}")
+
+    with rx.session() as session:
+        for new_doc in new_documents:
+            session.add(new_doc)
+        session.commit()
+
+
+def load_raw_content(fp: str):
+    with open(fp, "rb") as f:
+        return f.read()
