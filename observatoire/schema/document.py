@@ -106,3 +106,20 @@ class Document(rx.Model, table=True):
         sa_column=Column(JSONB),
         description="Details of the events processing, for reproducibility",
     )
+
+
+def extract_md(md_dict: dict | None):
+    if md_dict is None:
+        return None
+    s = ""
+    for page in md_dict["pages"]:
+        page_images_by_id = dict([
+            (img["id"], img["image_base64"])
+            for img in page.get("images", [])
+        ])
+        page_md = page["markdown"]
+        for img_id, img_base64 in page_images_by_id.items():
+            page_md = page_md.replace(f"![{img_id}]({img_id})", f"![{img_id}]({img_base64})")
+        s += page_md
+        s += "\n"
+    return s

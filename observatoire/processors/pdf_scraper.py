@@ -154,6 +154,8 @@ def download_and_save_documents_for_locality(locality_id: int):
                     continue
                 files_for_all_urls.append((base_url, link))
 
+    print(f"Will run on {len(files_for_all_urls)} URLs / {len(already_extracted_urls)} unique docs in DB / {len(existing_document_source_urls)} docs in DB")
+
     headers = get_default_headers()
     output_folder = f"/tmp/observatoire/locality-{locality_id}"
     pathlib.Path(output_folder).mkdir(parents=True, exist_ok=True)

@@ -2,7 +2,7 @@ import reflex as rx
 from sqlmodel import select
 
 from observatoire.schema.locality import Locality
-from observatoire.schema.document import Document
+from observatoire.schema.document import Document, extract_md
 from observatoire.schema.documented_event import DocumentedEvent
 from observatoire.components.navbar import navbar
 from rxconfig import config
@@ -11,14 +11,16 @@ from rxconfig import config
 class State(rx.State):
     loading: bool = True
     document: Document | None = None
+    document_md: str | None = None
 
     @rx.event
     def on_load(self):
         with rx.session() as session:
-            id, file_name = session.exec(
-                select(Document.id, Document.file_name).where(Document.id == self.did)
+            id, file_name, i_md_from_ocr, source_url = session.exec(
+                select(Document.id, Document.file_name, Document.i_md_from_ocr, Document.source_url).where(Document.id == self.did)
             ).one()
-            self.document = Document(id=id, file_name=file_name)
+            self.document = Document(id=id, file_name=file_name, i_md_from_ocr=i_md_from_ocr, source_url=source_url)
+            self.document_md = extract_md(i_md_from_ocr)
             self.loading = False
 
     @rx.event
@@ -47,21 +49,27 @@ def index() -> rx.Component:
                 rx.vstack(
                     rx.flex(
                         rx.heading("Document", size="9"),
-                        rx.cond(State.loading, rx.spinner()),
                         align="center",
                         spacing="4",
                     ),
-                    rx.text(
-                        State.document.file_name,
-                        size="5",
+                    rx.text(State.document.file_name),
+                    rx.flex(
+                        rx.link(rx.icon("eye"), href=State.document.source_url, is_external=True),
+                        rx.button(
+                            "Télécharger", on_click=State.download_pdf
+                        ),
+                        spacing="4"
                     ),
-                    rx.button(
-                        "Télécharger le fichier source", on_click=State.download_pdf
+                    rx.cond(
+                        State.document_md,
+                        rx.box(
+                            rx.heading("Résultat OCR", size="6"),
+                            rx.markdown(State.document_md)
+                        )
                     ),
                     spacing="5",
                     justify="center",
-                ),
-                rx.heading("Villes", size="7"),
+                )
             ),
         ),
     )
