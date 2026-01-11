@@ -8,6 +8,7 @@ dependencies = [
     "beautifulsoup4>=4.14.2",
     "celery[redis]>=5.5.3",
     "flower>=2.0.1",
+    "html-to-markdown>=2.20.0",
     "jupyterlab>=4.4.10",
     "mistralai>=1.9.11",
     "pandas>=2.3.3",

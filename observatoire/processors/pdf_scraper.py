@@ -20,13 +20,16 @@ def endswith_any(s: str, suffixes: list[str]):
     return False
 
 
-def extract_files_from_url(url, extensions=[".zip", ".pdf"]):
-    # Download the HTML content of the URL
+def download_html_contents_from_url(url: str) -> str:
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
     }
 
-    response = requests.get(url, headers=headers)
+    return requests.get(url, headers=headers)
+
+
+def extract_files_from_url(url, extensions=[".zip", ".pdf"]):
+    response = download_html_contents_from_url(url)
     if response.status_code != 200:
         print(f"Failed to download the page {url}. Status code: {response.status_code}")
         return

@@ -167,10 +167,17 @@ def process_locality_documents(locality_id: int):
     print(f"Will process {count} docs")
     for idx, doc_id in enumerate(all_ids_sorted):
         print(f"Processing {doc_id} | {idx + 1}/{count}")
-        if doc_id in doc_ids_no_ocr:
-            run_and_save_ocr(doc_id=doc_id, mistral_client=mistral_client)
-        if doc_id in doc_ids_no_detail:
-            run_and_save_document_parsed_details(doc_id=doc_id, mistral_client=mistral_client)
+        try:
+            if doc_id in doc_ids_no_ocr:
+                run_and_save_ocr(doc_id=doc_id, mistral_client=mistral_client)
+            if doc_id in doc_ids_no_detail:
+                run_and_save_document_parsed_details(doc_id=doc_id, mistral_client=mistral_client)
+        except KeyboardInterrupt:
+            print("Stopped by keyboard")
+            return
+        except BaseException as e:
+            print(f"Error processing {str(e)}")
+
 
 def process_all_localities_documents():
     with rx.session() as session:

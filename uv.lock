@@ -649,6 +649,17 @@ wheels = [
 ]
 
 [[package]]
+name = "html-to-markdown"
+version = "2.20.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/dc/a1/0f2a48a6fcbf3f52cf1057b233bc86d243aea8591272a8dea32fa937d5a2/html_to_markdown-2.20.0.tar.gz", hash = "sha256:3c225301d7e78813a50edcf2b5bedc5d4fde50471f98aac3ba3a690b21f43396", size = 203635 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/dc/61/e58f8092ea6a62085279e3a2791386b9ddaf98a61b65922ebfc8e9017dd7/html_to_markdown-2.20.0-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:3f426d0e7f3af1b1470e2d8cd218433954c85e40d04684de601c3bdc241b7130", size = 8902465 },
+    { url = "https://files.pythonhosted.org/packages/4c/49/840973c01ab853acd720a8f4004617b038aa0f8c1ac60fe0486d82885e2f/html_to_markdown-2.20.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:73df9e71ecc36e45be0e0e0dee76878da0da52711c1adcbe2a5553834a8824ef", size = 9676906 },
+    { url = "https://files.pythonhosted.org/packages/0c/8d/dda5f113864abedd26eed7ca0ed1bb3f5da00febcd9dab3230a743560336/html_to_markdown-2.20.0-cp310-abi3-win_amd64.whl", hash = "sha256:68b4d1576f58bfb3e21ae6a731bbfcfc8553eea456433419446bb7c5934a35ab", size = 9433774 },
+]
+
+[[package]]
 name = "htmldate"
 version = "1.9.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1443,6 +1454,7 @@ dependencies = [
     { name = "beautifulsoup4" },
     { name = "celery", extra = ["redis"] },
     { name = "flower" },
+    { name = "html-to-markdown" },
     { name = "jupyterlab" },
     { name = "mistralai" },
     { name = "pandas" },
@@ -1459,6 +1471,7 @@ requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.14.2" },
     { name = "celery", extras = ["redis"], specifier = ">=5.5.3" },
     { name = "flower", specifier = ">=2.0.1" },
+    { name = "html-to-markdown", specifier = ">=2.20.0" },
     { name = "jupyterlab", specifier = ">=4.4.10" },
     { name = "mistralai", specifier = ">=1.9.11" },
     { name = "pandas", specifier = ">=2.3.3" },
