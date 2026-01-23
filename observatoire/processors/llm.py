@@ -529,7 +529,7 @@ def process_all_localities_documents():
         process_locality_documents(locality_id=locality_id)
 
 
-def classify_sections_by_city(cities_dir: str, city_names: list[str] | None = None):
+def classify_sections_by_city(cities_dir: str, city_names: list[str] | None = None, overwrite: bool=False):
     """
     Process all cities in a directory, running one batch request per city
     to classify sections as municipal council related or not.
@@ -559,7 +559,7 @@ def classify_sections_by_city(cities_dir: str, city_names: list[str] | None = No
         city_path = os.path.join(cities_dir, city_name)
         output_path = os.path.join(city_path, "municipal_council_section_check.json")
 
-        if os.path.exists(output_path):
+        if os.path.exists(output_path) and not overwrite:
             logger.info("Skipping %s (%d/%d): classification already exists", city_name, idx + 1, count)
             continue
 

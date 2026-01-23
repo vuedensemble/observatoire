@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import pathlib
+import shutil
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urljoin, urlparse
 
@@ -226,7 +227,136 @@ def create_section_metadata_from_crawl(city_folder: str) -> int:
     return section_index
 
 
-def download_files_from_crawl(city_folder: str, section_filter: set[str] | None = None) -> int:
+def get_next_section_index(city_folder: str) -> int:
+    """Get the next available section index for a city folder."""
+    existing_sections = [
+        entry for entry in os.listdir(city_folder)
+        if os.path.isdir(os.path.join(city_folder, entry)) and entry.startswith("section_")
+    ]
+    if not existing_sections:
+        return 1
+    max_index = max(int(s.split("_")[1]) for s in existing_sections)
+    return max_index + 1
+
+
+def create_sections_from_extracted_zip(
+    extract_folder: str,
+    city_folder: str,
+    original_section_name: str,
+    original_section_metadata: dict,
+    zip_url: str,
+) -> list[str]:
+    """
+    Create new sections from subfolders of an extracted ZIP file.
+
+    Each subfolder (including nested ones) that contains PDF files becomes a new section.
+    Updates crawl_output.json with the new sections.
+
+    Args:
+        extract_folder: Path to the extracted ZIP contents
+        city_folder: Path to the city folder
+        original_section_name: Name of the section that contained the ZIP
+        original_section_metadata: Metadata of the original section
+        zip_url: URL of the original ZIP file
+
+    Returns:
+        List of new section folder names created
+    """
+    # Find all directories that contain PDFs (including root and nested)
+    all_pdf_dirs = set()
+    for pdf_path in glob.glob(os.path.join(extract_folder, "**", "*.pdf"), recursive=True):
+        all_pdf_dirs.add(os.path.dirname(pdf_path))
+
+    if not all_pdf_dirs:
+        logger.info("No PDF files found in extracted ZIP")
+        return []
+
+    # Load crawl_output.json to add new sections
+    crawl_output_path = os.path.join(city_folder, "crawl_output.json")
+    with open(crawl_output_path, "r", encoding="utf-8") as f:
+        crawl_data = json.load(f)
+
+    # Use a synthetic URL key for extracted sections
+    extracted_url = f"extracted://{original_section_name}/{os.path.basename(extract_folder)}"
+    if extracted_url not in crawl_data.get("results", {}):
+        crawl_data["results"][extracted_url] = []
+
+    new_section_names = []
+    next_index = get_next_section_index(city_folder)
+
+    for pdf_dir in sorted(all_pdf_dirs):
+        # Get PDFs in this specific directory (not subdirectories)
+        pdfs_in_dir = [
+            f for f in os.listdir(pdf_dir)
+            if f.lower().endswith(".pdf") and os.path.isfile(os.path.join(pdf_dir, f))
+        ]
+        if not pdfs_in_dir:
+            continue
+
+        # Create new section folder
+        new_section_name = f"section_{next_index:04d}"
+        new_section_folder = os.path.join(city_folder, new_section_name)
+        pathlib.Path(new_section_folder).mkdir(parents=True, exist_ok=True)
+
+        # Determine section title from folder path relative to extract_folder
+        rel_path = os.path.relpath(pdf_dir, extract_folder)
+        if rel_path == ".":
+            section_title = f"{original_section_metadata.get('title', '')} (extrait)"
+        else:
+            section_title = f"{original_section_metadata.get('title', '')} / {rel_path}"
+
+        # Move PDFs to new section folder and build files list
+        files = []
+        for pdf_name in sorted(pdfs_in_dir):
+            src_path = os.path.join(pdf_dir, pdf_name)
+            dst_path = os.path.join(new_section_folder, pdf_name)
+            shutil.move(src_path, dst_path)
+            files.append({
+                "url": f"{zip_url}#{rel_path}/{pdf_name}",
+                "text": pdf_name,
+                "filename": pdf_name,
+            })
+
+        # Create section.json
+        section_metadata = {
+            "title": section_title,
+            "source_url": original_section_metadata.get("source_url", ""),
+            "extracted_from": {
+                "section": original_section_name,
+                "zip_url": zip_url,
+                "subfolder": rel_path,
+            },
+            "files": files,
+        }
+        section_json_path = os.path.join(new_section_folder, "section.json")
+        with open(section_json_path, "w", encoding="utf-8") as f:
+            json.dump(section_metadata, f, ensure_ascii=False, indent=2)
+
+        # Add to crawl_output.json results
+        crawl_data["results"][extracted_url].append({
+            "title": section_title,
+            "chunks": [{"text": pdf_name, "link": f"#{rel_path}/{pdf_name}"} for pdf_name in sorted(pdfs_in_dir)],
+        })
+
+        new_section_names.append(new_section_name)
+        logger.info("Created new section %s: '%s' (%d PDFs)", new_section_name, section_title[:50], len(pdfs_in_dir))
+        next_index += 1
+
+    # Save updated crawl_output.json
+    with open(crawl_output_path, "w", encoding="utf-8") as f:
+        json.dump(crawl_data, f, ensure_ascii=False, indent=2)
+
+    # Clean up empty directories in extract_folder
+    for dirpath, dirnames, filenames in os.walk(extract_folder, topdown=False):
+        if not dirnames and not filenames:
+            os.rmdir(dirpath)
+    if os.path.exists(extract_folder) and not os.listdir(extract_folder):
+        os.rmdir(extract_folder)
+
+    return new_section_names
+
+
+def download_files_from_crawl(city_folder: str, section_filter: set[str] | None = None) -> dict:
     """
     Download files for sections in a city folder.
 
@@ -236,7 +366,7 @@ def download_files_from_crawl(city_folder: str, section_filter: set[str] | None 
                        If None, all sections are processed.
 
     Returns:
-        Number of sections processed
+        Dict with 'sections_processed' count and 'new_sections_from_zips' list
     """
     section_folders = sorted([
         entry for entry in os.listdir(city_folder)
@@ -250,6 +380,7 @@ def download_files_from_crawl(city_folder: str, section_filter: set[str] | None 
     logger.info("Downloading files from %d sections...", total_sections)
 
     headers = get_default_headers()
+    all_new_sections = []
 
     for idx, section_name in enumerate(section_folders, 1):
         section_folder = os.path.join(city_folder, section_name)
@@ -281,14 +412,16 @@ def download_files_from_crawl(city_folder: str, section_filter: set[str] | None 
                         dest_parent_folder=section_folder,
                         delete_after=True,
                     )
-                    pdf_files = glob.glob(
-                        os.path.join(extract_folder, "**", "*.pdf"),
-                        recursive=True,
+                    new_sections = create_sections_from_extracted_zip(
+                        extract_folder=extract_folder,
+                        city_folder=city_folder,
+                        original_section_name=section_name,
+                        original_section_metadata=section_metadata,
+                        zip_url=url,
                     )
-                    file_entry["extracted_pdfs"] = [
-                        os.path.relpath(pdf, section_folder) for pdf in pdf_files
-                    ]
-                    logger.info("Extracted %d PDFs from ZIP", len(pdf_files))
+                    file_entry["extracted_sections"] = new_sections
+                    all_new_sections.extend(new_sections)
+                    logger.info("Created %d sections from ZIP", len(new_sections))
 
             except Exception as e:
                 logger.error("Failed to download %s: %s", url, e)
@@ -298,7 +431,10 @@ def download_files_from_crawl(city_folder: str, section_filter: set[str] | None 
         with open(section_json_path, "w", encoding="utf-8") as f:
             json.dump(section_metadata, f, ensure_ascii=False, indent=2)
 
-    return total_sections
+    return {
+        "sections_processed": total_sections,
+        "new_sections_from_zips": all_new_sections,
+    }
 
 
 def scrape_city(
@@ -429,9 +565,29 @@ def process_single_city(
         logger.warning("%s %s: No classification file found, skipping downloads", progress, city_name)
 
     # Step 5: Download files only for municipal council sections
+    new_sections_from_zips = []
     if municipal_sections:
         logger.info("%s %s: Downloading files...", progress, city_name)
-        download_files_from_crawl(city_folder, section_filter=municipal_sections)
+        download_result = download_files_from_crawl(city_folder, section_filter=municipal_sections)
+        new_sections_from_zips = download_result.get("new_sections_from_zips", [])
+
+    # Step 6: If ZIPs created new sections, re-classify them
+    if new_sections_from_zips:
+        logger.info("%s %s: Re-classifying %d new sections from ZIPs...", progress, city_name, len(new_sections_from_zips))
+        classify_sections_by_city(
+            cities_dir=output_base_dir,
+            city_names=[sanitize_folder_name(city_name)],
+            overwrite=True
+        )
+
+        # Re-read classification to get updated municipal sections
+        if os.path.exists(classification_path):
+            with open(classification_path, "r", encoding="utf-8") as f:
+                classifications = json.load(f)
+            for section_name, classification in classifications.items():
+                if classification.get("est_conseil_municipal", False):
+                    municipal_sections.add(section_name)
+            logger.info("%s %s: Total municipal council sections after re-classification: %d", progress, city_name, len(municipal_sections))
 
     logger.info("%s %s: Done", progress, city_name)
     return {"city": city_name, "result": result, "municipal_sections": len(municipal_sections)}
@@ -443,6 +599,8 @@ def scrape_cities_from_csv(
     max_depth: int | None = None,
     skip_non_empty: bool = True,
     parallel_workers: int = 5,
+    city_names: list[str] | None = None,
+    list_only: bool = False,
 ) -> list[dict]:
     """
     Read a CSV file and run scrape_city on each row with a valid URL.
@@ -458,6 +616,8 @@ def scrape_cities_from_csv(
         max_depth: Maximum crawl depth (None for unlimited)
         skip_non_empty: If True, skip cities whose folder already has content
         parallel_workers: Number of cities to process in parallel (default: 5)
+        city_names: Optional list of city names to process (default: all cities)
+        list_only: If True, only return the list of cities that would be processed
 
     Returns:
         List of results from scrape_city for each processed city
@@ -473,6 +633,9 @@ def scrape_cities_from_csv(
 
     logger.info("Loaded %d rows from CSV: %s", len(rows), csv_path)
 
+    # Pre-compute lowercase city names filter for case-insensitive matching
+    city_names_lower = {c.lower() for c in city_names} if city_names else None
+
     # Filter rows and build list of cities to process
     cities_to_process = []
     for row_index, row in enumerate(rows, 1):
@@ -487,6 +650,10 @@ def scrape_cities_from_csv(
 
         # Build city name (include year if present)
         city_name = f"{commune}_{annee}" if annee else commune
+
+        # Skip cities not in the filter list (case insensitive)
+        if city_names_lower is not None and city_name.lower() not in city_names_lower:
+            continue
 
         # Skip sites with browser-based readers (no direct PDF links)
         if "liseuse" in type_de_site:
@@ -508,6 +675,14 @@ def scrape_cities_from_csv(
         cities_to_process.append({"city_name": city_name, "url": url})
 
     total_cities = len(cities_to_process)
+
+    # If list_only, return early with just the cities that would be processed
+    if list_only:
+        return {
+            "to_process": cities_to_process,
+            "skipped": skipped,
+        }
+
     logger.info("Will process %d cities with %d parallel workers", total_cities, parallel_workers)
 
     # Process cities in parallel

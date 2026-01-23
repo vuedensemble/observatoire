@@ -10,12 +10,34 @@ def scrape_command(args):
     if args.verbose:
         logging.getLogger().setLevel(logging.INFO)
 
+    if args.list:
+        results = scrape_cities_from_csv(
+            csv_path=args.csv_path,
+            output_base_dir=args.output_dir,
+            skip_non_empty=not args.no_skip,
+            city_names=args.cities if args.cities else None,
+            list_only=True,
+        )
+        to_process = results["to_process"]
+        skipped = results["skipped"]
+
+        print(f"Cities to process ({len(to_process)}):")
+        for city in to_process:
+            print(f"  {city['city_name']}: {city['url']}")
+
+        if skipped:
+            print(f"\nSkipped ({len(skipped)}):")
+            for city in skipped:
+                print(f"  {city['city']}: {city['reason']}")
+        return
+
     results = scrape_cities_from_csv(
         csv_path=args.csv_path,
         output_base_dir=args.output_dir,
         max_depth=args.max_depth,
         skip_non_empty=not args.no_skip,
         parallel_workers=args.parallel_workers,
+        city_names=args.cities if args.cities else None,
     )
 
     print(f"\nSummary:")
@@ -58,6 +80,9 @@ Examples:
   # Scrape cities from CSV
   %(prog)s scrape cities.csv output/
 
+  # Scrape specific cities only
+  %(prog)s scrape cities.csv output/ -c paris lyon marseille
+
   # Classify sections for all cities
   %(prog)s classify cities/
 
@@ -85,6 +110,12 @@ Examples:
 
   # Process 10 cities in parallel
   %(prog)s cities.csv output/ -p 10
+
+  # Process only specific cities
+  %(prog)s cities.csv output/ -c paris lyon marseille
+
+  # List cities that would be processed (dry run)
+  %(prog)s cities.csv output/ --list
 
   # Re-process cities even if folder exists
   %(prog)s cities.csv output/ --no-skip
@@ -117,6 +148,16 @@ Examples:
         type=int,
         default=5,
         help="Number of cities to process in parallel (default: 5)",
+    )
+    scrape_parser.add_argument(
+        "-c", "--cities",
+        nargs="+",
+        help="Only process these city names (default: all cities)",
+    )
+    scrape_parser.add_argument(
+        "-l", "--list",
+        action="store_true",
+        help="List cities that would be processed without actually processing them",
     )
     scrape_parser.add_argument(
         "-v", "--verbose",
