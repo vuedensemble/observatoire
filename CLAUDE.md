@@ -16,3 +16,27 @@ To automatically reload modules when they change:
 ## Code Style
 
 Prefer pure functions as much as possible. Functions should have all context passed via arguments rather than relying on closures or global state.
+
+## CLI
+
+The main CLI is at `observatoire/cli/run.py`. Run commands with:
+
+```bash
+uv run python -m observatoire.cli.run <command> [options]
+```
+
+Available commands:
+
+- `scrape` - Scrape city websites from a CSV file
+- `classify` - Classify sections as municipal council related using LLM batch API
+- `ocr` - Run Mistral OCR on all PDFs in a folder
+
+Examples:
+
+```bash
+# Run OCR on all PDFs in a folder
+uv run python -m observatoire.cli.run ocr /path/to/pdfs/
+
+# Run OCR recursively
+uv run python -m observatoire.cli.run ocr /path/to/pdfs/ -r -v
+```

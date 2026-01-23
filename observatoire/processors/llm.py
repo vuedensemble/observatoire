@@ -237,6 +237,147 @@ def ocr_pdf(mistral_client: mistralai.Mistral, fp=None, bytes=None):
     )
 
 
+class OcrBatchRequest(TypedDict):
+    custom_id: str
+    body: dict
+
+
+def build_ocr_batch_request(pdf_path: str, include_image_base64: bool = True) -> OcrBatchRequest:
+    """
+    Build a batch OCR request for a single PDF file.
+
+    Args:
+        pdf_path: Path to the PDF file
+        include_image_base64: Whether to include base64 images in the response
+
+    Returns:
+        OcrBatchRequest dict ready for batch processing
+    """
+    with open(pdf_path, "rb") as f:
+        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
+
+    return {
+        "custom_id": pdf_path,
+        "body": {
+            "document": {
+                "type": "document_url",
+                "document_url": f"data:application/pdf;base64,{base64_pdf}",
+            },
+            "include_image_base64": include_image_base64,
+        },
+    }
+
+
+def run_ocr_batch(
+    pdf_paths: list[str],
+    model: str = "mistral-ocr-latest",
+    poll_interval: float = 5.0,
+    include_image_base64: bool = True,
+    mistral_client: mistralai.Mistral | None = None,
+) -> dict[str, str]:
+    """
+    Run OCR on a list of PDF files using Mistral's batch API and save results locally.
+
+    Args:
+        pdf_paths: List of paths to PDF files to process
+        model: Mistral OCR model to use
+        poll_interval: Seconds between status checks
+        include_image_base64: Whether to include base64 images in OCR response
+        mistral_client: Optional pre-configured client
+
+    Returns:
+        Dict mapping input pdf_path to output JSON file path (saved next to input)
+    """
+    if mistral_client is None:
+        mistral_client = get_mistral_client()
+
+    logger.info("Building OCR batch requests for %d PDFs", len(pdf_paths))
+    requests = [
+        build_ocr_batch_request(pdf_path, include_image_base64=include_image_base64)
+        for pdf_path in pdf_paths
+    ]
+
+    # Create JSONL content
+    jsonl_content = "\n".join(json.dumps(req) for req in requests)
+
+    # Upload the JSONL file
+    uploaded_file = mistral_client.files.upload(
+        file={
+            "file_name": "ocr_batch_requests.jsonl",
+            "content": jsonl_content.encode("utf-8"),
+        },
+        purpose="batch",
+    )
+    logger.info("Uploaded OCR batch file: %s", uploaded_file.id)
+
+    # Create batch job with OCR endpoint
+    created_job = mistral_client.batch.jobs.create(
+        input_files=[uploaded_file.id],
+        model=model,
+        endpoint="/v1/ocr",
+    )
+
+    job_id = created_job.id
+    logger.info("OCR batch job created: %s", job_id)
+
+    # Poll for completion
+    while True:
+        job = mistral_client.batch.jobs.get(job_id=job_id)
+        status = str(job.status.value) if hasattr(job.status, "value") else str(job.status)
+
+        progress_info = ""
+        if hasattr(job, "succeeded_requests") and hasattr(job, "total_requests"):
+            progress_info = f" ({job.succeeded_requests}/{job.total_requests})"
+
+        logger.info("OCR batch job %s status: %s%s", job_id, status, progress_info)
+
+        if status == "SUCCESS":
+            break
+        elif status in ("FAILED", "TIMEOUT_EXCEEDED", "CANCELLED"):
+            raise RuntimeError(f"OCR batch job {job_id} ended with status: {status}")
+
+        time.sleep(poll_interval)
+
+    # Download results
+    logger.info("Downloading OCR results from file: %s", job.output_file)
+    output_file = mistral_client.files.download(file_id=job.output_file)
+
+    if hasattr(output_file, "read"):
+        output_content = output_file.read()
+        if isinstance(output_content, bytes):
+            output_content = output_content.decode("utf-8")
+    else:
+        output_content = output_file
+
+    # Parse JSONL results and save each to a file next to the input PDF
+    output_paths = {}
+    for line in output_content.strip().split("\n"):
+        if not line:
+            continue
+        result = json.loads(line)
+        custom_id = result.get("custom_id")  # This is the original pdf_path
+
+        # Generate output path next to the input PDF
+        output_path = os.path.splitext(custom_id)[0] + "_ocr.json"
+
+        if result.get("error"):
+            logger.warning("OCR error for %s: %s", custom_id, result["error"])
+            output_data = {"error": result["error"], "source_pdf": custom_id}
+        else:
+            # Extract the OCR response body
+            response_body = result.get("response", {}).get("body", {})
+            output_data = response_body
+
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(output_data, f, ensure_ascii=False, indent=2)
+
+        output_paths[custom_id] = output_path
+        logger.info("Saved OCR result: %s", output_path)
+
+    logger.info("OCR batch complete: %d results saved", len(output_paths))
+    return output_paths
+
+
 def find_doc_ids_no_ocr(locality_id: int):
     with rx.session() as session:
         existing_document_ids_no_ocr_tuples = list(session.connection().execute(text("SELECT id FROM document WHERE locality_id=:locality_id AND i_md_from_ocr = '{}'"), {"locality_id": locality_id}))
@@ -461,3 +602,71 @@ def classify_sections_by_city(cities_dir: str, city_names: list[str] | None = No
         except Exception as e:
             logger.error("Error processing city %s: %s", city_name, str(e))
             continue
+
+
+def ocr_folder(
+    folder_path: str,
+    recursive: bool = False,
+    skip_existing: bool = True,
+    model: str = "mistral-ocr-latest",
+    include_image_base64: bool = True,
+) -> dict[str, str]:
+    """
+    Run OCR on all PDF files in a folder using Mistral's batch API.
+
+    Args:
+        folder_path: Path to folder containing PDF files
+        recursive: If True, search for PDFs recursively in subfolders
+        skip_existing: If True, skip PDFs that already have a corresponding _ocr.json file
+        model: Mistral OCR model to use
+        include_image_base64: Whether to include base64 images in OCR response
+
+    Returns:
+        Dict mapping input pdf_path to output JSON file path
+    """
+    folder_path = os.path.abspath(folder_path)
+
+    # Find all PDF files
+    if recursive:
+        pdf_paths = []
+        for root, _, files in os.walk(folder_path):
+            for f in files:
+                if f.lower().endswith(".pdf"):
+                    pdf_paths.append(os.path.join(root, f))
+    else:
+        pdf_paths = [
+            os.path.join(folder_path, f)
+            for f in os.listdir(folder_path)
+            if f.lower().endswith(".pdf")
+        ]
+
+    pdf_paths = sorted(pdf_paths)
+    logger.info("Found %d PDF files in %s", len(pdf_paths), folder_path)
+
+    # Filter out PDFs that already have OCR results
+    if skip_existing:
+        pdf_paths_to_process = []
+        for pdf_path in pdf_paths:
+            ocr_path = os.path.splitext(pdf_path)[0] + "_ocr.json"
+            if os.path.exists(ocr_path):
+                logger.debug("Skipping %s: OCR result already exists", pdf_path)
+            else:
+                pdf_paths_to_process.append(pdf_path)
+        logger.info(
+            "Skipped %d PDFs with existing OCR results, %d to process",
+            len(pdf_paths) - len(pdf_paths_to_process),
+            len(pdf_paths_to_process),
+        )
+        pdf_paths = pdf_paths_to_process
+
+    if not pdf_paths:
+        logger.info("No PDFs to process")
+        return {}
+
+    return run_ocr_batch(
+        pdf_paths=pdf_paths,
+        model=model,
+        include_image_base64=include_image_base64,
+    )
+
+

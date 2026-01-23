@@ -3,7 +3,7 @@ import argparse
 import logging
 
 from observatoire.processors.e2e import scrape_cities_from_csv
-from observatoire.processors.llm import classify_sections_by_city
+from observatoire.processors.llm import classify_sections_by_city, ocr_folder
 
 
 def scrape_command(args):
@@ -34,6 +34,21 @@ def classify_command(args):
     )
 
 
+def ocr_command(args):
+    if args.verbose:
+        logging.getLogger().setLevel(logging.INFO)
+
+    results = ocr_folder(
+        folder_path=args.folder,
+        recursive=True,
+        skip_existing=not args.no_skip,
+        model=args.model,
+        include_image_base64=not args.no_images,
+    )
+
+    print(f"Processed {len(results)} PDFs")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Observatoire CLI tools",
@@ -48,6 +63,9 @@ Examples:
 
   # Classify sections for specific cities only
   %(prog)s classify cities/ -c paris lyon marseille
+
+  # Run OCR on all PDFs in a folder
+  %(prog)s ocr /path/to/pdfs/
 """,
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -139,6 +157,49 @@ Examples:
         help="Enable debug logging",
     )
     classify_parser.set_defaults(func=classify_command)
+
+    # OCR command
+    ocr_parser = subparsers.add_parser(
+        "ocr",
+        help="Run Mistral OCR on all PDFs in a folder",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Basic usage (searches subfolders recursively)
+  %(prog)s /path/to/pdfs/
+
+  # Force reprocess (don't skip existing _ocr.json)
+  %(prog)s /path/to/pdfs/ --no-skip
+
+  # Verbose output
+  %(prog)s /path/to/pdfs/ -v
+""",
+    )
+    ocr_parser.add_argument(
+        "folder",
+        help="Path to folder containing PDF files",
+    )
+    ocr_parser.add_argument(
+        "--no-skip",
+        action="store_true",
+        help="Process all PDFs even if _ocr.json already exists",
+    )
+    ocr_parser.add_argument(
+        "--model",
+        default="mistral-ocr-latest",
+        help="Mistral OCR model to use (default: mistral-ocr-latest)",
+    )
+    ocr_parser.add_argument(
+        "--no-images",
+        action="store_true",
+        help="Don't include base64 images in OCR output",
+    )
+    ocr_parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Enable debug logging",
+    )
+    ocr_parser.set_defaults(func=ocr_command)
 
     args = parser.parse_args()
     args.func(args)
