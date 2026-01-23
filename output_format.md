@@ -4,7 +4,9 @@
 
 ### Liste des délibérations
 
-#### Chaque délibération
+{boucle sur chaque délibération ci-dessous}
+
+#### Délibération <numéro>
 
 ##### Numéro
 <numéro>

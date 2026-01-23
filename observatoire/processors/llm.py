@@ -1,10 +1,28 @@
 import base64
+import json
+import logging
 import os
+import time
+from typing import TypedDict
 
 import mistralai
 from pydantic import BaseModel, Field
 import reflex as rx
 from sqlmodel import select, text
+
+
+class BatchRequestBody(TypedDict, total=False):
+    messages: list[dict]
+    max_tokens: int
+    temperature: float
+    response_format: dict
+
+
+class BatchRequest(TypedDict):
+    custom_id: str
+    body: BatchRequestBody
+
+logger = logging.getLogger(__name__)
 
 from observatoire.schema.document import Document, extract_md
 from observatoire.schema.locality import Locality
@@ -14,6 +32,186 @@ def get_mistral_client():
     return mistralai.Mistral(
         api_key=os.environ["LLM_API_KEY"],
     )
+
+
+def run_batch(
+    requests: list[BatchRequest],
+    model: str = "mistral-large-latest",
+    endpoint: str = "/v1/chat/completions",
+    poll_interval: float = 5.0,
+    mistral_client: mistralai.Mistral | None = None,
+) -> dict[str, dict]:
+    """
+    Run a batch of requests on Mistral's batch API and wait for results.
+
+    Args:
+        requests: List of BatchRequest dicts
+        model: Mistral model to use
+        endpoint: API endpoint (e.g., "/v1/chat/completions")
+        poll_interval: Seconds between status checks
+        mistral_client: Optional pre-configured client
+
+    Returns:
+        Dict mapping custom_id to response body
+    """
+    if mistral_client is None:
+        mistral_client = get_mistral_client()
+
+    logger.info("Creating batch job with %d requests", len(requests))
+
+    # Create JSONL content from requests
+    jsonl_content = "\n".join(json.dumps(req) for req in requests)
+
+    # Upload the JSONL file
+    uploaded_file = mistral_client.files.upload(
+        file={
+            "file_name": "batch_requests.jsonl",
+            "content": jsonl_content.encode("utf-8"),
+        },
+        purpose="batch",
+    )
+    logger.info("Uploaded batch file: %s", uploaded_file.id)
+
+    created_job = mistral_client.batch.jobs.create(
+        input_files=[uploaded_file.id],
+        model=model,
+        endpoint=endpoint,
+    )
+
+    job_id = created_job.id
+    logger.info("Batch job created: %s", job_id)
+
+    # Poll for completion
+    while True:
+        job = mistral_client.batch.jobs.get(job_id=job_id)
+        status = str(job.status.value) if hasattr(job.status, 'value') else str(job.status)
+
+        logger.info("Batch job %s status: %s", job_id, status)
+
+        if status == "SUCCESS":
+            break
+        elif status in ("FAILED", "TIMEOUT_EXCEEDED", "CANCELLED"):
+            raise RuntimeError(f"Batch job {job_id} ended with status: {status}")
+
+        time.sleep(poll_interval)
+
+    # Download results
+    logger.info("Downloading results from file: %s", job.output_file)
+    output_file = mistral_client.files.download(file_id=job.output_file)
+    # Handle different response types from the SDK
+    if hasattr(output_file, 'read'):
+        output_content = output_file.read()
+        if isinstance(output_content, bytes):
+            output_content = output_content.decode("utf-8")
+    else:
+        output_content = output_file
+
+    # Parse JSONL results
+    results = {}
+    for line in output_content.strip().split("\n"):
+        if not line:
+            continue
+        result = json.loads(line)
+        custom_id = result.get("custom_id")
+        if result.get("error"):
+            logger.warning("Error for %s: %s", custom_id, result["error"])
+            results[custom_id] = {"error": result["error"]}
+        else:
+            results[custom_id] = result.get("response", {}).get("body", {})
+
+    logger.info("Batch complete: %d results", len(results))
+    return results
+
+
+def build_section_classification_request(section_folder: str) -> BatchRequest:
+    """
+    Build a batch request to classify whether a section relates to a conseil municipal.
+
+    Args:
+        section_folder: Path to a section folder containing section.json
+
+    Returns:
+        BatchRequest dict ready to be passed to run_batch
+    """
+    section_json_path = os.path.join(section_folder, "section.json")
+    with open(section_json_path, "r", encoding="utf-8") as f:
+        section_data = json.load(f)
+
+    title = section_data.get("title", "")
+    source_url = section_data.get("source_url", "")
+    files = section_data.get("files", [])
+
+    files_description = "\n".join([
+        f"- {file.get('text', '')} (fichier: {file.get('filename', '')})"
+        for file in files
+    ])
+
+    prompt = f"""Analyse les informations suivantes provenant d'une section d'un site web municipal et détermine si cette section concerne un conseil municipal (délibérations, comptes-rendus, procès-verbaux de conseil municipal).
+
+Titre de la section : {title}
+URL source : {source_url}
+
+Liste des fichiers :
+{files_description}
+"""
+
+    json_schema = {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "section_classification",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "est_conseil_municipal": {
+                        "type": "boolean",
+                        "description": "True si la section concerne un conseil municipal"
+                    },
+                    "raison": {
+                        "type": "string",
+                        "description": "Courte explication de la décision"
+                    },
+                    "type_documents": {
+                        "type": "string",
+                        "description": "Type de documents identifiés (ex: délibérations, comptes-rendus, budgets, autre)"
+                    }
+                },
+                "required": ["est_conseil_municipal", "raison", "type_documents"],
+                "additionalProperties": False
+            }
+        }
+    }
+
+    return {
+        "custom_id": section_folder,
+        "body": {
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 200,
+            "temperature": 0,
+            "response_format": json_schema,
+        },
+    }
+
+
+def build_section_classification_requests(city_folder: str) -> list[BatchRequest]:
+    """
+    Build batch requests for all sections in a city folder.
+
+    Args:
+        city_folder: Path to a city folder containing section_* subfolders
+
+    Returns:
+        List of BatchRequest dicts
+    """
+    requests = []
+    for entry in sorted(os.listdir(city_folder)):
+        section_folder = os.path.join(city_folder, entry)
+        if os.path.isdir(section_folder) and entry.startswith("section_"):
+            section_json = os.path.join(section_folder, "section.json")
+            if os.path.exists(section_json):
+                requests.append(build_section_classification_request(section_folder))
+    logger.info("Built %d classification requests for %s", len(requests), city_folder)
+    return requests
 
 
 def encode_pdf(pdf_path: str):
@@ -188,3 +386,78 @@ def process_all_localities_documents():
     for idx, locality_id in enumerate(locality_ids):
         print(f"Running {locality_id} | {idx + 1}/{count}")
         process_locality_documents(locality_id=locality_id)
+
+
+def classify_sections_by_city(cities_dir: str, city_names: list[str] | None = None):
+    """
+    Process all cities in a directory, running one batch request per city
+    to classify sections as municipal council related or not.
+
+    Args:
+        cities_dir: Path to directory containing city folders (e.g., 'cities/')
+                   Structure: cities/<city>/<section>/
+        city_names: Optional list of city folder names to process. If None, all cities are processed.
+
+    Results are saved to cities/<city>/municipal_council_section_check.json
+    """
+    mistral_client = get_mistral_client()
+
+    city_folders = sorted([
+        entry for entry in os.listdir(cities_dir)
+        if os.path.isdir(os.path.join(cities_dir, entry))
+    ])
+
+    if city_names is not None:
+        city_names_lower = set(name.lower() for name in city_names)
+        city_folders = [c for c in city_folders if c.lower() in city_names_lower]
+
+    count = len(city_folders)
+    logger.info("Found %d cities to process", count)
+
+    for idx, city_name in enumerate(city_folders):
+        city_path = os.path.join(cities_dir, city_name)
+        output_path = os.path.join(city_path, "municipal_council_section_check.json")
+
+        if os.path.exists(output_path):
+            logger.info("Skipping %s (%d/%d): classification already exists", city_name, idx + 1, count)
+            continue
+
+        logger.info("Processing city %s (%d/%d)", city_name, idx + 1, count)
+
+        requests = build_section_classification_requests(city_path)
+        if not requests:
+            logger.warning("No sections found for %s, skipping", city_name)
+            continue
+
+        try:
+            results = run_batch(
+                requests=requests,
+                mistral_client=mistral_client,
+            )
+
+            # Parse JSON responses and build output
+            output = {}
+            for custom_id, response_body in results.items():
+                section_name = os.path.basename(custom_id)
+                if "error" in response_body:
+                    output[section_name] = {"error": response_body["error"]}
+                else:
+                    # Extract the parsed JSON from the response
+                    choices = response_body.get("choices", [])
+                    if choices:
+                        content = choices[0].get("message", {}).get("content", "{}")
+                        try:
+                            output[section_name] = json.loads(content)
+                        except json.JSONDecodeError:
+                            output[section_name] = {"raw_content": content}
+                    else:
+                        output[section_name] = {"error": "No choices in response"}
+
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(output, f, ensure_ascii=False, indent=2)
+
+            logger.info("Saved results for %s to %s", city_name, output_path)
+
+        except Exception as e:
+            logger.error("Error processing city %s: %s", city_name, str(e))
+            continue

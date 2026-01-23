@@ -129,7 +129,7 @@ def assign_section_to_chunk(chunks: list):
     return chunks_with_levels
 
 
-def group_links(chunks: list):
+def group_links(chunks: list, source_url: str):
     current_section_title = ""
     current_section_chunks = []
     sections = []
@@ -146,15 +146,15 @@ def group_links(chunks: list):
         })
     
     if len(current_section_chunks) > 0:
-        sections.append({"title": current_section_title, "chunks": current_section_chunks})
+        sections.append({"source_url": source_url, "title": current_section_title, "chunks": current_section_chunks})
     return sections
 
 
-def pipeline(html_content: str):
+def pipeline(html_content: str, source_url):
     bs = bs4.BeautifulSoup(html_content, "html.parser")
     chunks = extract_chunks(bs)
     chunks_with_sections = assign_section_to_chunk(chunks)
-    return group_links(chunks_with_sections)
+    return group_links(chunks_with_sections, source_url)
 
 
 def display_section_outputs(sections):
