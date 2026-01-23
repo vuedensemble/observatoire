@@ -28,6 +28,39 @@ from observatoire.schema.document import Document, extract_md
 from observatoire.schema.locality import Locality
 
 
+# Conseil Municipal extraction models
+
+class ProjetMentionne(BaseModel):
+    nom: str = Field(description="Nom du projet")
+    description: str = Field(description="Description du projet")
+    nature: str = Field(description="Nature du projet (infrastructure, service, etc.)")
+    competence: str = Field(description="Compétence concernée (voirie, culture, sport, etc.)")
+
+
+class Deliberation(BaseModel):
+    numero: str = Field(description="Numéro de la délibération")
+    objet: str = Field(description="Objet de la délibération")
+    detail: str = Field(description="Détail de la délibération en texte libre")
+    decision: str = Field(description="Décision prise (adoptée, rejetée, reportée, etc.)")
+    votants: str = Field(description="Information sur les votants (nombre, unanimité, etc.)")
+    projets_mentionnes: list[ProjetMentionne] = Field(
+        default_factory=list,
+        description="Liste des projets mentionnés dans cette délibération"
+    )
+
+
+class ConseilMunicipalExtraction(BaseModel):
+    date: str = Field(description="Date du conseil municipal au format JJ-MM-AAAA")
+    deliberations: list[Deliberation] = Field(
+        default_factory=list,
+        description="Liste des délibérations du conseil municipal"
+    )
+    projets_mentionnes_global: list[ProjetMentionne] = Field(
+        default_factory=list,
+        description="Liste globale de tous les projets mentionnés lors du conseil municipal"
+    )
+
+
 def get_mistral_client():
     return mistralai.Mistral(
         api_key=os.environ["LLM_API_KEY"],
@@ -86,7 +119,11 @@ def run_batch(
         job = mistral_client.batch.jobs.get(job_id=job_id)
         status = str(job.status.value) if hasattr(job.status, 'value') else str(job.status)
 
-        logger.info("Batch job %s status: %s", job_id, status)
+        progress_info = ""
+        if hasattr(job, "succeeded_requests") and hasattr(job, "total_requests"):
+            progress_info = f" ({job.succeeded_requests}/{job.total_requests})"
+
+        logger.info("Batch job %s status: %s%s", job_id, status, progress_info)
 
         if status == "SUCCESS":
             break
@@ -669,4 +706,486 @@ def ocr_folder(
         include_image_base64=include_image_base64,
     )
 
+
+def load_ocr_markdown(ocr_json_path: str) -> str:
+    """
+    Load an OCR JSON file and extract the markdown content.
+
+    Args:
+        ocr_json_path: Path to the _ocr.json file
+
+    Returns:
+        Markdown string from all pages
+    """
+    with open(ocr_json_path, "r", encoding="utf-8") as f:
+        ocr_data = json.load(f)
+
+    if "error" in ocr_data:
+        logger.warning("OCR file %s contains an error: %s", ocr_json_path, ocr_data["error"])
+        return ""
+
+    return extract_md(ocr_data, image_strategy="remove") or ""
+
+
+def find_ocr_files(folder_path: str) -> list[str]:
+    """
+    Find all _ocr.json files in a folder recursively.
+
+    Args:
+        folder_path: Path to folder to search
+
+    Returns:
+        List of paths to _ocr.json files
+    """
+    import glob as glob_module
+    return sorted(glob_module.glob(os.path.join(folder_path, "**", "*_ocr.json"), recursive=True))
+
+
+CONSEIL_MUNICIPAL_EXTRACTION_PROMPT = """Tu es un assistant spécialisé dans l'analyse de documents administratifs français.
+
+Analyse le contenu suivant, qui provient d'un document de conseil municipal (procès-verbal, compte-rendu, délibération), et extrais les informations en suivant EXACTEMENT le format markdown ci-dessous.
+
+FORMAT DE SORTIE (à suivre strictement):
+
+# Date
+<date au format YYYY-MM-DD>
+
+# Liste des délibérations
+
+## Délibération <numéro>
+
+### Numéro
+<numéro>
+
+### Objet
+<objet>
+
+### Détail
+
+<détail de la délibération en texte libre>
+
+### Décision
+
+<décision>
+
+### Votants
+<votants>
+
+### Projet mentionné
+
+<pour chaque projet: - **nom**: description (nature: X, compétence: Y)>
+
+## Liste des projets mentionnés lors du conseil municipal
+
+<liste globale de tous les projets mentionnés: - **nom**: description (nature: X, compétence: Y)>
+
+FIN DU FORMAT
+
+Instructions:
+- Répète la section "## Délibération <numéro>" pour chaque délibération trouvée dans le document
+- Si une information n'est pas disponible, laisse le champ vide
+- N'ajoute pas de commentaires ou d'explications, seulement le markdown structuré
+
+Contenu du document:
+
+{content}
+"""
+
+
+def build_conseil_municipal_extraction_request(
+    ocr_file_path: str,
+    markdown_content: str,
+) -> BatchRequest:
+    """
+    Build a batch request to extract conseil municipal data from markdown content.
+
+    Args:
+        ocr_file_path: Path to the _ocr.json file (used as custom_id)
+        markdown_content: Markdown content from OCR
+
+    Returns:
+        BatchRequest dict ready for batch processing
+    """
+    prompt = CONSEIL_MUNICIPAL_EXTRACTION_PROMPT.format(content=markdown_content)
+
+    return {
+        "custom_id": ocr_file_path,
+        "body": {
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 16000,
+            "temperature": 0,
+        },
+    }
+
+
+def get_extraction_output_path(ocr_file_path: str) -> str:
+    """Get the extraction output path for an OCR file (replaces _ocr.json with _extraction.md)."""
+    return ocr_file_path.replace("_ocr.json", "_extraction.md")
+
+
+def extract_conseil_municipal_batch(
+    folders: list[str],
+    model: str = "mistral-large-latest",
+    skip_existing: bool = True,
+) -> dict[str, str]:
+    """
+    Extract conseil municipal data from all _ocr.json files in the given folders.
+    Each _ocr.json file is processed separately. Output is markdown.
+
+    Args:
+        folders: List of folder paths to search for _ocr.json files
+        model: Mistral model to use for extraction
+        skip_existing: If True, skip files that already have extraction results
+
+    Returns:
+        Dict mapping _ocr.json file paths to extraction markdown or error dict
+    """
+    mistral_client = get_mistral_client()
+
+    # Find all OCR files and build requests
+    requests = []
+
+    for folder_path in folders:
+        folder_path = os.path.abspath(folder_path)
+        ocr_files = find_ocr_files(folder_path)
+
+        if not ocr_files:
+            logger.warning("No _ocr.json files found in %s", folder_path)
+            continue
+
+        for ocr_file in ocr_files:
+            # Check if extraction already exists
+            if skip_existing:
+                md_output = get_extraction_output_path(ocr_file)
+                if os.path.exists(md_output):
+                    logger.debug("Skipping %s: extraction already exists", ocr_file)
+                    continue
+
+            # Load markdown content
+            markdown_content = load_ocr_markdown(ocr_file)
+
+            if not markdown_content:
+                logger.warning("Skipping %s: no markdown content", ocr_file)
+                continue
+
+            logger.info("Adding %s (%d chars)", ocr_file, len(markdown_content))
+
+            request = build_conseil_municipal_extraction_request(ocr_file, markdown_content)
+            requests.append(request)
+
+    if not requests:
+        logger.info("No files to process")
+        return {}
+
+    logger.info("Processing %d OCR files in batch", len(requests))
+
+    # Run batch
+    results = run_batch(
+        requests=requests,
+        model=model,
+        mistral_client=mistral_client,
+    )
+
+    # Process results
+    extractions = {}
+    for ocr_file_path, response_body in results.items():
+        if "error" in response_body:
+            logger.error("Error for %s: %s", ocr_file_path, response_body["error"])
+            extractions[ocr_file_path] = {"error": response_body["error"]}
+            continue
+
+        choices = response_body.get("choices", [])
+        if not choices:
+            extractions[ocr_file_path] = {"error": "No choices in response"}
+            continue
+
+        md_content = choices[0].get("message", {}).get("content", "")
+
+        # Save markdown output next to the OCR file
+        md_output_path = get_extraction_output_path(ocr_file_path)
+        with open(md_output_path, "w", encoding="utf-8") as f:
+            f.write(md_content)
+
+        logger.info("Saved extraction for %s", ocr_file_path)
+        extractions[ocr_file_path] = md_content
+
+    return extractions
+
+
+# --- Structured JSON extraction from markdown ---
+
+def find_extraction_md_files(folder_path: str) -> list[str]:
+    """
+    Find all _extraction.md files in a folder recursively.
+
+    Args:
+        folder_path: Path to folder to search
+
+    Returns:
+        List of paths to _extraction.md files
+    """
+    import glob as glob_module
+    return sorted(glob_module.glob(os.path.join(folder_path, "**", "*_extraction.md"), recursive=True))
+
+
+def get_structured_json_output_path(extraction_md_path: str) -> str:
+    """Get the JSON output path for an extraction.md file (replaces _extraction.md with _structured.json)."""
+    return extraction_md_path.replace("_extraction.md", "_structured.json")
+
+
+STRUCTURED_JSON_EXTRACTION_PROMPT = """Tu es un assistant spécialisé dans l'extraction de données structurées à partir de documents markdown.
+
+Analyse le contenu markdown suivant, qui décrit un conseil municipal avec ses délibérations, et extrais les informations en JSON structuré.
+
+Contenu markdown:
+
+{content}
+"""
+
+STRUCTURED_JSON_SCHEMA = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "conseil_municipal_structured",
+        "strict": True,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "description": "Date du conseil municipal au format JJ-MM-AAAA"
+                },
+                "deliberations": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "numero": {"type": "string"},
+                            "objet": {"type": "string"},
+                            "detail": {"type": "string"},
+                            "decision": {"type": "string"},
+                            "votants": {"type": "string"},
+                            "projets_mentionnes": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "nom": {"type": "string"},
+                                        "description": {"type": "string"},
+                                        "nature": {"type": "string"},
+                                        "competence": {"type": "string"}
+                                    },
+                                    "required": ["nom", "description", "nature", "competence"],
+                                    "additionalProperties": False
+                                }
+                            }
+                        },
+                        "required": ["numero", "objet", "detail", "decision", "votants", "projets_mentionnes"],
+                        "additionalProperties": False
+                    }
+                },
+                "projets_mentionnes_global": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "nom": {"type": "string"},
+                            "description": {"type": "string"},
+                            "nature": {"type": "string"},
+                            "competence": {"type": "string"}
+                        },
+                        "required": ["nom", "description", "nature", "competence"],
+                        "additionalProperties": False
+                    }
+                }
+            },
+            "required": ["date", "deliberations", "projets_mentionnes_global"],
+            "additionalProperties": False
+        }
+    }
+}
+
+
+def build_structured_json_extraction_request(
+    extraction_md_path: str,
+    markdown_content: str,
+) -> BatchRequest:
+    """
+    Build a batch request to extract structured JSON from extraction markdown.
+
+    Args:
+        extraction_md_path: Path to the _extraction.md file (used as custom_id)
+        markdown_content: Markdown content from extraction
+
+    Returns:
+        BatchRequest dict ready for batch processing
+    """
+    prompt = STRUCTURED_JSON_EXTRACTION_PROMPT.format(content=markdown_content)
+
+    return {
+        "custom_id": extraction_md_path,
+        "body": {
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 16000,
+            "temperature": 0,
+            "response_format": STRUCTURED_JSON_SCHEMA,
+        },
+    }
+
+
+def extract_structured_json_batch(
+    folders: list[str],
+    model: str = "mistral-large-latest",
+    skip_existing: bool = True,
+) -> dict[str, dict]:
+    """
+    Extract structured JSON from all _extraction.md files in the given folders.
+    Each _extraction.md file is processed separately.
+
+    Args:
+        folders: List of folder paths to search for _extraction.md files
+        model: Mistral model to use for extraction
+        skip_existing: If True, skip files that already have JSON results
+
+    Returns:
+        Dict mapping _extraction.md file paths to structured JSON or error dict
+    """
+    mistral_client = get_mistral_client()
+
+    # Find all extraction.md files and build requests
+    requests = []
+
+    for folder_path in folders:
+        folder_path = os.path.abspath(folder_path)
+        md_files = find_extraction_md_files(folder_path)
+
+        if not md_files:
+            logger.warning("No _extraction.md files found in %s", folder_path)
+            continue
+
+        for md_file in md_files:
+            # Check if JSON output already exists
+            if skip_existing:
+                json_output = get_structured_json_output_path(md_file)
+                if os.path.exists(json_output):
+                    logger.debug("Skipping %s: JSON already exists", md_file)
+                    continue
+
+            # Load markdown content
+            with open(md_file, "r", encoding="utf-8") as f:
+                markdown_content = f.read()
+
+            if not markdown_content.strip():
+                logger.warning("Skipping %s: empty file", md_file)
+                continue
+
+            logger.info("Adding %s (%d chars)", md_file, len(markdown_content))
+
+            request = build_structured_json_extraction_request(md_file, markdown_content)
+            requests.append(request)
+
+    if not requests:
+        logger.info("No files to process")
+        return {}
+
+    logger.info("Processing %d extraction.md files in batch", len(requests))
+
+    # Run batch
+    results = run_batch(
+        requests=requests,
+        model=model,
+        mistral_client=mistral_client,
+    )
+
+    # Process results
+    extractions = {}
+    for md_file_path, response_body in results.items():
+        if "error" in response_body:
+            logger.error("Error for %s: %s", md_file_path, response_body["error"])
+            extractions[md_file_path] = {"error": response_body["error"]}
+            continue
+
+        choices = response_body.get("choices", [])
+        if not choices:
+            extractions[md_file_path] = {"error": "No choices in response"}
+            continue
+
+        content = choices[0].get("message", {}).get("content", "{}")
+        try:
+            structured_data = json.loads(content)
+        except json.JSONDecodeError:
+            logger.error("Failed to parse JSON for %s", md_file_path)
+            extractions[md_file_path] = {"error": "Failed to parse JSON", "raw_content": content}
+            continue
+
+        # Save JSON output next to the extraction.md file
+        json_output_path = get_structured_json_output_path(md_file_path)
+        with open(json_output_path, "w", encoding="utf-8") as f:
+            json.dump(structured_data, f, ensure_ascii=False, indent=2)
+
+        logger.info("Saved structured JSON for %s", md_file_path)
+        extractions[md_file_path] = structured_data
+
+    return extractions
+
+
+def run_full_extraction_pipeline(
+    folder_path: str,
+    ocr_model: str = "mistral-ocr-latest",
+    extraction_model: str = "mistral-large-latest",
+    skip_existing: bool = True,
+    include_image_base64: bool = True,
+) -> dict:
+    """
+    Run the full extraction pipeline: OCR → extract-deliberations → structure-json.
+
+    Args:
+        folder_path: Path to folder containing PDF files
+        ocr_model: Mistral OCR model to use
+        extraction_model: Mistral model for extraction steps
+        skip_existing: If True, skip files that already have results at each step
+        include_image_base64: Whether to include base64 images in OCR response
+
+    Returns:
+        Dict with results from each step
+    """
+    folder_path = os.path.abspath(folder_path)
+    results = {
+        "ocr": {},
+        "extract_deliberations": {},
+        "structure_json": {},
+    }
+
+    # Step 1: OCR
+    logger.info("=== Step 1/3: Running OCR ===")
+    ocr_results = ocr_folder(
+        folder_path=folder_path,
+        recursive=True,
+        skip_existing=skip_existing,
+        model=ocr_model,
+        include_image_base64=include_image_base64,
+    )
+    results["ocr"] = ocr_results
+    logger.info("OCR complete: %d files processed", len(ocr_results))
+
+    # Step 2: Extract deliberations
+    logger.info("=== Step 2/3: Extracting deliberations ===")
+    extract_results = extract_conseil_municipal_batch(
+        folders=[folder_path],
+        model=extraction_model,
+        skip_existing=skip_existing,
+    )
+    results["extract_deliberations"] = extract_results
+    logger.info("Extraction complete: %d files processed", len(extract_results))
+
+    # Step 3: Structure JSON
+    logger.info("=== Step 3/3: Structuring JSON ===")
+    json_results = extract_structured_json_batch(
+        folders=[folder_path],
+        model=extraction_model,
+        skip_existing=skip_existing,
+    )
+    results["structure_json"] = json_results
+    logger.info("JSON structuring complete: %d files processed", len(json_results))
+
+    return results
 
