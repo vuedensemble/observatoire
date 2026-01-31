@@ -1,65 +1,151 @@
-import Image from "next/image";
+import Link from 'next/link';
+import SearchInput from '@/components/SearchInput';
+import QuoteBlock from '@/components/QuoteBlock';
+import MapCAPB from '@/components/MapCAPB';
+import { getAllCommunes } from '@/lib/db';
 
 export default function Home() {
+  const communes = getAllCommunes();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div>
+      {/* Hero Section */}
+      <section className="bg-white py-16 lg:py-24">
+        <div className="container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-[var(--neutre)] text-sm uppercase tracking-wider mb-4">
+                Observatoire citoyen des collectivités du Pays Basque Nord - Sud Landes
+              </p>
+              <h1 className="text-4xl lg:text-5xl font-bold text-[var(--violet)] mb-6 leading-tight">
+                Es-tu au courant de ce qu&apos;il se passe dans ta commune ?
+              </h1>
+              <p className="text-lg text-[var(--violet-dark)] mb-8">
+                Découvre les projets, les délibérations et les décisions qui façonnent ton territoire.
+              </p>
+
+              {/* Search */}
+              <SearchInput className="max-w-lg" />
+            </div>
+
+            {/* Map */}
+            <div className="hidden lg:block">
+              <MapCAPB communes={communes} className="h-[400px]" />
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Mobile Map */}
+      <section className="lg:hidden py-8">
+        <div className="container">
+          <MapCAPB communes={communes} className="h-[300px]" />
         </div>
-      </main>
+      </section>
+
+      {/* Presentation Section */}
+      <section className="section">
+        <div className="container">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-[var(--violet)] mb-8 text-center">
+              Notre mission
+            </h2>
+
+            <QuoteBlock>
+              <p className="text-lg text-[var(--violet-dark)] leading-relaxed">
+                <strong>Vue d&apos;Ensemble</strong> développe un outil inédit permettant d&apos;analyser
+                en continu les conseils municipaux des communes du Pays Basque Nord et Sud-Landes.
+              </p>
+              <p className="text-lg text-[var(--violet-dark)] leading-relaxed mt-4">
+                Nous digérons des milliers de documents peu accessibles pour le citoyen
+                (PDFs de conseils municipaux) et en proposons une synthèse lisible,
+                visuelle et opérationnelle.
+              </p>
+            </QuoteBlock>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+              <div className="text-center p-6">
+                <div className="w-12 h-12 bg-[var(--violet)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-[var(--violet-dark)] mb-2">Transparence</h3>
+                <p className="text-sm text-[var(--neutre)]">
+                  Accès libre à toutes les informations avec liens vers les documents sources
+                </p>
+              </div>
+
+              <div className="text-center p-6">
+                <div className="w-12 h-12 bg-[var(--vert)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-[var(--violet-dark)] mb-2">Simplicité</h3>
+                <p className="text-sm text-[var(--neutre)]">
+                  Interface claire et synthèses lisibles pour tous les citoyens
+                </p>
+              </div>
+
+              <div className="text-center p-6 sm:col-span-2 lg:col-span-1">
+                <div className="w-12 h-12 bg-[var(--orange)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-[var(--violet-dark)] mb-2">Accessibilité</h3>
+                <p className="text-sm text-[var(--neutre)]">
+                  Pas de compte requis, ouvert à tous
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="bg-white py-16">
+        <div className="container">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="stat-box">
+              <div className="stat-value">{communes.length}</div>
+              <div className="stat-label">Communes suivies</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-value">158</div>
+              <div className="stat-label">Communes CAPB</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-value">10</div>
+              <div className="stat-label">Projets analysés</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-value">18</div>
+              <div className="stat-label">Délibérations</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section">
+        <div className="container">
+          <div className="bg-[var(--violet)] rounded-2xl p-8 lg:p-12 text-center text-white">
+            <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-white">
+              Soutenez le projet
+            </h2>
+            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+              Vue d&apos;Ensemble est un projet citoyen porté par des bénévoles.
+              Votre soutien nous permet de continuer à développer cet outil.
+            </p>
+            <Link href="/soutenir" className="btn bg-white text-[var(--violet)] hover:bg-[var(--creme)]">
+              Soutenir le projet
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
