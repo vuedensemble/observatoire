@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { ProjetWithRelations, Thematique } from '@/lib/types';
 import ProjetCard from './ProjetCard';
+import SidePanel from './SidePanel';
+import ProjetDetail from './ProjetDetail';
 
 interface ProjetFiltersProps {
   projets: ProjetWithRelations[];
@@ -15,6 +17,7 @@ export default function ProjetFilters({ projets, thematiques }: ProjetFiltersPro
   const [selectedThematiques, setSelectedThematiques] = useState<string[]>([]);
   const [selectedAnnees, setSelectedAnnees] = useState<string[]>([]);
   const [selectedConseils, setSelectedConseils] = useState<string[]>([]);
+  const [selectedProjet, setSelectedProjet] = useState<ProjetWithRelations | null>(null);
 
   // Extraire les conseils uniques des projets
   const conseils = Array.from(
@@ -183,7 +186,11 @@ export default function ProjetFilters({ projets, thematiques }: ProjetFiltersPro
       {filteredProjets.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjets.map((projet) => (
-            <ProjetCard key={projet.id} projet={projet} />
+            <ProjetCard
+              key={projet.id}
+              projet={projet}
+              onClick={() => setSelectedProjet(projet)}
+            />
           ))}
         </div>
       ) : (
@@ -191,6 +198,14 @@ export default function ProjetFilters({ projets, thematiques }: ProjetFiltersPro
           Aucun projet ne correspond aux filtres sélectionnés.
         </p>
       )}
+
+      {/* Side Panel */}
+      <SidePanel
+        isOpen={selectedProjet !== null}
+        onClose={() => setSelectedProjet(null)}
+      >
+        {selectedProjet && <ProjetDetail projet={selectedProjet} />}
+      </SidePanel>
     </div>
   );
 }
