@@ -138,3 +138,26 @@ To connect to PostgreSQL:
 2. Create `prisma/schema.prisma` based on types in `lib/types.ts`
 3. Replace functions in `lib/db.ts` with Prisma queries
 4. Update API routes if needed (they already use the db functions)
+
+## Comment faire tourner l'application et la modifier avec Claude Code
+
+### Étape 1 : Lancer l'application sur ton ordi
+
+1. Ouvrir le terminal
+2. Aller dans le dossier webapp :
+   ```bash
+   cd /Users/apple/Desktop/projets_github/observatoire/webapp
+   ```
+3. Lancer le serveur de développement :
+   ```bash
+   npm run dev
+   ```
+4. L'application tourne sur http://localhost:3000
+5. Pour arrêter le serveur : `Ctrl+C`
+
+### Étape 2 : Modifier le code avec Claude Code
+
+1. Ouvrir l'app Claude, puis aller sur **Code** en haut
+2. Aller dans une conversation puis sélectionner **Local** avec le dossier `/Users/apple/Desktop/projets_github/observatoire`
+3. Discuter avec Claude pour modifier le code — l'app se recharge automatiquement dans ton navigateur
+4. Quand tu as fini, dis à Claude : « Commit les changements et pousse sur Github »
