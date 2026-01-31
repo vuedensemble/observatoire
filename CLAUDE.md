@@ -40,3 +40,15 @@ uv run python -m observatoire.cli.run ocr /path/to/pdfs/
 # Run OCR recursively
 uv run python -m observatoire.cli.run ocr /path/to/pdfs/ -r -v
 ```
+
+## Web Application
+
+The `webapp/` directory contains a NextJS application for the project's web interface.
+
+Specifications are in `webapp/specs/`:
+
+- `01-vision.md` - Mission, context, target users
+- `02-architecture.md` - Data model, API routes
+- `03-pages.md` - Page descriptions
+- `04-composants.md` - Reusable UI components
+- `05-charte.md` - Colors, typography, design system
