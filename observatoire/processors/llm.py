@@ -305,34 +305,29 @@ def build_ocr_batch_request(pdf_path: str, include_image_base64: bool = True) ->
     }
 
 
-def run_ocr_batch(
-    pdf_paths: list[str],
-    model: str = "mistral-ocr-latest",
-    poll_interval: float = 5.0,
-    include_image_base64: bool = True,
-    mistral_client: mistralai.Mistral | None = None,
+def _run_single_ocr_batch(
+    requests: list[OcrBatchRequest],
+    model: str,
+    poll_interval: float,
+    mistral_client: mistralai.Mistral,
+    batch_num: int = 1,
+    total_batches: int = 1,
 ) -> dict[str, str]:
     """
-    Run OCR on a list of PDF files using Mistral's batch API and save results locally.
+    Run a single OCR batch and return output paths.
 
     Args:
-        pdf_paths: List of paths to PDF files to process
+        requests: List of OcrBatchRequest dicts
         model: Mistral OCR model to use
         poll_interval: Seconds between status checks
-        include_image_base64: Whether to include base64 images in OCR response
-        mistral_client: Optional pre-configured client
+        mistral_client: Pre-configured client
+        batch_num: Current batch number (for logging)
+        total_batches: Total number of batches (for logging)
 
     Returns:
-        Dict mapping input pdf_path to output JSON file path (saved next to input)
+        Dict mapping input pdf_path to output JSON file path
     """
-    if mistral_client is None:
-        mistral_client = get_mistral_client()
-
-    logger.info("Building OCR batch requests for %d PDFs", len(pdf_paths))
-    requests = [
-        build_ocr_batch_request(pdf_path, include_image_base64=include_image_base64)
-        for pdf_path in pdf_paths
-    ]
+    batch_label = f"[{batch_num}/{total_batches}] " if total_batches > 1 else ""
 
     # Create JSONL content
     jsonl_content = "\n".join(json.dumps(req) for req in requests)
@@ -345,7 +340,7 @@ def run_ocr_batch(
         },
         purpose="batch",
     )
-    logger.info("Uploaded OCR batch file: %s", uploaded_file.id)
+    logger.info("%sUploaded OCR batch file: %s", batch_label, uploaded_file.id)
 
     # Create batch job with OCR endpoint
     created_job = mistral_client.batch.jobs.create(
@@ -355,7 +350,7 @@ def run_ocr_batch(
     )
 
     job_id = created_job.id
-    logger.info("OCR batch job created: %s", job_id)
+    logger.info("%sOCR batch job created: %s", batch_label, job_id)
 
     # Poll for completion
     while True:
@@ -366,7 +361,7 @@ def run_ocr_batch(
         if hasattr(job, "succeeded_requests") and hasattr(job, "total_requests"):
             progress_info = f" ({job.succeeded_requests}/{job.total_requests})"
 
-        logger.info("OCR batch job %s status: %s%s", job_id, status, progress_info)
+        logger.info("%sOCR batch job %s status: %s%s", batch_label, job_id, status, progress_info)
 
         if status == "SUCCESS":
             break
@@ -376,7 +371,7 @@ def run_ocr_batch(
         time.sleep(poll_interval)
 
     # Download results
-    logger.info("Downloading OCR results from file: %s", job.output_file)
+    logger.info("%sDownloading OCR results from file: %s", batch_label, job.output_file)
     output_file = mistral_client.files.download(file_id=job.output_file)
 
     if hasattr(output_file, "read"):
@@ -409,10 +404,99 @@ def run_ocr_batch(
             json.dump(output_data, f, ensure_ascii=False, indent=2)
 
         output_paths[custom_id] = output_path
-        logger.info("Saved OCR result: %s", output_path)
+        logger.info("%sSaved OCR result: %s", batch_label, output_path)
 
-    logger.info("OCR batch complete: %d results saved", len(output_paths))
     return output_paths
+
+
+def run_ocr_batch(
+    pdf_paths: list[str],
+    model: str = "mistral-ocr-latest",
+    poll_interval: float = 5.0,
+    include_image_base64: bool = True,
+    mistral_client: mistralai.Mistral | None = None,
+) -> dict[str, str]:
+    """
+    Run OCR on a list of PDF files using Mistral's batch API and save results locally.
+    If the total JSONL content exceeds 200MB, requests are split into multiple batches.
+
+    Args:
+        pdf_paths: List of paths to PDF files to process
+        model: Mistral OCR model to use
+        poll_interval: Seconds between status checks
+        include_image_base64: Whether to include base64 images in OCR response
+        mistral_client: Optional pre-configured client
+
+    Returns:
+        Dict mapping input pdf_path to output JSON file path (saved next to input)
+    """
+    if mistral_client is None:
+        mistral_client = get_mistral_client()
+
+    logger.info("Building OCR batch requests for %d PDFs", len(pdf_paths))
+
+    # Filter out PDFs larger than 50MB
+    max_file_size_bytes = 50 * 1024 * 1024  # 50MB
+    pdf_paths_filtered = []
+    for pdf_path in pdf_paths:
+        file_size = os.path.getsize(pdf_path)
+        if file_size > max_file_size_bytes:
+            logger.warning("Skipping %s: file size %.1f MB exceeds 50MB limit", pdf_path, file_size / (1024 * 1024))
+        else:
+            pdf_paths_filtered.append(pdf_path)
+    if len(pdf_paths_filtered) < len(pdf_paths):
+        logger.info("Skipped %d PDFs exceeding 50MB, %d remaining", len(pdf_paths) - len(pdf_paths_filtered), len(pdf_paths_filtered))
+    pdf_paths = pdf_paths_filtered
+
+    if not pdf_paths:
+        logger.info("No PDFs to process")
+        return {}
+
+    # Build all requests
+    requests = [
+        build_ocr_batch_request(pdf_path, include_image_base64=include_image_base64)
+        for pdf_path in pdf_paths
+    ]
+
+    # Split into batches if total JSONL content exceeds 200MB
+    max_batch_size_bytes = 200 * 1024 * 1024  # 200MB
+    batches: list[list[OcrBatchRequest]] = []
+    current_batch: list[OcrBatchRequest] = []
+    current_batch_size = 0
+
+    for req in requests:
+        req_size = len(json.dumps(req).encode("utf-8")) + 1  # +1 for newline
+        if current_batch and current_batch_size + req_size > max_batch_size_bytes:
+            # Start a new batch
+            batches.append(current_batch)
+            current_batch = [req]
+            current_batch_size = req_size
+        else:
+            current_batch.append(req)
+            current_batch_size += req_size
+
+    if current_batch:
+        batches.append(current_batch)
+
+    if len(batches) > 1:
+        logger.info("Split %d requests into %d batches (200MB limit per batch)", len(requests), len(batches))
+
+    # Process each batch
+    all_output_paths = {}
+    for batch_num, batch_requests in enumerate(batches, 1):
+        logger.info("Processing batch %d/%d with %d requests", batch_num, len(batches), len(batch_requests))
+        batch_output_paths = _run_single_ocr_batch(
+            requests=batch_requests,
+            model=model,
+            poll_interval=poll_interval,
+            mistral_client=mistral_client,
+            batch_num=batch_num,
+            total_batches=len(batches),
+        )
+        all_output_paths.update(batch_output_paths)
+
+    logger.info("OCR batch complete: %d results saved", len(all_output_paths))
+    return all_output_paths
 
 
 def find_doc_ids_no_ocr(locality_id: int):
@@ -696,6 +780,21 @@ def ocr_folder(
         )
         pdf_paths = pdf_paths_to_process
 
+    # Filter out PDFs larger than 50MB
+    max_size_bytes = 50 * 1024 * 1024  # 50MB
+    pdf_paths_under_limit = []
+    skipped_large = 0
+    for pdf_path in pdf_paths:
+        file_size = os.path.getsize(pdf_path)
+        if file_size > max_size_bytes:
+            logger.warning("Skipping %s: file size %.1f MB exceeds 50MB limit", pdf_path, file_size / (1024 * 1024))
+            skipped_large += 1
+        else:
+            pdf_paths_under_limit.append(pdf_path)
+    if skipped_large > 0:
+        logger.info("Skipped %d PDFs exceeding 50MB size limit, %d to process", skipped_large, len(pdf_paths_under_limit))
+    pdf_paths = pdf_paths_under_limit
+
     if not pdf_paths:
         logger.info("No PDFs to process")
         return {}
@@ -748,7 +847,10 @@ Analyse le contenu suivant, qui provient d'un document de conseil municipal (pro
 FORMAT DE SORTIE (à suivre strictement):
 
 # Date
-<date au format YYYY-MM-DD>
+<date, format JJ-MM-AAAA>
+
+# Présents / Absents
+<lister les personnes présentes et absentes>
 
 # Liste des délibérations
 
@@ -762,7 +864,7 @@ FORMAT DE SORTIE (à suivre strictement):
 
 ### Détail
 
-<détail de la délibération en texte libre>
+<détail de la délibération en texte libre ici>
 
 ### Décision
 
@@ -773,11 +875,11 @@ FORMAT DE SORTIE (à suivre strictement):
 
 ### Projet mentionné
 
-<pour chaque projet: - **nom**: description (nature: X, compétence: Y)>
+<liste des projets mentionnés avec nom, description, nature, compétence>
 
 ## Liste des projets mentionnés lors du conseil municipal
 
-<liste globale de tous les projets mentionnés: - **nom**: description (nature: X, compétence: Y)>
+<liste des projets mentionnés avec nom, description, nature, compétence>
 
 FIN DU FORMAT
 
@@ -785,6 +887,7 @@ Instructions:
 - Répète la section "## Délibération <numéro>" pour chaque délibération trouvée dans le document
 - Si une information n'est pas disponible, laisse le champ vide
 - N'ajoute pas de commentaires ou d'explications, seulement le markdown structuré
+- IMPORTANT: Retourne directement le markdown, sans l'entourer de blocs de code (pas de ```markdown)
 
 Contenu du document:
 

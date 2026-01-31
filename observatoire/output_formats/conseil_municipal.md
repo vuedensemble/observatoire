@@ -1,6 +1,9 @@
 # Date
 <date, format JJ-MM-AAAA>
 
+# Présents / Absents
+<lister les personnes présentes et absentes>
+
 # Liste des délibérations
 
 {boucle sur chaque délibération ci-dessous}
