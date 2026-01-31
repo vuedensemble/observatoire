@@ -1,20 +1,20 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import SearchInput from '@/components/SearchInput';
 import QuoteBlock from '@/components/QuoteBlock';
-import MapCAPB from '@/components/MapCAPB';
 import { getAllCommunes } from '@/lib/db';
 
 export default function Home() {
   const communes = getAllCommunes();
 
   return (
-    <div>
+    <div className="bg-[var(--creme)]">
       {/* Hero Section */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="py-16 lg:py-24">
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-[var(--neutre)] text-sm uppercase tracking-wider mb-4">
+              <p className="text-[var(--violet)] text-sm uppercase tracking-wider mb-4">
                 Observatoire citoyen des collectivités du Pays Basque Nord - Sud Landes
               </p>
               <h1 className="text-4xl lg:text-5xl font-bold text-[var(--violet)] mb-6 leading-tight">
@@ -28,18 +28,31 @@ export default function Home() {
               <SearchInput className="max-w-lg" />
             </div>
 
-            {/* Map */}
+            {/* Illustration */}
             <div className="hidden lg:block">
-              <MapCAPB communes={communes} className="h-[400px]" />
+              <Image
+                src="/illustration-pays-basque.png"
+                alt="Carte du Pays Basque Nord et Sud Landes"
+                width={500}
+                height={400}
+                className="w-full h-auto max-h-[400px] object-contain"
+                priority
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mobile Map */}
+      {/* Mobile Illustration */}
       <section className="lg:hidden py-8">
         <div className="container">
-          <MapCAPB communes={communes} className="h-[300px]" />
+          <Image
+            src="/illustration-pays-basque.png"
+            alt="Carte du Pays Basque Nord et Sud Landes"
+            width={400}
+            height={320}
+            className="w-full h-auto max-h-[300px] object-contain"
+          />
         </div>
       </section>
 
@@ -47,19 +60,21 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-[var(--violet)] mb-8 text-center">
-              Notre mission
-            </h2>
-
             <QuoteBlock>
-              <p className="text-lg text-[var(--violet-dark)] leading-relaxed">
-                <strong>Vue d&apos;Ensemble</strong> développe un outil inédit permettant d&apos;analyser
-                en continu les conseils municipaux des communes du Pays Basque Nord et Sud-Landes.
+              <p className="text-lg text-black leading-relaxed">
+                <strong>Vue d&apos;Ensemble</strong> a développé un outil inédit permettant d&apos;analyser en continu
+                les conseils municipaux de 158 communes au Pays basque nord et Sud Landes.
+                Notre outil digère des milliers de documents peu accessibles pour le citoyen
+                et en propose une synthèse lisible et opérationnelle pour tous.tes.
               </p>
-              <p className="text-lg text-[var(--violet-dark)] leading-relaxed mt-4">
-                Nous digérons des milliers de documents peu accessibles pour le citoyen
-                (PDFs de conseils municipaux) et en proposons une synthèse lisible,
-                visuelle et opérationnelle.
+              <p className="text-lg text-black leading-relaxed mt-4">
+                Car comprendre ce qu&apos;il se passe dans sa commune, c&apos;est retrouver du pouvoir d&apos;agir.
+                C&apos;est redonner la possibilité aux citoyen.nes de contribuer aux choix structurants
+                de leur commune, de mettre en débat ces choix, de faire porter sa voix
+                et d&apos;agir quand il est encore temps.
+              </p>
+              <p className="text-lg text-black leading-relaxed mt-4">
+                C&apos;est renouer avec sa citoyenneté au quotidien, ses droits et ses devoirs.
               </p>
             </QuoteBlock>
 
@@ -106,7 +121,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="bg-white py-16">
+      <section className="py-16">
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="stat-box">
@@ -133,7 +148,7 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="bg-[var(--violet)] rounded-2xl p-8 lg:p-12 text-center text-white">
-            <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-white">
+            <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: 'white' }}>
               Soutenez le projet
             </h2>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
