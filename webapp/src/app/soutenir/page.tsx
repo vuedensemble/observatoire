@@ -35,7 +35,9 @@ export default function SoutenirPage() {
                   et le développement de nouvelles fonctionnalités.
                 </p>
                 <a
-                  href="#"
+                  href="https://www.helloasso.com/associations/association-vue-d-ensemble"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-primary inline-flex"
                 >
                   Faire un don sur HelloAsso
