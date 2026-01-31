@@ -45,6 +45,16 @@ uv run python -m observatoire.cli.run ocr /path/to/pdfs/ -r -v
 
 The `webapp/` directory contains a NextJS application for the project's web interface.
 
+### Running the app
+
+```bash
+cd webapp
+npm run dev    # Development server
+npm run build  # Production build
+```
+
+### Specifications
+
 Specifications are in `webapp/specs/`:
 
 - `01-vision.md` - Mission, context, target users
@@ -52,3 +62,79 @@ Specifications are in `webapp/specs/`:
 - `03-pages.md` - Page descriptions
 - `04-composants.md` - Reusable UI components
 - `05-charte.md` - Colors, typography, design system
+
+### Project Structure
+
+```
+webapp/src/
+├── app/                      # Next.js App Router
+│   ├── layout.tsx            # Root layout with Header/Footer
+│   ├── page.tsx              # Homepage
+│   ├── globals.css           # Global styles & design system
+│   ├── commune/[slug]/       # Commune detail page
+│   ├── projet/[slug]/        # Project detail page
+│   ├── a-propos/             # About page
+│   ├── methodologie/         # Methodology page
+│   ├── contact/              # Contact form page
+│   ├── soutenir/             # Support page
+│   ├── rejoindre/            # Join us page
+│   └── api/                  # API Routes
+│       ├── communes/         # GET /api/communes, /api/communes/[id]
+│       ├── projets/          # GET /api/projets, /api/projets/[id]
+│       ├── thematiques/      # GET /api/thematiques
+│       └── search/           # GET /api/search
+├── components/               # React components
+│   ├── Header.tsx            # Navigation header (responsive)
+│   ├── Footer.tsx            # Site footer
+│   ├── Breadcrumb.tsx        # Breadcrumb navigation
+│   ├── SearchInput.tsx       # Search with autocomplete
+│   ├── MapCAPB.tsx           # Interactive territory map
+│   ├── ProjetCard.tsx        # Project card
+│   ├── DeliberationCard.tsx  # Deliberation card
+│   ├── ConseilAccordion.tsx  # Expandable council list
+│   ├── ThematiqueBadge.tsx   # Colored theme badge
+│   ├── StatutBadge.tsx       # Status badge (en_cours/vote/abandonne)
+│   ├── StatBox.tsx           # Statistic display box
+│   ├── Timeline.tsx          # Vertical timeline
+│   ├── QuoteBlock.tsx        # Quote with green border
+│   └── AccordionList.tsx     # Generic accordion
+└── lib/                      # Data layer
+    ├── types.ts              # TypeScript interfaces
+    ├── mock-data.ts          # Mock data (communes, projets, etc.)
+    ├── db.ts                 # Data access functions
+    └── utils.ts              # Utility functions (date formatting)
+```
+
+### Mock Database
+
+The app uses a mock database in `src/lib/` with:
+
+- **15 communes** from Pays Basque (Anglet, Bayonne, Biarritz, etc.)
+- **10 conseils municipaux** with dates and attendees
+- **18 délibérations** with votes and decisions
+- **10 projets** linked to communes and thématiques
+- **8 thématiques** (Urbanisme, Environnement, Budget, etc.)
+
+Data access functions in `db.ts`:
+- `getAllCommunes()`, `getCommuneBySlug()`
+- `getProjetsByCommune()`, `getProjetBySlug()`
+- `getConseilsByCommune()`, `getDeliberationsByCommune()`
+- `searchCommunes()`, `searchProjets()`
+
+### Design System
+
+Colors defined in `globals.css`:
+- Violet: `#6B5CE7` (primary)
+- Vert: `#2EAD6B` (success, environment)
+- Orange: `#E57C3A` (accent)
+- Crème: `#F5F0E1` (background)
+- Violet foncé: `#3D3270` (text)
+
+### Replacing Mock Data with Real Database
+
+To connect to PostgreSQL:
+
+1. Install dependencies: `npm install @prisma/client prisma`
+2. Create `prisma/schema.prisma` based on types in `lib/types.ts`
+3. Replace functions in `lib/db.ts` with Prisma queries
+4. Update API routes if needed (they already use the db functions)
