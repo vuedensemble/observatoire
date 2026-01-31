@@ -6,7 +6,6 @@ import { useState } from 'react';
 const navLinks = [
   { href: '/a-propos', label: 'Le projet' },
   { href: '/methodologie', label: 'La méthodologie' },
-  { href: '/contact', label: 'Une info ?' },
   { href: '/soutenir', label: 'Soutenir le projet' },
   { href: '/rejoindre', label: 'Nous rejoindre' },
 ];
