@@ -34,3 +34,4 @@
 ## Liste des projets mentionnés lors du conseil municipal
 
 <liste des projets mentionnés avec nom, description, nature, compétence>
+ 
