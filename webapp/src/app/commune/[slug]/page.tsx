@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/components/Breadcrumb';
-import ProjetCard from '@/components/ProjetCard';
+import ProjetFilters from '@/components/ProjetFilters';
 import StatBox from '@/components/StatBox';
 import ConseilAccordion from '@/components/ConseilAccordion';
 import {
   getCommuneBySlug,
   getProjetsByCommune,
   getConseilsByCommune,
+  getAllThematiques,
 } from '@/lib/db';
 
 interface PageProps {
@@ -27,6 +28,7 @@ export default async function CommunePage({ params }: PageProps) {
 
   const projets = getProjetsByCommune(commune.id);
   const conseils = getConseilsByCommune(commune.id);
+  const thematiques = getAllThematiques();
 
   return (
     <div className="section">
@@ -64,11 +66,7 @@ export default async function CommunePage({ params }: PageProps) {
           </h2>
 
           {projets.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projets.map((projet) => (
-                <ProjetCard key={projet.id} projet={projet} />
-              ))}
-            </div>
+            <ProjetFilters projets={projets} thematiques={thematiques} />
           ) : (
             <p className="text-[var(--neutre)] text-center py-8">
               Aucun projet recensé pour cette commune.

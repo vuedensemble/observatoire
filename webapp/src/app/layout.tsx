@@ -1,11 +1,24 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Rubik_Dirt, Barlow, Barlow_Semi_Condensed } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const inter = Inter({
-  variable: '--font-geist-sans',
+const rubikDirt = Rubik_Dirt({
+  weight: '400',
+  variable: '--font-rubik-dirt',
+  subsets: ['latin'],
+});
+
+const barlow = Barlow({
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-barlow',
+  subsets: ['latin'],
+});
+
+const barlowSemiCondensed = Barlow_Semi_Condensed({
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-barlow-semi-condensed',
   subsets: ['latin'],
 });
 
@@ -22,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${inter.variable} antialiased min-h-screen flex flex-col`}>
+      <body className={`${rubikDirt.variable} ${barlow.variable} ${barlowSemiCondensed.variable} antialiased min-h-screen flex flex-col`}>
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

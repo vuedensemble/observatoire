@@ -1,23 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  /* Couleurs principales */
-  --violet: #6B5CE7;
-  --violet-dark: #3D3270;
-  --violet-light: #8B7EED;
-  --vert: #2EAD6B;
-  --orange: #E57C3A;
-  --creme: #F5F0E1;
+  /* Couleur majeure */
+  --violet: #5528FF;
+
+  /* Couleur complémentaire */
+  --vert: #27B782;
+
+  /* Couleur ponctuelle */
+  --orange: #EA4E1B;
+
+  /* Couleur de fond */
+  --creme: #F8F3E0;
+
+  /* Couleurs dérivées pour l'UI */
+  --violet-dark: #3D1DB3;
+  --violet-light: #7B5CFF;
+  --vert-dark: #1E8F63;
 
   /* Couleurs fonctionnelles */
-  --succes: #2EAD6B;
+  --succes: var(--vert);
   --neutre: #9CA3AF;
-  --info: #6B5CE7;
+  --info: var(--violet);
 
   /* Couleurs thématiques */
-  --th-urbanisme: #E57C3A;
-  --th-environnement: #2EAD6B;
-  --th-budget: #6B5CE7;
+  --th-urbanisme: var(--orange);
+  --th-environnement: var(--vert);
+  --th-budget: var(--violet);
   --th-social: #3B82F6;
   --th-culture: #EC4899;
   --th-transports: #EAB308;
@@ -43,14 +52,18 @@
   --color-creme: var(--creme);
   --color-neutre: var(--neutre);
   --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-rubik-dirt: var(--font-rubik-dirt);
+  --font-barlow: var(--font-barlow);
+  --font-barlow-semi-condensed: var(--font-barlow-semi-condensed);
 }
 
+/* Texte : Barlow, Medium 500 at 21px */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans, system-ui, sans-serif);
+  font-family: var(--font-barlow), system-ui, sans-serif;
+  font-size: 1.3125rem; /* 21px */
+  font-weight: 500;
 }
 
 /* Typography */
@@ -58,15 +71,19 @@ h1, h2, h3 {
   color: var(--violet);
 }
 
+/* Grands titres : Rubik Dirt, regular 400 at 48px */
 h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-family: var(--font-rubik-dirt), system-ui, sans-serif;
+  font-size: 3rem; /* 48px */
+  font-weight: 400;
   line-height: 1.2;
 }
 
+/* Titre 1 : Barlow Semi Condensed, medium 500 at 36px */
 h2 {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: var(--font-barlow-semi-condensed), system-ui, sans-serif;
+  font-size: 2.25rem; /* 36px */
+  font-weight: 500;
   line-height: 1.3;
 }
 
