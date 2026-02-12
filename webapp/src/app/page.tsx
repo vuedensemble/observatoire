@@ -15,12 +15,12 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-[var(--violet)] text-sm uppercase tracking-wider mb-4">
-                Observatoire citoyen des collectivités du Pays Basque Nord - Sud Landes
+                Pays Basque Nord - Sud Landes
               </p>
               <h1 className="text-4xl lg:text-5xl font-bold text-[var(--violet)] mb-6 leading-tight">
-                Es-tu au courant de ce qu&apos;il se passe dans ta commune ?
+                Que se passe-t-il dans ta commune ?
               </h1>
-              <p className="text-lg text-[var(--violet-dark)] mb-8">
+              <p className="text-lg mb-8" style={{ color: '#5528FF' }}>
                 Découvre les projets, les délibérations et les décisions qui façonnent ton territoire.
               </p>
 
@@ -59,25 +59,29 @@ export default function Home() {
       {/* Presentation Section */}
       <section className="section">
         <div className="container">
+          <div className="bg-[#DCD3FF] rounded-lg p-8 lg:p-12">
           <div className="max-w-3xl mx-auto">
             <QuoteBlock>
               <p className="text-lg text-black leading-relaxed">
-                <strong>Vue d&apos;Ensemble</strong> a développé un outil inédit permettant d&apos;analyser en continu
-                les conseils municipaux de 158 communes au Pays basque nord et Sud Landes.
+                <strong>L&apos;association Vue d&apos;Ensemble</strong> a développé un outil inédit permettant d&apos;analyser en continu
+                les conseils municipaux des communes au Pays basque nord et Sud Landes.
                 Notre outil digère des milliers de documents peu accessibles pour le citoyen
                 et en propose une synthèse lisible et opérationnelle pour tous.tes.
               </p>
               <p className="text-lg text-black leading-relaxed mt-4">
-                Car comprendre ce qu&apos;il se passe dans sa commune, c&apos;est retrouver du pouvoir d&apos;agir.
+                Car comprendre ce qu&apos;il se passe dans sa commune, c&apos;est <strong>retrouver du pouvoir d&apos;agir</strong>.
                 C&apos;est redonner la possibilité aux citoyen.nes de contribuer aux choix structurants
                 de leur commune, de mettre en débat ces choix, de faire porter sa voix
-                et d&apos;agir quand il est encore temps.
+                et d&apos;agir tant qu&apos;il est encore temps.
               </p>
-              <p className="text-lg text-black leading-relaxed mt-4">
+              <p className="text-lg text-black leading-relaxed mt-4 font-bold">
                 C&apos;est renouer avec sa citoyenneté au quotidien, ses droits et ses devoirs.
               </p>
             </QuoteBlock>
+          </div>
+          </div>
 
+          <div className="max-w-3xl mx-auto">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
               <div className="text-center p-6">
                 <div className="w-12 h-12 bg-[var(--violet)] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -121,7 +125,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="stat-box">
@@ -147,7 +151,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="section">
         <div className="container">
-          <div className="bg-[var(--violet)] rounded-2xl p-8 lg:p-12 text-center text-white">
+          <div className="bg-[var(--violet)] rounded-lg p-8 lg:p-12 text-center text-white">
             <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: 'white' }}>
               Soutenez le projet
             </h2>

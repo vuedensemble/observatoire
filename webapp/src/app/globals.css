@@ -189,9 +189,10 @@ a:hover {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background: var(--vert);
-  border-radius: 2px;
+  width: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='60' viewBox='0 0 14 60'%3E%3Cpath d='M7 0 C13 10, 1 20, 7 30 C13 40, 1 50, 7 60' stroke='%2327B782' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: 14px 60px;
 }
 
 /* Container */
@@ -295,6 +296,9 @@ select:focus {
 .stat-box {
   text-align: center;
   padding: 1.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .stat-box .stat-value {
