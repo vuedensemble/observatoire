@@ -18,9 +18,9 @@ export default function Timeline({ items }: TimelineProps) {
           key={item.id}
           className={`timeline-item ${index === items.length - 1 ? 'pb-0' : ''}`}
         >
-          <div className="text-sm text-[var(--neutre)] mb-2">
+          <span className="timeline-date">
             {formatDateShort(item.date)}
-          </div>
+          </span>
           <div>{item.content}</div>
         </div>
       ))}

@@ -128,6 +128,14 @@ export const deliberations: Deliberation[] = [
   { id: 'del-30', conseil_id: 'cm-17', numero: '2023-12-002', objet: 'Extension de la médiathèque', detail: 'Lancement de l\'étude pour l\'extension de la médiathèque municipale.', decision: 'Adopté à l\'unanimité', votants: { pour: 35, contre: 0, abstention: 0 } },
   // Anglet - CM 2023-09-11
   { id: 'del-31', conseil_id: 'cm-18', numero: '2023-09-001', objet: 'Aménagement plage des Cavaliers', detail: 'Réaménagement des accès et des équipements de la plage des Cavaliers.', decision: 'Adopté à l\'unanimité', votants: { pour: 35, contre: 0, abstention: 0 } },
+  // Bayonne - CM 2024-06-20 (Saint-Esprit)
+  { id: 'del-36', conseil_id: 'cm-11', numero: '2024-06-003', objet: 'Renouvellement urbain Saint-Esprit - Phase opérationnelle', detail: 'Approbation du lancement de la phase opérationnelle du programme ANRU : démolition de la barre Breuer et reconstruction de 120 logements sociaux BBC.', decision: 'Adopté à la majorité', votants: { pour: 33, contre: 5, abstention: 2 } },
+  // Bayonne - CM 2024-03-18 (Saint-Esprit)
+  { id: 'del-37', conseil_id: 'cm-12', numero: '2024-03-003', objet: 'Renouvellement urbain Saint-Esprit - Convention financière ANRU', detail: 'Signature de la convention financière pluriannuelle avec l\'ANRU pour un montant de 45 millions d\'euros sur la période 2024-2030.', decision: 'Adopté à l\'unanimité', votants: { pour: 40, contre: 0, abstention: 0 } },
+  // Bayonne - CM 2023-12-11 (Saint-Esprit)
+  { id: 'del-38', conseil_id: 'cm-13', numero: '2023-12-003', objet: 'Renouvellement urbain Saint-Esprit - Étude d\'impact environnemental', detail: 'Validation de l\'étude d\'impact environnemental et du plan de relogement des habitants concernés par les démolitions.', decision: 'Adopté à la majorité', votants: { pour: 30, contre: 7, abstention: 3 } },
+  // Bayonne - CM 2023-06-12 (Saint-Esprit)
+  { id: 'del-39', conseil_id: 'cm-15', numero: '2023-06-002', objet: 'Renouvellement urbain Saint-Esprit - Concertation publique', detail: 'Bilan de la concertation publique menée auprès des habitants du quartier et validation des orientations du projet.', decision: 'Adopté à l\'unanimité', votants: { pour: 38, contre: 0, abstention: 0 } },
   // Biarritz - CM 2024-03-14
   { id: 'del-32', conseil_id: 'cm-19', numero: '2024-03-001', objet: 'Rénovation de la Grande Plage', detail: 'Programme de rénovation des équipements et accessibilité de la Grande Plage.', decision: 'Adopté à l\'unanimité', votants: { pour: 33, contre: 0, abstention: 0 } },
   { id: 'del-33', conseil_id: 'cm-19', numero: '2024-03-002', objet: 'Navette électrique centre-ville', detail: 'Mise en service d\'une navette électrique gratuite dans le centre-ville de Biarritz.', decision: 'Adopté à la majorité', votants: { pour: 28, contre: 3, abstention: 2 } },
@@ -205,6 +213,10 @@ export const projetDeliberations: ProjetDeliberation[] = [
   { projet_id: 'proj-6', deliberation_id: 'del-12' },
   { projet_id: 'proj-7', deliberation_id: 'del-13' },
   { projet_id: 'proj-8', deliberation_id: 'del-11' },
+  { projet_id: 'proj-8', deliberation_id: 'del-36' },
+  { projet_id: 'proj-8', deliberation_id: 'del-37' },
+  { projet_id: 'proj-8', deliberation_id: 'del-38' },
+  { projet_id: 'proj-8', deliberation_id: 'del-39' },
   { projet_id: 'proj-9', deliberation_id: 'del-15' },
   { projet_id: 'proj-10', deliberation_id: 'del-17' },
   { projet_id: 'proj-11', deliberation_id: 'del-19' },
