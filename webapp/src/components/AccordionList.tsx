@@ -31,7 +31,7 @@ export default function AccordionList({ items, defaultOpen = [] }: AccordionList
       {items.map((item) => {
         const isOpen = openItems.has(item.id);
         return (
-          <div key={item.id} className="bg-white rounded-lg border border-[var(--border)]">
+          <div key={item.id} className="bg-white rounded-lg">
             <button
               onClick={() => toggleItem(item.id)}
               className="accordion-header w-full"

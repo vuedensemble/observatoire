@@ -57,10 +57,10 @@ export default async function ProjetPage({ params }: PageProps) {
             </a>
           )}
         </div>
-        <h4 className="font-semibold text-[var(--violet-dark)] mb-2">
+        <h4 className="font-semibold text-black mb-2">
           {delib.objet}
         </h4>
-        <p className="text-sm text-[var(--foreground)] mb-3">
+        <p className="text-sm text-black mb-3">
           {delib.detail}
         </p>
         <div className="text-sm">
@@ -82,16 +82,9 @@ export default async function ProjetPage({ params }: PageProps) {
         <Breadcrumb items={breadcrumbItems} />
 
         {/* En-tête projet */}
-        <div className="bg-white rounded-lg border border-[var(--border)] p-6 lg:p-8 mb-8">
-          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-            <h1 className="text-2xl lg:text-3xl font-bold text-[var(--violet)]">
-              {projet.nom}
-            </h1>
-            <StatutBadge statut={projet.statut} />
-          </div>
-
-          {/* Communes */}
-          <div className="flex flex-wrap gap-2 mb-4">
+        <div className="bg-white rounded-lg p-6 lg:p-8 mb-8">
+          {/* Commune(s) */}
+          <div className="flex flex-wrap gap-2 mb-1">
             {projet.communes.map((commune) => (
               <Link
                 key={commune.id}
@@ -103,41 +96,42 @@ export default async function ProjetPage({ params }: PageProps) {
             ))}
           </div>
 
-          {/* Thématiques */}
+          <h1 className="text-2xl lg:text-3xl font-bold text-[var(--violet)] mb-4">
+            {projet.nom}
+          </h1>
+
+          {/* Badges : thématiques + statut */}
           <div className="flex flex-wrap gap-2 mb-6">
             {projet.thematiques.map((thematique) => (
               <ThematiqueBadge key={thematique.id} thematique={thematique} />
             ))}
+            <StatutBadge statut={projet.statut} />
           </div>
 
           {/* Infos */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4 border-y border-[var(--border)]">
-            <div>
-              <span className="text-sm text-[var(--neutre)]">Nature</span>
-              <p className="font-medium text-[var(--violet-dark)]">{projet.nature}</p>
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
             <div>
               <span className="text-sm text-[var(--neutre)]">Compétence</span>
-              <p className="font-medium text-[var(--violet-dark)]">{projet.competence}</p>
+              <p className="font-medium text-black">{projet.competence}</p>
             </div>
             {projet.montant && (
               <div>
                 <span className="text-sm text-[var(--neutre)]">Montant</span>
-                <p className="font-medium text-[var(--violet-dark)]">{formatMontant(projet.montant)}</p>
+                <p className="font-medium text-black">{formatMontant(projet.montant)}</p>
               </div>
             )}
             <div>
               <span className="text-sm text-[var(--neutre)]">Délibérations</span>
-              <p className="font-medium text-[var(--violet-dark)]">{projet.deliberations.length}</p>
+              <p className="font-medium text-black">{projet.deliberations.length}</p>
             </div>
           </div>
 
           {/* Description */}
           <div className="mt-6">
-            <h2 className="text-lg font-semibold text-[var(--violet-dark)] mb-2">
+            <h2 className="text-lg font-semibold text-[var(--violet)] mb-2">
               Description
             </h2>
-            <p className="text-[var(--foreground)] leading-relaxed">
+            <p className="text-black leading-relaxed">
               {projet.description}
             </p>
           </div>

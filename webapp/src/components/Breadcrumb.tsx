@@ -11,22 +11,22 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav aria-label="Fil d'ariane" className="text-sm text-[var(--neutre)] mb-6">
+    <nav aria-label="Fil d'ariane" className="text-sm mb-6" style={{ color: 'var(--violet)' }}>
       <ol className="flex items-center gap-2">
         <li>
-          <Link href="/" className="hover:text-[var(--violet)]">
+          <Link href="/" className="hover:opacity-70 transition-opacity" style={{ color: 'var(--violet)' }}>
             Accueil
           </Link>
         </li>
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-2">
-            <span className="text-[var(--border)]">&gt;</span>
+            <span>&gt;</span>
             {item.href ? (
-              <Link href={item.href} className="hover:text-[var(--violet)]">
+              <Link href={item.href} className="hover:opacity-70 transition-opacity" style={{ color: 'var(--violet)' }}>
                 {item.label}
               </Link>
             ) : (
-              <span className="text-[var(--violet-dark)]">{item.label}</span>
+              <span>{item.label}</span>
             )}
           </li>
         ))}

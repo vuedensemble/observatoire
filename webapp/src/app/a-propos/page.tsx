@@ -176,7 +176,7 @@ export default function AProposPage() {
               Nos principes
             </h2>
             <div className="grid sm:grid-cols-3 gap-6">
-              <div className="p-6 bg-white rounded-lg border border-[var(--border)] shadow-sm text-center">
+              <div className="p-6 bg-white rounded-lg text-center">
                 <div className="w-12 h-12 bg-[var(--violet)] rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -188,7 +188,7 @@ export default function AProposPage() {
                   Pas de compte requis, accès libre à toutes les informations
                 </p>
               </div>
-              <div className="p-6 bg-white rounded-lg border border-[var(--border)] shadow-sm text-center">
+              <div className="p-6 bg-white rounded-lg text-center">
                 <div className="w-12 h-12 bg-[var(--vert)] rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -199,7 +199,7 @@ export default function AProposPage() {
                   Interface claire, synthèses lisibles et compréhensibles par tous
                 </p>
               </div>
-              <div className="p-6 bg-white rounded-lg border border-[var(--border)] shadow-sm text-center">
+              <div className="p-6 bg-white rounded-lg text-center">
                 <div className="w-12 h-12 bg-[var(--orange)] rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />

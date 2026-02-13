@@ -21,11 +21,11 @@ export default function DeliberationCard({
         </span>
       </div>
 
-      <h4 className="font-semibold text-[var(--violet-dark)] mb-2">
+      <h4 className="font-semibold text-black mb-2">
         {deliberation.objet}
       </h4>
 
-      <p className="text-sm text-[var(--foreground)] mb-3 line-clamp-2">
+      <p className="text-sm text-black mb-3 line-clamp-2">
         {deliberation.detail}
       </p>
 

@@ -1,10 +1,10 @@
 interface StatutBadgeProps {
-  statut: 'en_cours' | 'vote' | 'abandonne';
+  statut: 'en_cours' | 'realise' | 'abandonne';
 }
 
 const statutLabels: Record<string, string> = {
   en_cours: 'En cours',
-  vote: 'Voté',
+  realise: 'Réalisé',
   abandonne: 'Abandonné',
 };
 

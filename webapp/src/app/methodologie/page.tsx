@@ -92,12 +92,12 @@ export default function MethodologiePage() {
           {steps.map((step, index) => (
             <div key={step.number} className={`relative flex items-start gap-6 ${index < steps.length - 1 ? 'pb-12' : ''}`}>
               {/* Pastille numérotée */}
-              <div className="relative z-10 w-12 h-12 bg-[var(--violet)] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+              <div className="relative z-10 w-12 h-12 bg-[var(--violet)] rounded-full flex items-center justify-center flex-shrink-0">
                 {step.icon}
               </div>
 
               {/* Contenu */}
-              <div className="bg-white rounded-lg border border-[var(--border)] p-6 flex-1 shadow-sm">
+              <div className="bg-white rounded-lg p-6 flex-1">
                 <h2 className="text-xl font-bold text-[var(--violet-dark)] mb-2">
                   {step.title}
                 </h2>
@@ -121,7 +121,7 @@ export default function MethodologiePage() {
 
         {/* Section Limites */}
         <div className="max-w-2xl mx-auto mt-16">
-          <div className="bg-[#FFF8F0] rounded-lg border border-[var(--orange)]/20 p-6">
+          <div className="bg-[#FFF8F0] rounded-lg p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-[var(--orange)] rounded-full flex items-center justify-center flex-shrink-0">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

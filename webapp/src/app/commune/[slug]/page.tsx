@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/components/Breadcrumb';
 import ProjetFilters from '@/components/ProjetFilters';
-import StatBox from '@/components/StatBox';
 import ConseilAccordion from '@/components/ConseilAccordion';
+import CommuneSidebar from '@/components/CommuneSidebar';
 import {
   getCommuneBySlug,
   getProjetsByCommune,
@@ -31,64 +31,87 @@ export default async function CommunePage({ params }: PageProps) {
   const thematiques = getAllThematiques();
 
   return (
-    <div className="section">
-      <div className="container">
-        <Breadcrumb items={[{ label: commune.nom }]} />
+    <div className="flex flex-col lg:flex-row">
 
-        {/* En-tête commune */}
-        <div className="bg-white rounded-lg border border-[var(--border)] p-6 lg:p-8 mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[var(--violet)] mb-4">
-            {commune.nom}
-          </h1>
+      {/* Bandeau latéral gauche — fixe, ne chevauche pas le footer */}
+      <CommuneSidebar>
+        <h1 className="text-2xl font-bold mb-1" style={{ color: 'var(--violet)' }}>
+          {commune.nom}
+        </h1>
+        <p className="text-black/50 text-sm mb-6">
+          {commune.code_postal}
+        </p>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <StatBox value={commune.code_postal} label="Code postal" />
-            <StatBox
-              value={formatNumber(commune.population)}
-              label="Habitants"
-            />
-            <StatBox value={projets.length} label="Projets" />
-            <StatBox value={conseils.length} label="Conseils" />
+        {/* Trait ondulé */}
+        <svg className="mb-6" width="60" height="14" viewBox="0 0 60 14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 7 C10 1, 20 13, 30 7 C40 1, 50 13, 60 7" stroke="#27B782" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        </svg>
+
+        {/* Stats */}
+        <div className="space-y-5">
+          <div>
+            <div className="text-2xl font-bold" style={{ color: 'var(--violet)' }}>{formatNumber(commune.population)}</div>
+            <div className="text-black/50 text-sm">Habitants</div>
           </div>
-
-          <div className="mt-6 pt-6 border-t border-[var(--border)]">
-            <p className="text-[var(--neutre)]">
-              <span className="font-medium text-[var(--violet-dark)]">Maire :</span>{' '}
-              {commune.maire}
-            </p>
+          <div>
+            <div className="text-2xl font-bold" style={{ color: 'var(--violet)' }}>{projets.length}</div>
+            <div className="text-black/50 text-sm">Projets</div>
+          </div>
+          <div>
+            <div className="text-2xl font-bold" style={{ color: 'var(--violet)' }}>{conseils.length}</div>
+            <div className="text-black/50 text-sm">Conseils municipaux</div>
           </div>
         </div>
 
-        {/* Section Projets */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-[var(--violet)] mb-6">
-            Projets de la commune
-          </h2>
+        {/* Maire */}
+        <div className="mt-6 pt-6">
+          <div className="text-black/50 text-sm mb-1">Maire</div>
+          <div className="font-medium text-black">{commune.maire}</div>
+        </div>
+      </CommuneSidebar>
 
-          {projets.length > 0 ? (
-            <ProjetFilters projets={projets} thematiques={thematiques} />
-          ) : (
-            <p className="text-[var(--neutre)] text-center py-8">
-              Aucun projet recensé pour cette commune.
-            </p>
-          )}
-        </section>
+      {/* Espace réservé pour le bandeau fixe sur desktop */}
+      <div className="hidden lg:block lg:w-96 flex-shrink-0" />
 
-        {/* Section Historique des conseils */}
-        <section>
-          <h2 className="text-2xl font-bold text-[var(--violet)] mb-6">
-            Historique des conseils municipaux
-          </h2>
+      {/* Contenu principal */}
+      <main className="flex-1 min-w-0 bg-white">
+        <div className="py-10 lg:py-14">
+          <div className="max-w-5xl mx-auto px-6 lg:px-12">
+            <Breadcrumb items={[{ label: commune.nom }]} />
 
-          {conseils.length > 0 ? (
-            <ConseilAccordion conseils={conseils} />
-          ) : (
-            <p className="text-[var(--neutre)] text-center py-8">
-              Aucun conseil municipal recensé pour cette commune.
-            </p>
-          )}
-        </section>
-      </div>
+            {/* Section Projets */}
+            <section className="mb-20">
+              <h2 className="text-2xl font-bold text-[var(--violet)] mb-8">
+                Projets de la commune
+              </h2>
+
+              {projets.length > 0 ? (
+                <ProjetFilters projets={projets} thematiques={thematiques} />
+              ) : (
+                <p className="text-[var(--neutre)] text-center py-12">
+                  Aucun projet recensé pour cette commune.
+                </p>
+              )}
+            </section>
+
+            {/* Section Historique des conseils */}
+            <section className="mb-16">
+              <h2 className="text-2xl font-bold text-[var(--violet)] mb-8">
+                Historique des conseils municipaux
+              </h2>
+
+              {conseils.length > 0 ? (
+                <ConseilAccordion conseils={conseils} />
+              ) : (
+                <p className="text-[var(--neutre)] text-center py-12">
+                  Aucun conseil municipal recensé pour cette commune.
+                </p>
+              )}
+            </section>
+          </div>
+        </div>
+      </main>
+
     </div>
   );
 }

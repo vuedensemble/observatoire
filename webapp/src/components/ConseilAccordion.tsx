@@ -9,8 +9,11 @@ interface ConseilAccordionProps {
   conseils: ConseilWithDeliberations[];
 }
 
+const DEFAULT_LIMIT = 3;
+
 export default function ConseilAccordion({ conseils }: ConseilAccordionProps) {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+  const [showAll, setShowAll] = useState(false);
 
   const toggleItem = (id: string) => {
     const newOpenItems = new Set(openItems);
@@ -22,19 +25,22 @@ export default function ConseilAccordion({ conseils }: ConseilAccordionProps) {
     setOpenItems(newOpenItems);
   };
 
+  const displayedConseils = showAll ? conseils : conseils.slice(0, DEFAULT_LIMIT);
+
   return (
-    <div className="space-y-2">
-      {conseils.map((conseil) => {
+    <div>
+    <div className="space-y-3">
+      {displayedConseils.map((conseil) => {
         const isOpen = openItems.has(conseil.id);
         return (
-          <div key={conseil.id} className="bg-white rounded-lg border border-[var(--border)]">
+          <div key={conseil.id} className="bg-transparent border border-black/30 rounded-lg">
             <button
               onClick={() => toggleItem(conseil.id)}
               className="accordion-header w-full"
               aria-expanded={isOpen}
             >
               <div className="flex flex-wrap items-center justify-between gap-4 w-full">
-                <span className="font-medium text-[var(--violet-dark)]">
+                <span className="font-medium text-black">
                   Conseil du {formatDateLong(conseil.date)}
                 </span>
                 <div className="flex items-center gap-4 text-sm text-[var(--neutre)]">
@@ -80,8 +86,8 @@ export default function ConseilAccordion({ conseils }: ConseilAccordionProps) {
               </svg>
             </button>
             {isOpen && (
-              <div className="px-4 pb-4">
-                <div className="space-y-4 pt-2">
+              <div className="px-5 pb-5">
+                <div className="space-y-4 pt-3">
                   {conseil.deliberations.map((delib) => (
                     <DeliberationCard
                       key={delib.id}
@@ -95,6 +101,17 @@ export default function ConseilAccordion({ conseils }: ConseilAccordionProps) {
           </div>
         );
       })}
+    </div>
+    {conseils.length > DEFAULT_LIMIT && (
+      <div className="text-center mt-8">
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="px-6 py-2.5 border border-[var(--violet)] text-[var(--violet)] rounded-lg text-sm font-medium hover:bg-[var(--violet)] hover:text-white transition-colors"
+        >
+          {showAll ? 'Voir moins' : `Voir plus (${conseils.length} conseils)`}
+        </button>
+      </div>
+    )}
     </div>
   );
 }

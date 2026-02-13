@@ -13,11 +13,14 @@ interface ProjetFiltersProps {
 
 const ANNEES = ['2024', '2023', '2022', '2021', '2020'];
 
+const DEFAULT_LIMIT = 3;
+
 export default function ProjetFilters({ projets, thematiques }: ProjetFiltersProps) {
   const [selectedThematiques, setSelectedThematiques] = useState<string[]>([]);
   const [selectedAnnees, setSelectedAnnees] = useState<string[]>([]);
   const [selectedConseils, setSelectedConseils] = useState<string[]>([]);
   const [selectedProjet, setSelectedProjet] = useState<ProjetWithRelations | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   // Extraire les conseils uniques des projets
   const conseils = Array.from(
@@ -184,15 +187,27 @@ export default function ProjetFilters({ projets, thematiques }: ProjetFiltersPro
 
       {/* Résultats */}
       {filteredProjets.length > 0 ? (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjets.map((projet) => (
-            <ProjetCard
-              key={projet.id}
-              projet={projet}
-              onClick={() => setSelectedProjet(projet)}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(showAll || hasActiveFilters ? filteredProjets : filteredProjets.slice(0, DEFAULT_LIMIT)).map((projet) => (
+              <ProjetCard
+                key={projet.id}
+                projet={projet}
+                onClick={() => setSelectedProjet(projet)}
+              />
+            ))}
+          </div>
+          {!hasActiveFilters && filteredProjets.length > DEFAULT_LIMIT && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowAll(!showAll)}
+                className="px-6 py-2.5 border border-[var(--violet)] text-[var(--violet)] rounded-lg text-sm font-medium hover:bg-[var(--violet)] hover:text-white transition-colors"
+              >
+                {showAll ? 'Voir moins' : `Voir plus (${filteredProjets.length} projets)`}
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <p className="text-[var(--neutre)] text-center py-8">
           Aucun projet ne correspond aux filtres sélectionnés.
