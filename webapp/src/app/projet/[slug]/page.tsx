@@ -39,11 +39,8 @@ export default async function ProjetPage({ params }: PageProps) {
     date: delib.conseil.date,
     content: (
       <div className="card">
-        <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-          <span className="text-sm font-medium text-[var(--violet)]">
-            {delib.numero}
-          </span>
-          {delib.conseil.pdf_url && (
+        {delib.conseil.pdf_url && (
+          <div className="flex items-end justify-end mb-2">
             <a
               href={delib.conseil.pdf_url}
               target="_blank"
@@ -55,8 +52,8 @@ export default async function ProjetPage({ params }: PageProps) {
               </svg>
               PDF
             </a>
-          )}
-        </div>
+          </div>
+        )}
         <h4 className="font-semibold text-black mb-2">
           {delib.objet}
         </h4>

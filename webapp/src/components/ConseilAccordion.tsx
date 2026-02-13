@@ -87,12 +87,13 @@ export default function ConseilAccordion({ conseils }: ConseilAccordionProps) {
             </button>
             {isOpen && (
               <div className="px-5 pb-5">
-                <div className="space-y-4 pt-3">
-                  {conseil.deliberations.map((delib) => (
+                <div className="divide-y divide-black/10 pt-1">
+                  {conseil.deliberations.map((delib, index) => (
                     <DeliberationCard
                       key={delib.id}
                       deliberation={{ ...delib, conseil }}
                       showPdfLink={false}
+                      index={index + 1}
                     />
                   ))}
                 </div>
