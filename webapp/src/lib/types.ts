@@ -47,7 +47,7 @@ export interface Projet {
   description: string;
   nature: string;
   competence: string;
-  statut: 'en_cours' | 'vote' | 'abandonne';
+  statut: 'en_cours' | 'realise' | 'abandonne';
   montant?: number;
 }
 

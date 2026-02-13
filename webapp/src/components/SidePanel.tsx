@@ -38,7 +38,7 @@ export default function SidePanel({ isOpen, onClose, children }: SidePanelProps)
 
       {/* Panel */}
       <div
-        className={`fixed top-0 right-0 h-full w-full max-w-2xl bg-[var(--creme)] z-50 shadow-2xl transform transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 h-full w-full max-w-2xl bg-[var(--creme)] z-50 transform transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

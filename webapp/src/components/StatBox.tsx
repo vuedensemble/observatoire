@@ -6,7 +6,7 @@ interface StatBoxProps {
 
 export default function StatBox({ value, label, icon }: StatBoxProps) {
   return (
-    <div className="stat-box bg-white rounded-lg border border-[var(--border)]">
+    <div className="stat-box bg-white rounded-lg">
       {icon && <div className="text-[var(--violet)] mb-2">{icon}</div>}
       <div className="stat-value">{value}</div>
       <div className="stat-label">{label}</div>
