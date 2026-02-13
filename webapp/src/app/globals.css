@@ -219,13 +219,30 @@ h3 {
 /* Form inputs */
 input[type="text"],
 input[type="search"],
-input[type="email"],
-select {
+input[type="email"] {
   border: 2px solid var(--border);
   border-radius: 0.25rem;
   padding: 0.75rem 1rem;
   width: 100%;
   font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--violet-dark);
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px;
+  cursor: pointer;
   transition: border-color 0.2s ease;
 }
 
@@ -235,6 +252,31 @@ input[type="email"]:focus,
 select:focus {
   outline: none;
   border-color: var(--violet);
+}
+
+/* Filter selects (ProjetFilters) */
+.filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #6B7280;
+  background-color: #f5f0ff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: auto;
+}
+
+.filter-select:focus {
+  outline: none;
+  background-color: #ede8fc;
 }
 
 /* Header search input */
@@ -259,35 +301,46 @@ select:focus {
 /* Timeline */
 .timeline {
   position: relative;
-  padding-left: 2rem;
+  padding-left: 4.75rem;
 }
 
 .timeline::before {
   content: "";
   position: absolute;
-  left: 0.5rem;
+  left: 2.1875rem;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: var(--border);
+  width: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='60' viewBox='0 0 14 60'%3E%3Cpath d='M7 0 C13 10, 1 20, 7 30 C13 40, 1 50, 7 60' stroke='%2327B782' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: 14px 60px;
 }
 
 .timeline-item {
   position: relative;
-  padding-bottom: 2rem;
+  padding-bottom: 1.75rem;
 }
 
 .timeline-item::before {
   content: "";
   position: absolute;
-  left: -1.5rem;
-  top: 0.25rem;
-  width: 1rem;
-  height: 1rem;
+  left: calc(-4.75rem + 2.1875rem - 2px);
+  top: 0.125rem;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--violet);
-  border: 3px solid white;
-  box-shadow: 0 0 0 2px var(--violet);
+  border: none;
+  box-shadow: none;
+  z-index: 1;
+}
+
+.timeline-date {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--violet);
+  margin-bottom: 0.375rem;
 }
 
 /* Accordion */

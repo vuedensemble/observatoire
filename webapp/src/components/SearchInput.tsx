@@ -137,7 +137,10 @@ export default function SearchInput({
       </div>
 
       {isOpen && results.length > 0 && (
-        <ul className={`absolute z-50 mt-2 bg-white border border-[var(--border)] rounded-lg shadow-lg overflow-hidden ${isHeader ? 'w-72 right-0' : 'w-full'}`}>
+        <ul
+          className={`absolute z-50 bg-white border border-[var(--border)] rounded-lg shadow-lg overflow-hidden ${isHeader ? 'right-0' : 'w-full mt-2'}`}
+          style={isHeader ? { top: '100%', marginTop: '4px', width: '18rem' } : undefined}
+        >
           {results.map((commune) => (
             <li key={commune.id}>
               <button
@@ -157,7 +160,10 @@ export default function SearchInput({
       )}
 
       {isOpen && results.length === 0 && query.length >= 2 && !loading && (
-        <div className={`absolute z-50 mt-2 bg-white border border-[var(--border)] rounded-lg shadow-lg p-4 text-center text-[var(--neutre)] ${isHeader ? 'w-72 right-0 text-sm' : 'w-full'}`}>
+        <div
+          className={`absolute z-50 bg-white border border-[var(--border)] rounded-lg shadow-lg text-center text-[var(--neutre)] ${isHeader ? 'right-0 text-sm' : 'w-full mt-2 text-base'}`}
+          style={isHeader ? { top: '100%', marginTop: '4px', width: '18rem', padding: '0.5rem 1rem' } : { padding: '0.75rem 1rem' }}
+        >
           Aucune commune trouvée
         </div>
       )}
