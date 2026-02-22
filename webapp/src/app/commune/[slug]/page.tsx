@@ -8,6 +8,7 @@ import {
   getProjetsByCommune,
   getConseilsByCommune,
   getAllThematiques,
+  getUnvalidatedProjetsForCommune,
 } from '@/lib/db';
 
 interface PageProps {
@@ -26,7 +27,10 @@ export default async function CommunePage({ params }: PageProps) {
     notFound();
   }
 
-  const projets = getProjetsByCommune(commune.id);
+  const validatedProjets = getProjetsByCommune(commune.id);
+  const unvalidatedProjets = getUnvalidatedProjetsForCommune(commune.id);
+  const projets = [...validatedProjets, ...unvalidatedProjets]
+    .sort((a, b) => b.deliberations.length - a.deliberations.length);
   const conseils = getConseilsByCommune(commune.id);
   const thematiques = getAllThematiques();
 

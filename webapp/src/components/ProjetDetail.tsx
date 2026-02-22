@@ -49,11 +49,15 @@ export default function ProjetDetail({ projet }: ProjetDetailProps) {
           <span style={{ color: 'var(--neutre)' }}>Décision :</span>{' '}
           <span style={{ fontWeight: 500, color: 'var(--vert)' }}>{delib.decision}</span>
         </div>
-        {delib.votants && (
+        {delib.votants_texte && delib.votants_texte !== '---' ? (
+          <div style={{ marginTop: '0.375rem', fontSize: '0.8125rem', color: 'var(--neutre)' }}>
+            {delib.votants_texte}
+          </div>
+        ) : delib.votants ? (
           <div style={{ marginTop: '0.375rem', fontSize: '0.8125rem', color: 'var(--neutre)' }}>
             Pour : {delib.votants.pour} | Contre : {delib.votants.contre} | Abstention : {delib.votants.abstention}
           </div>
-        )}
+        ) : null}
       </div>
     ),
   }));
@@ -85,7 +89,16 @@ export default function ProjetDetail({ projet }: ProjetDetailProps) {
           {projet.thematiques.map((thematique) => (
             <ThematiqueBadge key={thematique.id} thematique={thematique} />
           ))}
-          <StatutBadge statut={projet.statut} />
+          {projet.needsConsolidation ? (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[var(--orange)]/10 text-[var(--orange)] text-xs font-medium rounded-full">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              À vérifier
+            </span>
+          ) : (
+            <StatutBadge statut={projet.statut} />
+          )}
         </div>
 
         {/* Infos */}

@@ -39,13 +39,15 @@ export default function DeliberationCard({
               <span className="text-[var(--neutre)]">Décision :</span>{' '}
               <span className="font-medium text-[var(--vert)]">{deliberation.decision}</span>
             </span>
-            {deliberation.votants && (
+            {deliberation.votants_texte && deliberation.votants_texte !== '---' ? (
+              <span className="text-xs text-[var(--neutre)]">{deliberation.votants_texte}</span>
+            ) : deliberation.votants ? (
               <span className="text-xs text-[var(--neutre)]">
                 {deliberation.votants.pour} pour
                 {deliberation.votants.contre ? ` · ${deliberation.votants.contre} contre` : ''}
                 {deliberation.votants.abstention ? ` · ${deliberation.votants.abstention} abst.` : ''}
               </span>
-            )}
+            ) : null}
           </div>
         </div>
       </article>
