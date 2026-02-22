@@ -246,6 +246,19 @@ export default function ProjetFilters({ projets, thematiques }: ProjetFiltersPro
       {/* Résultats */}
       {filteredProjets.length > 0 ? (
         <>
+          {showAll && !hasActiveFilters && filteredProjets.length > DEFAULT_LIMIT && (
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={() => setShowAll(false)}
+                className="text-sm text-[var(--neutre)] hover:text-[var(--violet)] transition-colors flex items-center gap-1"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                </svg>
+                Réduire
+              </button>
+            </div>
+          )}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(showAll || hasActiveFilters ? filteredProjets : filteredProjets.slice(0, DEFAULT_LIMIT)).map((projet) => (
               <ProjetCard
