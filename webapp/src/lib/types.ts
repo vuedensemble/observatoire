@@ -8,6 +8,7 @@ export interface Commune {
   population: number;
   maire: string;
   infos_generales?: Record<string, unknown>;
+  folder_name?: string | null;
 }
 
 export interface ConseilMunicipal {
@@ -17,6 +18,8 @@ export interface ConseilMunicipal {
   presents: string[];
   absents: string[];
   pdf_url: string;
+  source_section?: string | null;
+  source_url?: string | null;
 }
 
 export interface Deliberation {
@@ -31,6 +34,9 @@ export interface Deliberation {
     contre?: number;
     abstention?: number;
   };
+  votants_texte?: string | null;
+  source_file?: string | null;
+  source_section?: string | null;
 }
 
 export interface Thematique {
@@ -72,6 +78,7 @@ export interface ProjetWithRelations extends Projet {
   communes: Commune[];
   thematiques: Thematique[];
   deliberations: (Deliberation & { conseil: ConseilMunicipal })[];
+  needsConsolidation?: boolean;
 }
 
 export interface CommuneWithStats extends Commune {
@@ -82,4 +89,34 @@ export interface CommuneWithStats extends Commune {
 export interface ConseilWithDeliberations extends ConseilMunicipal {
   deliberations: Deliberation[];
   commune: Commune;
+}
+
+// Deduplication types
+export interface ProjetMention {
+  id: string;
+  commune_id: string;
+  deliberation_id?: string | null;
+  nom: string;
+  description?: string | null;
+  nature?: string | null;
+  competence?: string | null;
+  source_file?: string | null;
+  source_section?: string | null;
+  groupe_id?: string | null;
+}
+
+export interface ProjetGroupe {
+  id: string;
+  commune_id: string;
+  nom_canonique: string;
+  description?: string | null;
+  nature?: string | null;
+  competence?: string | null;
+  statut: 'proposition' | 'valide' | 'rejete';
+  projet_id?: string | null;
+  created_at: string;
+}
+
+export interface ProjetGroupeWithMentions extends ProjetGroupe {
+  mentions: ProjetMention[];
 }

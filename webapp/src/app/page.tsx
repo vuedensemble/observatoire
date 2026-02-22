@@ -2,10 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SearchInput from '@/components/SearchInput';
 import QuoteBlock from '@/components/QuoteBlock';
-import { getAllCommunes } from '@/lib/db';
+import { getAllCommunes, countProjets, countDeliberations } from '@/lib/db';
 
 export default function Home() {
   const communes = getAllCommunes();
+  const totalProjets = countProjets();
+  const totalDelibs = countDeliberations();
 
   return (
     <div className="bg-[var(--creme)]">
@@ -137,11 +139,11 @@ export default function Home() {
               <div className="stat-label">Communes CAPB</div>
             </div>
             <div className="stat-box">
-              <div className="stat-value">10</div>
+              <div className="stat-value">{totalProjets}</div>
               <div className="stat-label">Projets analysés</div>
             </div>
             <div className="stat-box">
-              <div className="stat-value">18</div>
+              <div className="stat-value">{totalDelibs}</div>
               <div className="stat-label">Délibérations</div>
             </div>
           </div>

@@ -40,7 +40,17 @@ export default function ProjetCard({ projet, onClick }: ProjetCardProps) {
         ) : (
           <span />
         )}
-        <StatutBadge statut={projet.statut} />
+        <div className="flex items-center gap-2 ml-2 flex-shrink-0">
+          {projet.needsConsolidation && (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[var(--orange)]/10 text-[var(--orange)] text-[0.6875rem] font-medium rounded-full whitespace-nowrap">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              À vérifier
+            </span>
+          )}
+          {!projet.needsConsolidation && <StatutBadge statut={projet.statut} />}
+        </div>
       </div>
 
       {/* Corps : titre */}

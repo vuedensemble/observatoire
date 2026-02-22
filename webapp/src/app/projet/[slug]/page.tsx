@@ -64,11 +64,13 @@ export default async function ProjetPage({ params }: PageProps) {
           <span className="text-[var(--neutre)]">Décision :</span>{' '}
           <span className="font-medium text-[var(--vert)]">{delib.decision}</span>
         </div>
-        {delib.votants && (
+        {delib.votants_texte && delib.votants_texte !== '---' ? (
+          <div className="mt-2 text-xs text-[var(--neutre)]">{delib.votants_texte}</div>
+        ) : delib.votants ? (
           <div className="mt-2 text-xs text-[var(--neutre)]">
             Pour : {delib.votants.pour} | Contre : {delib.votants.contre} | Abstention : {delib.votants.abstention}
           </div>
-        )}
+        ) : null}
       </div>
     ),
   }));
