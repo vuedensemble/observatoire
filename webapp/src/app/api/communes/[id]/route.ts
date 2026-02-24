@@ -8,9 +8,9 @@ export async function GET(
   const { id } = await params;
 
   // Try by ID first, then by slug
-  let commune = getCommuneById(id);
+  let commune = await getCommuneById(id);
   if (!commune) {
-    commune = getCommuneBySlug(id);
+    commune = await getCommuneBySlug(id);
   }
 
   if (!commune) {

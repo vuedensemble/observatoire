@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
 
   // If any filters provided, use search
   if (commune || thematique || dateDebut || dateFin || query) {
-    const results = searchProjets({
+    const results = await searchProjets({
       commune,
       thematique,
       dateDebut,
@@ -22,6 +22,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(results);
   }
 
-  const projets = getAllProjets();
+  const projets = await getAllProjets();
   return NextResponse.json(projets);
 }

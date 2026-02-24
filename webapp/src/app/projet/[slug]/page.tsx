@@ -12,7 +12,7 @@ interface PageProps {
 
 export default async function ProjetPage({ params }: PageProps) {
   const { slug } = await params;
-  const projet = getProjetBySlug(slug);
+  const projet = await getProjetBySlug(slug);
 
   if (!projet) {
     notFound();
@@ -157,7 +157,7 @@ export default async function ProjetPage({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const projet = getProjetBySlug(slug);
+  const projet = await getProjetBySlug(slug);
 
   if (!projet) {
     return { title: 'Projet non trouvé' };

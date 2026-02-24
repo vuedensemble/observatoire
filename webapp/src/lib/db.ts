@@ -1,4 +1,4 @@
-import { eq, sql } from 'drizzle-orm';
+import { eq, sql, inArray } from 'drizzle-orm';
 import { db } from './db/index';
 import {
   communes,
@@ -27,8 +27,8 @@ import type {
 } from './types';
 
 // Communes
-export function getAllCommunes(): CommuneWithStats[] {
-  const rows = db
+export async function getAllCommunes(): Promise<CommuneWithStats[]> {
+  const rows = await db
     .select({
       id: communes.id,
       nom: communes.nom,
@@ -40,8 +40,7 @@ export function getAllCommunes(): CommuneWithStats[] {
       nombre_projets: sql<number>`(select count(*) from projet_communes where commune_id = ${communes.id})`,
       nombre_conseils: sql<number>`(select count(*) from conseils_municipaux where commune_id = ${communes.id})`,
     })
-    .from(communes)
-    .all();
+    .from(communes);
 
   return rows.map((r) => ({
     ...r,
@@ -51,93 +50,94 @@ export function getAllCommunes(): CommuneWithStats[] {
   }));
 }
 
-export function getCommuneById(id: string): Commune | undefined {
-  const row = db.select().from(communes).where(eq(communes.id, id)).get();
+export async function getCommuneById(id: string): Promise<Commune | undefined> {
+  const [row] = await db.select().from(communes).where(eq(communes.id, id)).limit(1);
   if (!row) return undefined;
   return { ...row, infos_generales: (row.infos_generales as Record<string, unknown> | null) ?? undefined };
 }
 
-export function getCommuneBySlug(slug: string): Commune | undefined {
-  const row = db.select().from(communes).where(eq(communes.slug, slug)).get();
+export async function getCommuneBySlug(slug: string): Promise<Commune | undefined> {
+  const [row] = await db.select().from(communes).where(eq(communes.slug, slug)).limit(1);
   if (!row) return undefined;
   return { ...row, infos_generales: (row.infos_generales as Record<string, unknown> | null) ?? undefined };
 }
 
-export function searchCommunes(query: string): CommuneWithStats[] {
+export async function searchCommunes(query: string): Promise<CommuneWithStats[]> {
   const q = query.toLowerCase();
-  return getAllCommunes().filter(
+  const all = await getAllCommunes();
+  return all.filter(
     (c) => c.nom.toLowerCase().includes(q) || c.code_postal.includes(q)
   );
 }
 
 // Conseils municipaux
-export function getConseilsByCommune(communeId: string): ConseilWithDeliberations[] {
-  const conseils = db
-    .select()
-    .from(conseilsMunicipaux)
-    .where(eq(conseilsMunicipaux.commune_id, communeId))
-    .all();
+export async function getConseilsByCommune(communeId: string): Promise<ConseilWithDeliberations[]> {
+  const [communeRow, conseils] = await Promise.all([
+    db.select().from(communes).where(eq(communes.id, communeId)).limit(1).then(r => r[0]),
+    db.select().from(conseilsMunicipaux).where(eq(conseilsMunicipaux.commune_id, communeId)),
+  ]);
 
-  const commune = db.select().from(communes).where(eq(communes.id, communeId)).get();
-  if (!commune) return [];
+  if (!communeRow) return [];
 
   const communeObj: Commune = {
-    ...commune,
-    infos_generales: (commune.infos_generales as Record<string, unknown> | null) ?? undefined,
+    ...communeRow,
+    infos_generales: (communeRow.infos_generales as Record<string, unknown> | null) ?? undefined,
   };
 
+  const conseilIds = conseils.map(c => c.id);
+  const allDelibs = conseilIds.length > 0
+    ? await db.select().from(deliberations).where(inArray(deliberations.conseil_id, conseilIds))
+    : [];
+
+  // Group deliberations by conseil_id in memory
+  const delibsByConseil = new Map<string, Deliberation[]>();
+  for (const d of allDelibs) {
+    if (!delibsByConseil.has(d.conseil_id)) delibsByConseil.set(d.conseil_id, []);
+    delibsByConseil.get(d.conseil_id)!.push(d as Deliberation);
+  }
+
   return conseils
-    .map((cm) => {
-      const delibs = db
-        .select()
-        .from(deliberations)
-        .where(eq(deliberations.conseil_id, cm.id))
-        .all();
-      return {
-        ...cm,
-        deliberations: delibs as Deliberation[],
-        commune: communeObj,
-      };
-    })
+    .map(cm => ({
+      ...cm,
+      deliberations: delibsByConseil.get(cm.id) || [],
+      commune: communeObj,
+    }))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getConseilById(id: string): ConseilWithDeliberations | undefined {
-  const conseil = db.select().from(conseilsMunicipaux).where(eq(conseilsMunicipaux.id, id)).get();
+export async function getConseilById(id: string): Promise<ConseilWithDeliberations | undefined> {
+  const [conseil] = await db.select().from(conseilsMunicipaux).where(eq(conseilsMunicipaux.id, id)).limit(1);
   if (!conseil) return undefined;
 
-  const commune = db.select().from(communes).where(eq(communes.id, conseil.commune_id)).get();
-  if (!commune) return undefined;
+  const [communeRow] = await db.select().from(communes).where(eq(communes.id, conseil.commune_id)).limit(1);
+  if (!communeRow) return undefined;
 
-  const delibs = db
+  const delibs = await db
     .select()
     .from(deliberations)
-    .where(eq(deliberations.conseil_id, conseil.id))
-    .all();
+    .where(eq(deliberations.conseil_id, conseil.id));
 
   return {
     ...conseil,
     deliberations: delibs as Deliberation[],
-    commune: { ...commune, infos_generales: (commune.infos_generales as Record<string, unknown> | null) ?? undefined },
+    commune: { ...communeRow, infos_generales: (communeRow.infos_generales as Record<string, unknown> | null) ?? undefined },
   };
 }
 
 // Deliberations
-export function getDeliberationsByCommune(communeId: string): (Deliberation & { conseil: ConseilMunicipal })[] {
-  const conseils = db
+export async function getDeliberationsByCommune(communeId: string): Promise<(Deliberation & { conseil: ConseilMunicipal })[]> {
+  const conseils = await db
     .select()
     .from(conseilsMunicipaux)
-    .where(eq(conseilsMunicipaux.commune_id, communeId))
-    .all();
+    .where(eq(conseilsMunicipaux.commune_id, communeId));
 
-  const conseilMap = new Map(conseils.map((c) => [c.id, c]));
   const conseilIds = conseils.map((c) => c.id);
   if (conseilIds.length === 0) return [];
 
-  const allDelibs = db.select().from(deliberations).all();
-  const filtered = allDelibs.filter((d) => conseilMap.has(d.conseil_id));
+  const conseilMap = new Map(conseils.map((c) => [c.id, c]));
+  const delibs = await db.select().from(deliberations).where(inArray(deliberations.conseil_id, conseilIds));
 
-  return filtered
+  return delibs
     .map((d) => ({
       ...(d as Deliberation),
       conseil: conseilMap.get(d.conseil_id)! as ConseilMunicipal,
@@ -145,120 +145,114 @@ export function getDeliberationsByCommune(communeId: string): (Deliberation & { 
     .sort((a, b) => new Date(b.conseil.date).getTime() - new Date(a.conseil.date).getTime());
 }
 
-export function getDeliberationById(id: string): (Deliberation & { conseil: ConseilMunicipal }) | undefined {
-  const delib = db.select().from(deliberations).where(eq(deliberations.id, id)).get();
+export async function getDeliberationById(id: string): Promise<(Deliberation & { conseil: ConseilMunicipal }) | undefined> {
+  const [delib] = await db.select().from(deliberations).where(eq(deliberations.id, id)).limit(1);
   if (!delib) return undefined;
 
-  const conseil = db.select().from(conseilsMunicipaux).where(eq(conseilsMunicipaux.id, delib.conseil_id)).get();
+  const [conseil] = await db.select().from(conseilsMunicipaux).where(eq(conseilsMunicipaux.id, delib.conseil_id)).limit(1);
   if (!conseil) return undefined;
 
   return { ...(delib as Deliberation), conseil: conseil as ConseilMunicipal };
 }
 
 // Thematiques
-export function getAllThematiques(): Thematique[] {
-  return db.select().from(thematiques).all();
+export async function getAllThematiques(): Promise<Thematique[]> {
+  return db.select().from(thematiques);
 }
 
-export function getThematiqueById(id: string): Thematique | undefined {
-  return db.select().from(thematiques).where(eq(thematiques.id, id)).get();
+export async function getThematiqueById(id: string): Promise<Thematique | undefined> {
+  const [row] = await db.select().from(thematiques).where(eq(thematiques.id, id)).limit(1);
+  return row;
 }
 
 // Projets
-export function getAllProjets(): ProjetWithRelations[] {
-  const allProjets = db.select().from(projets).all();
-  return allProjets.map((p) => enrichProjet(p as Projet));
+export async function getAllProjets(): Promise<ProjetWithRelations[]> {
+  const allProjets = await db.select().from(projets);
+  const results: ProjetWithRelations[] = [];
+  for (const p of allProjets) {
+    results.push(await enrichProjet(p as Projet));
+  }
+  return results;
 }
 
-export function getProjetById(id: string): ProjetWithRelations | undefined {
-  const projet = db.select().from(projets).where(eq(projets.id, id)).get();
+export async function getProjetById(id: string): Promise<ProjetWithRelations | undefined> {
+  const [projet] = await db.select().from(projets).where(eq(projets.id, id)).limit(1);
   if (!projet) return undefined;
   return enrichProjet(projet as Projet);
 }
 
-export function getProjetBySlug(slug: string): ProjetWithRelations | undefined {
-  const projet = db.select().from(projets).where(eq(projets.slug, slug)).get();
+export async function getProjetBySlug(slug: string): Promise<ProjetWithRelations | undefined> {
+  const [projet] = await db.select().from(projets).where(eq(projets.slug, slug)).limit(1);
   if (!projet) return undefined;
   return enrichProjet(projet as Projet);
 }
 
-export function getProjetsByCommune(communeId: string): ProjetWithRelations[] {
-  const links = db
+export async function getProjetsByCommune(communeId: string): Promise<ProjetWithRelations[]> {
+  const links = await db
     .select()
     .from(projetCommunes)
-    .where(eq(projetCommunes.commune_id, communeId))
-    .all();
+    .where(eq(projetCommunes.commune_id, communeId));
 
   const projetIds = links.map((l) => l.projet_id);
   if (projetIds.length === 0) return [];
 
-  const allProjets = db.select().from(projets).all();
-  const projetIdSet = new Set(projetIds);
+  const communeProjets = await db.select().from(projets).where(inArray(projets.id, projetIds));
 
-  return allProjets
-    .filter((p) => projetIdSet.has(p.id))
-    .map((p) => enrichProjet(p as Projet));
+  const results: ProjetWithRelations[] = [];
+  for (const p of communeProjets) {
+    results.push(await enrichProjet(p as Projet));
+  }
+  return results;
 }
 
-export function getProjetsByThematique(thematiqueId: string): ProjetWithRelations[] {
-  const links = db
+export async function getProjetsByThematique(thematiqueId: string): Promise<ProjetWithRelations[]> {
+  const links = await db
     .select()
     .from(projetThematiques)
-    .where(eq(projetThematiques.thematique_id, thematiqueId))
-    .all();
+    .where(eq(projetThematiques.thematique_id, thematiqueId));
 
   const projetIds = links.map((l) => l.projet_id);
   if (projetIds.length === 0) return [];
 
-  const allProjets = db.select().from(projets).all();
-  const projetIdSet = new Set(projetIds);
+  const themProjets = await db.select().from(projets).where(inArray(projets.id, projetIds));
 
-  return allProjets
-    .filter((p) => projetIdSet.has(p.id))
-    .map((p) => enrichProjet(p as Projet));
+  const results: ProjetWithRelations[] = [];
+  for (const p of themProjets) {
+    results.push(await enrichProjet(p as Projet));
+  }
+  return results;
 }
 
-function enrichProjet(projet: Projet): ProjetWithRelations {
-  // Get commune IDs
-  const communeLinks = db
-    .select()
-    .from(projetCommunes)
-    .where(eq(projetCommunes.projet_id, projet.id))
-    .all();
-  const communeIds = new Set(communeLinks.map((l) => l.commune_id));
+async function enrichProjet(projet: Projet): Promise<ProjetWithRelations> {
+  // Fetch all junction rows in parallel
+  const [communeLinks, thematiqueLinks, delibLinks] = await Promise.all([
+    db.select().from(projetCommunes).where(eq(projetCommunes.projet_id, projet.id)),
+    db.select().from(projetThematiques).where(eq(projetThematiques.projet_id, projet.id)),
+    db.select().from(projetDeliberations).where(eq(projetDeliberations.projet_id, projet.id)),
+  ]);
 
-  // Get thematique IDs
-  const thematiqueLinks = db
-    .select()
-    .from(projetThematiques)
-    .where(eq(projetThematiques.projet_id, projet.id))
-    .all();
-  const thematiqueIds = new Set(thematiqueLinks.map((l) => l.thematique_id));
+  const communeIds = communeLinks.map((l) => l.commune_id);
+  const thematiqueIds = thematiqueLinks.map((l) => l.thematique_id);
+  const delibIds = delibLinks.map((l) => l.deliberation_id);
 
-  // Get deliberation IDs
-  const delibLinks = db
-    .select()
-    .from(projetDeliberations)
-    .where(eq(projetDeliberations.projet_id, projet.id))
-    .all();
-  const delibIds = new Set(delibLinks.map((l) => l.deliberation_id));
+  // Fetch only the needed rows in parallel
+  const [projetCommunesRaw, projetThematiquesList, projetDelibs] = await Promise.all([
+    communeIds.length > 0 ? db.select().from(communes).where(inArray(communes.id, communeIds)) : Promise.resolve([]),
+    thematiqueIds.length > 0 ? db.select().from(thematiques).where(inArray(thematiques.id, thematiqueIds)) : Promise.resolve([]),
+    delibIds.length > 0 ? db.select().from(deliberations).where(inArray(deliberations.id, delibIds)) : Promise.resolve([]),
+  ]);
 
-  // Fetch related entities
-  const allCommunes = db.select().from(communes).all();
-  const projetCommunesList = allCommunes
-    .filter((c) => communeIds.has(c.id))
-    .map((c) => ({ ...c, infos_generales: (c.infos_generales as Record<string, unknown> | null) ?? undefined }));
+  const projetCommunesList = projetCommunesRaw.map((c) => ({
+    ...c,
+    infos_generales: (c.infos_generales as Record<string, unknown> | null) ?? undefined,
+  }));
 
-  const allThematiques = db.select().from(thematiques).all();
-  const projetThematiquesList = allThematiques.filter((t) => thematiqueIds.has(t.id));
-
-  const allDelibs = db.select().from(deliberations).all();
-  const projetDelibs = allDelibs.filter((d) => delibIds.has(d.id));
-
-  // Get conseils for each deliberation
-  const conseilIds = new Set(projetDelibs.map((d) => d.conseil_id));
-  const allConseils = db.select().from(conseilsMunicipaux).all();
-  const conseilMap = new Map(allConseils.filter((c) => conseilIds.has(c.id)).map((c) => [c.id, c]));
+  // Fetch conseils for the deliberations
+  const conseilIds = [...new Set(projetDelibs.map((d) => d.conseil_id))];
+  const conseilRows = conseilIds.length > 0
+    ? await db.select().from(conseilsMunicipaux).where(inArray(conseilsMunicipaux.id, conseilIds))
+    : [];
+  const conseilMap = new Map(conseilRows.map((c) => [c.id, c]));
 
   const deliberationsWithConseils = projetDelibs
     .map((d) => ({
@@ -277,13 +271,13 @@ function enrichProjet(projet: Projet): ProjetWithRelations {
 }
 
 // Counts
-export function countProjets(): number {
-  const row = db.select({ count: sql<number>`count(*)` }).from(projets).get();
+export async function countProjets(): Promise<number> {
+  const [row] = await db.select({ count: sql<number>`count(*)` }).from(projets);
   return Number(row?.count ?? 0);
 }
 
-export function countDeliberations(): number {
-  const row = db.select({ count: sql<number>`count(*)` }).from(deliberations).get();
+export async function countDeliberations(): Promise<number> {
+  const [row] = await db.select({ count: sql<number>`count(*)` }).from(deliberations);
   return Number(row?.count ?? 0);
 }
 
@@ -296,8 +290,8 @@ export interface SearchFilters {
   query?: string;
 }
 
-export function searchProjets(filters: SearchFilters): ProjetWithRelations[] {
-  let results = getAllProjets();
+export async function searchProjets(filters: SearchFilters): Promise<ProjetWithRelations[]> {
+  let results = await getAllProjets();
 
   if (filters.commune) {
     results = results.filter((p) =>
@@ -343,26 +337,26 @@ export function searchProjets(filters: SearchFilters): ProjetWithRelations[] {
 
 // --- Admin: Project deduplication ---
 
-export function getProjetGroupesByCommune(communeId: string): ProjetGroupeWithMentions[] {
-  const groups = db
-    .select()
-    .from(projetGroupes)
-    .where(eq(projetGroupes.commune_id, communeId))
-    .all();
+export async function getProjetGroupesByCommune(communeId: string): Promise<ProjetGroupeWithMentions[]> {
+  // Fetch groups and all mentions for this commune in parallel
+  const [groups, allMentions] = await Promise.all([
+    db.select().from(projetGroupes).where(eq(projetGroupes.commune_id, communeId)),
+    db.select().from(projetMentions).where(eq(projetMentions.commune_id, communeId)),
+  ]);
 
-  return groups.map((g) => {
-    const mentions = db
-      .select()
-      .from(projetMentions)
-      .where(eq(projetMentions.groupe_id, g.id))
-      .all();
+  // Index mentions by groupe_id in memory
+  const mentionsByGroup = new Map<string, ProjetMention[]>();
+  for (const m of allMentions) {
+    if (!m.groupe_id) continue;
+    if (!mentionsByGroup.has(m.groupe_id)) mentionsByGroup.set(m.groupe_id, []);
+    mentionsByGroup.get(m.groupe_id)!.push(m as ProjetMention);
+  }
 
-    return {
-      ...g,
-      statut: g.statut as ProjetGroupe['statut'],
-      mentions: mentions as ProjetMention[],
-    };
-  });
+  return groups.map(g => ({
+    ...g,
+    statut: g.statut as ProjetGroupe['statut'],
+    mentions: mentionsByGroup.get(g.id) || [],
+  }));
 }
 
 function stripAccents(text: string): string {
@@ -392,42 +386,68 @@ function inferThematiques(texts: string[], allThems: { id: string; nom: string; 
   });
 }
 
-export function getUnvalidatedProjetsForCommune(communeId: string): ProjetWithRelations[] {
-  const groups = db
-    .select()
-    .from(projetGroupes)
-    .where(eq(projetGroupes.commune_id, communeId))
-    .all()
-    .filter((g) => g.statut === 'proposition');
+export async function getUnvalidatedProjetsForCommune(communeId: string): Promise<ProjetWithRelations[]> {
+  // Bulk fetch: groups, commune, thematiques, and all mentions for this commune (4 parallel queries)
+  const [groupsRaw, communeRow, allThems, allMentions] = await Promise.all([
+    db.select().from(projetGroupes).where(eq(projetGroupes.commune_id, communeId)),
+    db.select().from(communes).where(eq(communes.id, communeId)).limit(1).then(r => r[0]),
+    db.select().from(thematiques),
+    db.select().from(projetMentions).where(eq(projetMentions.commune_id, communeId)),
+  ]);
 
-  const commune = db.select().from(communes).where(eq(communes.id, communeId)).get();
-  if (!commune) return [];
+  if (!communeRow) return [];
+
+  const groups = groupsRaw.filter((g) => g.statut === 'proposition');
+  if (groups.length === 0) return [];
 
   const communeObj: Commune = {
-    ...commune,
-    infos_generales: (commune.infos_generales as Record<string, unknown> | null) ?? undefined,
+    ...communeRow,
+    infos_generales: (communeRow.infos_generales as Record<string, unknown> | null) ?? undefined,
   };
 
-  return groups.map((g) => {
-    // Get mentions in this group
-    const mentions = db
-      .select()
-      .from(projetMentions)
-      .where(eq(projetMentions.groupe_id, g.id))
-      .all();
+  // Index mentions by groupe_id in memory
+  const mentionsByGroup = new Map<string, typeof allMentions>();
+  for (const m of allMentions) {
+    if (!m.groupe_id) continue;
+    if (!mentionsByGroup.has(m.groupe_id)) mentionsByGroup.set(m.groupe_id, []);
+    mentionsByGroup.get(m.groupe_id)!.push(m);
+  }
 
-    // Collect unique deliberation IDs from mentions
+  // Collect ALL unique deliberation IDs across all mentions
+  const allDelibIds = new Set<string>();
+  for (const m of allMentions) {
+    if (m.deliberation_id) allDelibIds.add(m.deliberation_id);
+  }
+
+  // Bulk fetch all deliberations in one query
+  const allDelibs = allDelibIds.size > 0
+    ? await db.select().from(deliberations).where(inArray(deliberations.id, [...allDelibIds]))
+    : [];
+  const delibMap = new Map(allDelibs.map(d => [d.id, d]));
+
+  // Bulk fetch all conseils for those deliberations in one query
+  const allConseilIds = [...new Set(allDelibs.map(d => d.conseil_id))];
+  const allConseils = allConseilIds.length > 0
+    ? await db.select().from(conseilsMunicipaux).where(inArray(conseilsMunicipaux.id, allConseilIds))
+    : [];
+  const conseilMap = new Map(allConseils.map(c => [c.id, c]));
+
+  // Assemble everything in memory — no more DB queries in the loop
+  const results: ProjetWithRelations[] = [];
+  for (const g of groups) {
+    const mentions = mentionsByGroup.get(g.id) || [];
+
+    // Build deliberations with conseils from the pre-fetched maps
     const delibIds = new Set<string>();
     for (const m of mentions) {
       if (m.deliberation_id) delibIds.add(m.deliberation_id);
     }
 
-    // Build deliberations with their conseils
     const delibsWithConseils: (Deliberation & { conseil: ConseilMunicipal })[] = [];
     for (const delibId of delibIds) {
-      const delib = db.select().from(deliberations).where(eq(deliberations.id, delibId)).get();
+      const delib = delibMap.get(delibId);
       if (!delib) continue;
-      const conseil = db.select().from(conseilsMunicipaux).where(eq(conseilsMunicipaux.id, delib.conseil_id)).get();
+      const conseil = conseilMap.get(delib.conseil_id);
       if (!conseil) continue;
       delibsWithConseils.push({
         ...(delib as Deliberation),
@@ -443,10 +463,9 @@ export function getUnvalidatedProjetsForCommune(communeId: string): ProjetWithRe
       if (m.nature) textsForInference.push(m.nature);
       if (m.competence) textsForInference.push(m.competence);
     }
-    const allThems = db.select().from(thematiques).all();
     const matchedThems = inferThematiques(textsForInference, allThems);
 
-    return {
+    results.push({
       id: g.id,
       nom: g.nom_canonique,
       slug: slugify(g.nom_canonique),
@@ -458,16 +477,16 @@ export function getUnvalidatedProjetsForCommune(communeId: string): ProjetWithRe
       thematiques: matchedThems,
       deliberations: delibsWithConseils,
       needsConsolidation: true,
-    };
-  });
+    });
+  }
+  return results;
 }
 
-export function getUngroupedMentions(communeId: string): ProjetMention[] {
-  const rows = db
+export async function getUngroupedMentions(communeId: string): Promise<ProjetMention[]> {
+  const rows = await db
     .select()
     .from(projetMentions)
-    .where(eq(projetMentions.commune_id, communeId))
-    .all();
+    .where(eq(projetMentions.commune_id, communeId));
 
   return rows.filter((r) => !r.groupe_id) as ProjetMention[];
 }
@@ -481,19 +500,19 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-export function validateProjetGroupe(
+export async function validateProjetGroupe(
   groupeId: string,
   nomCanonique: string,
   description?: string,
-): { projetId: string } {
-  const groupe = db.select().from(projetGroupes).where(eq(projetGroupes.id, groupeId)).get();
+): Promise<{ projetId: string }> {
+  const [groupe] = await db.select().from(projetGroupes).where(eq(projetGroupes.id, groupeId)).limit(1);
   if (!groupe) throw new Error(`Groupe not found: ${groupeId}`);
 
   const projetId = `proj-${slugify(nomCanonique).slice(0, 60)}`;
   const projetSlug = slugify(nomCanonique);
 
   // Create the projet
-  db.insert(projets).values({
+  await db.insert(projets).values({
     id: projetId,
     nom: nomCanonique,
     slug: projetSlug,
@@ -501,20 +520,19 @@ export function validateProjetGroupe(
     nature: groupe.nature || '',
     competence: groupe.competence || '',
     statut: 'en_cours',
-  }).run();
+  });
 
   // Link projet to commune
-  db.insert(projetCommunes).values({
+  await db.insert(projetCommunes).values({
     projet_id: projetId,
     commune_id: groupe.commune_id,
-  }).run();
+  });
 
   // Link projet to all deliberations referenced by mentions in this group
-  const mentions = db
+  const mentions = await db
     .select()
     .from(projetMentions)
-    .where(eq(projetMentions.groupe_id, groupeId))
-    .all();
+    .where(eq(projetMentions.groupe_id, groupeId));
 
   const delibIds = new Set<string>();
   for (const m of mentions) {
@@ -522,32 +540,30 @@ export function validateProjetGroupe(
   }
 
   for (const delibId of delibIds) {
-    db.insert(projetDeliberations).values({
+    await db.insert(projetDeliberations).values({
       projet_id: projetId,
       deliberation_id: delibId,
-    }).run();
+    });
   }
 
   // Update groupe status
-  db.update(projetGroupes)
+  await db.update(projetGroupes)
     .set({ statut: 'valide', projet_id: projetId })
-    .where(eq(projetGroupes.id, groupeId))
-    .run();
+    .where(eq(projetGroupes.id, groupeId));
 
   return { projetId };
 }
 
-export function rejectProjetGroupe(groupeId: string): void {
-  db.update(projetGroupes)
+export async function rejectProjetGroupe(groupeId: string): Promise<void> {
+  await db.update(projetGroupes)
     .set({ statut: 'rejete' })
-    .where(eq(projetGroupes.id, groupeId))
-    .run();
+    .where(eq(projetGroupes.id, groupeId));
 }
 
-export function updateProjetGroupe(
+export async function updateProjetGroupe(
   groupeId: string,
   data: { nom_canonique?: string; description?: string; nature?: string; competence?: string },
-): void {
+): Promise<void> {
   const updates: Record<string, string> = {};
   if (data.nom_canonique !== undefined) updates.nom_canonique = data.nom_canonique;
   if (data.description !== undefined) updates.description = data.description;
@@ -555,43 +571,39 @@ export function updateProjetGroupe(
   if (data.competence !== undefined) updates.competence = data.competence;
 
   if (Object.keys(updates).length > 0) {
-    db.update(projetGroupes)
+    await db.update(projetGroupes)
       .set(updates)
-      .where(eq(projetGroupes.id, groupeId))
-      .run();
+      .where(eq(projetGroupes.id, groupeId));
   }
 }
 
-export function mergeProjetGroupes(
+export async function mergeProjetGroupes(
   groupeIds: string[],
   nomCanonique: string,
-): { mergedGroupeId: string } {
+): Promise<{ mergedGroupeId: string }> {
   if (groupeIds.length < 2) throw new Error('Need at least 2 groups to merge');
 
   // Keep the first group as the target, absorb the others
   const targetId = groupeIds[0];
   const sourceIds = groupeIds.slice(1);
 
-  const target = db.select().from(projetGroupes).where(eq(projetGroupes.id, targetId)).get();
+  const [target] = await db.select().from(projetGroupes).where(eq(projetGroupes.id, targetId)).limit(1);
   if (!target) throw new Error(`Groupe not found: ${targetId}`);
 
   // Update canonical name on target
-  db.update(projetGroupes)
+  await db.update(projetGroupes)
     .set({ nom_canonique: nomCanonique })
-    .where(eq(projetGroupes.id, targetId))
-    .run();
+    .where(eq(projetGroupes.id, targetId));
 
   // Move all mentions from source groups to target
   for (const sourceId of sourceIds) {
-    db.update(projetMentions)
+    await db.update(projetMentions)
       .set({ groupe_id: targetId })
-      .where(eq(projetMentions.groupe_id, sourceId))
-      .run();
+      .where(eq(projetMentions.groupe_id, sourceId));
 
     // Delete the now-empty source group
-    db.delete(projetGroupes)
-      .where(eq(projetGroupes.id, sourceId))
-      .run();
+    await db.delete(projetGroupes)
+      .where(eq(projetGroupes.id, sourceId));
   }
 
   return { mergedGroupeId: targetId };

@@ -11,13 +11,17 @@
     "db:push": "drizzle-kit push",
     "db:seed": "npx tsx scripts/seed.ts",
     "db:studio": "drizzle-kit studio",
+    "db:setup": "npx tsx scripts/setup-db.ts",
     "db:import": "npx tsx scripts/import-city.ts",
-    "db:import-all": "npx tsx scripts/import-city.ts --all ../datasets/cities/"
+    "db:import-all": "npx tsx scripts/import-city.ts --all ../datasets/cities/",
+    "db:delete-city": "npx tsx scripts/delete-city.ts",
+    "db:dedup": "npx tsx scripts/dedup-projects.ts"
   },
   "dependencies": {
     "better-auth": "^1.4.18",
-    "better-sqlite3": "^12.6.2",
+    "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",
+    "mysql2": "^3.18.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
@@ -25,7 +29,6 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

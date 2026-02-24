@@ -4,10 +4,10 @@ import SearchInput from '@/components/SearchInput';
 import QuoteBlock from '@/components/QuoteBlock';
 import { getAllCommunes, countProjets, countDeliberations } from '@/lib/db';
 
-export default function Home() {
-  const communes = getAllCommunes();
-  const totalProjets = countProjets();
-  const totalDelibs = countDeliberations();
+export default async function Home() {
+  const communes = await getAllCommunes();
+  const totalProjets = await countProjets();
+  const totalDelibs = await countDeliberations();
 
   return (
     <div className="bg-[var(--creme)]">

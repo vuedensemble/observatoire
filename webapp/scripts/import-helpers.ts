@@ -3,11 +3,15 @@
  * No side effects, no database access — only data transformations.
  */
 
-/** Convert DD-MM-YYYY to YYYY-MM-DD */
-export function convertDate(ddmmyyyy: string): string | null {
-  const match = ddmmyyyy.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+/** Convert DD-MM-YYYY or DD/MM/YYYY to YYYY-MM-DD, with validation */
+export function convertDate(raw: string): string | null {
+  if (!raw || raw === '---') return null;
+  const match = raw.match(/^(\d{2})[-/](\d{2})[-/](\d{4})$/);
   if (!match) return null;
   const [, dd, mm, yyyy] = match;
+  // Validate the date is real
+  const date = new Date(`${yyyy}-${mm}-${dd}T00:00:00`);
+  if (isNaN(date.getTime())) return null;
   return `${yyyy}-${mm}-${dd}`;
 }
 

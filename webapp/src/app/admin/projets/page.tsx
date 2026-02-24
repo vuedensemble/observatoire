@@ -3,9 +3,9 @@ import { db } from '@/lib/db/index';
 import { projetGroupes, projetMentions, communes } from '@/lib/db/schema';
 import { eq, sql } from 'drizzle-orm';
 
-export default function AdminProjetsPage() {
+export default async function AdminProjetsPage() {
   // Get communes with pending groups
-  const rows = db
+  const rows = await db
     .select({
       commune_id: projetGroupes.commune_id,
       nom: communes.nom,
@@ -16,18 +16,16 @@ export default function AdminProjetsPage() {
     })
     .from(projetGroupes)
     .innerJoin(communes, eq(communes.id, projetGroupes.commune_id))
-    .groupBy(projetGroupes.commune_id)
-    .all();
+    .groupBy(projetGroupes.commune_id);
 
   // Get mention counts per commune
-  const mentionCounts = db
+  const mentionCounts = await db
     .select({
       commune_id: projetMentions.commune_id,
       count: sql<number>`count(*)`,
     })
     .from(projetMentions)
-    .groupBy(projetMentions.commune_id)
-    .all();
+    .groupBy(projetMentions.commune_id);
 
   const mentionMap = new Map(mentionCounts.map((r) => [r.commune_id, Number(r.count)]));
 

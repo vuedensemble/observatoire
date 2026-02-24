@@ -8,9 +8,9 @@ export async function GET(
   const { id } = await params;
 
   // Try by ID first, then by slug
-  let projet = getProjetById(id);
+  let projet = await getProjetById(id);
   if (!projet) {
-    projet = getProjetBySlug(id);
+    projet = await getProjetBySlug(id);
   }
 
   if (!projet) {
