@@ -40,22 +40,22 @@ seed:
 import-all:
 	docker compose run --rm -v $(path):/app/datasets/cities migrate npx tsx scripts/import-city.ts --all ./datasets/cities/
 
-# Import a single city (usage: make import-city path=/path/to/city.json)
+# Import a single city (usage: make import-city path=/path/to/Anglet)
 import-city:
-	docker compose run --rm -v $(dir $(path)):/app/data migrate npx tsx scripts/import-city.ts ./data/$(notdir $(path))
+	docker compose run --rm -v $(path):/app/data/city migrate npx tsx scripts/import-city.ts ./data/city
 
-# Import a single city + deduplicate (usage: make import-city-dedup path=/path/to/city.json)
+# Import a single city + deduplicate (usage: make import-city-dedup path=/path/to/Anglet slug=anglet)
 import-city-dedup:
-	docker compose run --rm -v $(dir $(path)):/app/data migrate npx tsx scripts/import-city.ts ./data/$(notdir $(path))
-	docker compose run --rm migrate npx tsx scripts/dedup-projects.ts
+	docker compose run --rm -v $(path):/app/data/city migrate npx tsx scripts/import-city.ts ./data/city
+	docker compose run --rm migrate npx tsx scripts/dedup-projects.ts $(slug)
 
 # Delete a city (usage: make delete-city name=Bayonne)
 delete-city:
 	docker compose run --rm migrate npx tsx scripts/delete-city.ts $(name)
 
-# Deduplicate projects
+# Deduplicate projects (usage: make dedup slug=anglet  OR  make dedup slug=--all)
 dedup:
-	docker compose run --rm migrate npx tsx scripts/dedup-projects.ts
+	docker compose run --rm migrate npx tsx scripts/dedup-projects.ts $(slug)
 
 # Open MySQL shell
 shell-db:
