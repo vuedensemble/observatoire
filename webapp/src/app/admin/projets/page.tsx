@@ -3,6 +3,8 @@ import { db } from '@/lib/db/index';
 import { projetGroupes, projetMentions, communes } from '@/lib/db/schema';
 import { eq, sql } from 'drizzle-orm';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminProjetsPage() {
   // Get communes with pending groups
   const rows = await db
