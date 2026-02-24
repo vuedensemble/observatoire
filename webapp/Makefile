@@ -1,4 +1,4 @@
-.PHONY: build up down restart logs ps seed import-all import-city delete-city migrate shell-db shell-app
+.PHONY: build up down restart logs ps seed import-all import-city import-city-dedup delete-city migrate shell-db shell-app
 
 # Build and start all services
 up:
@@ -43,6 +43,11 @@ import-all:
 # Import a single city (usage: make import-city path=/path/to/city.json)
 import-city:
 	docker compose run --rm -v $(dir $(path)):/app/data migrate npx tsx scripts/import-city.ts ./data/$(notdir $(path))
+
+# Import a single city + deduplicate (usage: make import-city-dedup path=/path/to/city.json)
+import-city-dedup:
+	docker compose run --rm -v $(dir $(path)):/app/data migrate npx tsx scripts/import-city.ts ./data/$(notdir $(path))
+	docker compose run --rm migrate npx tsx scripts/dedup-projects.ts
 
 # Delete a city (usage: make delete-city name=Bayonne)
 delete-city:
