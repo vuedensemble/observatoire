@@ -1,9 +1,16 @@
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import mysql from 'mysql2/promise';
+import { drizzle } from 'drizzle-orm/mysql2';
 import * as schema from './schema';
 import * as authSchema from './auth-schema';
 
-const sqlite = new Database(process.env.DATABASE_URL || 'sqlite.db');
-sqlite.pragma('journal_mode = WAL');
+const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  port: Number(process.env.MYSQL_PORT) || 3306,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_USER_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  waitForConnections: true,
+  connectionLimit: 10,
+});
 
-export const db = drizzle(sqlite, { schema: { ...schema, ...authSchema } });
+export const db = drizzle(pool, { schema: { ...schema, ...authSchema }, mode: 'default' });

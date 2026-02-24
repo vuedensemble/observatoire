@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getProjetGroupesByCommune, mergeProjetGroupes } from '@/lib/db';
 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const communeId = request.nextUrl.searchParams.get('commune');
   const statut = request.nextUrl.searchParams.get('statut');
 
@@ -9,7 +9,7 @@ export function GET(request: NextRequest) {
     return NextResponse.json({ error: 'commune parameter required' }, { status: 400 });
   }
 
-  let groups = getProjetGroupesByCommune(communeId);
+  let groups = await getProjetGroupesByCommune(communeId);
 
   if (statut) {
     groups = groups.filter((g) => g.statut === statut);
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       if (!nom_canonique) {
         return NextResponse.json({ error: 'nom_canonique required' }, { status: 400 });
       }
-      const result = mergeProjetGroupes(groupe_ids, nom_canonique);
+      const result = await mergeProjetGroupes(groupe_ids, nom_canonique);
       return NextResponse.json({ ok: true, merged_groupe_id: result.mergedGroupeId });
     }
 

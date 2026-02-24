@@ -6,10 +6,10 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get('q');
 
   if (query) {
-    const results = searchCommunes(query);
+    const results = await searchCommunes(query);
     return NextResponse.json(results);
   }
 
-  const communes = getAllCommunes();
+  const communes = await getAllCommunes();
   return NextResponse.json(communes);
 }

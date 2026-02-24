@@ -11,7 +11,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
   try {
     const body = await request.json();
-    updateProjetGroupe(id, body);
+    await updateProjetGroupe(id, body);
     return NextResponse.json({ ok: true });
   } catch (error) {
     return NextResponse.json({ error: String(error) }, { status: 500 });
@@ -27,10 +27,10 @@ export async function POST(request: NextRequest, context: RouteContext) {
     const action = body.action as string;
 
     if (action === 'validate') {
-      const result = validateProjetGroupe(id, body.nom_canonique, body.description);
+      const result = await validateProjetGroupe(id, body.nom_canonique, body.description);
       return NextResponse.json({ ok: true, projet_id: result.projetId });
     } else if (action === 'reject') {
-      rejectProjetGroupe(id);
+      await rejectProjetGroupe(id);
       return NextResponse.json({ ok: true });
     } else {
       return NextResponse.json({ error: 'Invalid action. Use "validate" or "reject".' }, { status: 400 });

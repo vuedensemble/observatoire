@@ -6,10 +6,12 @@
  *   npx tsx scripts/import-city.ts --all ../datasets/cities/
  */
 
+import { config } from 'dotenv';
+config({ path: '.env.local' });
 import * as fs from 'fs';
 import * as path from 'path';
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import mysql from 'mysql2/promise';
+import { drizzle } from 'drizzle-orm/mysql2';
 import { eq } from 'drizzle-orm';
 import * as schema from '../src/lib/db/schema';
 import {
@@ -38,17 +40,24 @@ if (!pathArg) {
 }
 
 // --- Database setup ---
-const sqlite = new Database(process.env.DATABASE_URL || 'sqlite.db');
-sqlite.pragma('journal_mode = WAL');
-const db = drizzle(sqlite, { schema });
+const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  port: Number(process.env.MYSQL_PORT) || 3306,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_USER_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+});
+
+const db = drizzle(pool, { schema, mode: 'default' });
 
 // --- Existing commune data (for merge) ---
-function getExistingCommune(slug: string) {
-  return db.select().from(schema.communes).where(eq(schema.communes.slug, slug)).get();
+async function getExistingCommune(slug: string) {
+  const [row] = await db.select().from(schema.communes).where(eq(schema.communes.slug, slug)).limit(1);
+  return row;
 }
 
 // --- Main import function ---
-function importCity(cityFolder: string): { conseils: number; deliberations: number; mentions: number } {
+async function importCity(cityFolder: string): Promise<{ conseils: number; deliberations: number; mentions: number }> {
   const folderName = path.basename(cityFolder);
   const communeSlug = slugify(folderName);
 
@@ -69,18 +78,17 @@ function importCity(cityFolder: string): { conseils: number; deliberations: numb
   if (verbose) console.log(`  ${councilSections.length} council sections found`);
 
   // 2. Upsert commune
-  const existing = getExistingCommune(communeSlug);
+  const existing = await getExistingCommune(communeSlug);
   const communeId = existing?.id || communeSlug;
 
   if (!dryRun) {
     if (existing) {
       // Merge: only update folder_name, don't overwrite existing metadata
-      db.update(schema.communes)
+      await db.update(schema.communes)
         .set({ folder_name: folderName })
-        .where(eq(schema.communes.id, communeId))
-        .run();
+        .where(eq(schema.communes.id, communeId));
     } else {
-      db.insert(schema.communes).values({
+      await db.insert(schema.communes).values({
         id: communeId,
         nom: folderName, // Use folder name as display name
         slug: communeSlug,
@@ -88,7 +96,7 @@ function importCity(cityFolder: string): { conseils: number; deliberations: numb
         population: 0,
         maire: '',
         folder_name: folderName,
-      }).run();
+      });
     }
   }
 
@@ -153,18 +161,41 @@ function importCity(cityFolder: string): { conseils: number; deliberations: numb
   }
 
   // 4. For each date: create ONE conseil + N deliberations
+  const conseilDates = [...filesByDate.keys()];
+  let conseilIndex = 0;
+
   for (const [isoDate, { files, sectionName, sourceUrl, pdfUrl }] of filesByDate) {
+    conseilIndex++;
     const cmId = conseilId(communeSlug, isoDate);
     totalConseils++;
 
     if (!dryRun) {
-      // Insert or replace conseil
-      sqlite.prepare(`INSERT OR REPLACE INTO conseils_municipaux (id, commune_id, date, presents, absents, pdf_url, source_section, source_url)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
-        .run(cmId, communeId, isoDate, '[]', '[]', pdfUrl, sectionName, sourceUrl);
+      // Upsert conseil (INSERT ... ON DUPLICATE KEY UPDATE)
+      const [rawConn] = await pool.getConnection().then(c => [c]);
+      try {
+        await rawConn.execute(
+          `INSERT INTO conseils_municipaux (id, commune_id, date, presents, absents, pdf_url, source_section, source_url)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+           ON DUPLICATE KEY UPDATE
+             commune_id = VALUES(commune_id),
+             date = VALUES(date),
+             presents = VALUES(presents),
+             absents = VALUES(absents),
+             pdf_url = VALUES(pdf_url),
+             source_section = VALUES(source_section),
+             source_url = VALUES(source_url)`,
+          [cmId, communeId, isoDate, '[]', '[]', pdfUrl, sectionName, sourceUrl]
+        );
+      } finally {
+        rawConn.release();
+      }
     }
 
-    if (verbose) console.log(`  Conseil ${isoDate}: ${files.length} file(s)`);
+    // Progress indicator
+    const pct = Math.round((conseilIndex / conseilDates.length) * 100);
+    process.stdout.write(`\r  [${conseilIndex}/${conseilDates.length}] ${pct}% — conseil ${isoDate} (${totalDelibs} délib, ${totalMentions} mentions)`);
+
+    if (verbose) process.stdout.write(`\n  Conseil ${isoDate}: ${files.length} file(s)\n`);
 
     // Track deliberation numbers to avoid collisions within a conseil
     const usedDelibIds = new Set<string>();
@@ -188,20 +219,37 @@ function importCity(cityFolder: string): { conseils: number; deliberations: numb
         totalDelibs++;
 
         if (!dryRun) {
-          sqlite.prepare(`INSERT OR REPLACE INTO deliberations (id, conseil_id, numero, objet, detail, decision, votants, votants_texte, source_file, source_section)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-            .run(
-              delibId,
-              cmId,
-              delib.numero || `${i + 1}`,
-              delib.objet || '',
-              delib.detail || '',
-              delib.decision || '',
-              votantsParsed ? JSON.stringify(votantsParsed) : null,
-              votantsText,
-              fileName,
-              fileSectionName,
+          const [rawConn] = await pool.getConnection().then(c => [c]);
+          try {
+            await rawConn.execute(
+              `INSERT INTO deliberations (id, conseil_id, numero, objet, detail, decision, votants, votants_texte, source_file, source_section)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+               ON DUPLICATE KEY UPDATE
+                 conseil_id = VALUES(conseil_id),
+                 numero = VALUES(numero),
+                 objet = VALUES(objet),
+                 detail = VALUES(detail),
+                 decision = VALUES(decision),
+                 votants = VALUES(votants),
+                 votants_texte = VALUES(votants_texte),
+                 source_file = VALUES(source_file),
+                 source_section = VALUES(source_section)`,
+              [
+                delibId,
+                cmId,
+                delib.numero || `${i + 1}`,
+                delib.objet || '',
+                delib.detail || '',
+                delib.decision || '',
+                votantsParsed ? JSON.stringify(votantsParsed) : null,
+                votantsText,
+                fileName,
+                fileSectionName,
+              ]
             );
+          } finally {
+            rawConn.release();
+          }
         }
 
         // Collect per-deliberation project mentions
@@ -214,19 +262,35 @@ function importCity(cityFolder: string): { conseils: number; deliberations: numb
             totalMentions++;
 
             if (!dryRun) {
-              sqlite.prepare(`INSERT OR REPLACE INTO projet_mentions (id, commune_id, deliberation_id, nom, description, nature, competence, source_file, source_section)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-                .run(
-                  mId,
-                  communeId,
-                  delibId,
-                  mention.nom,
-                  mention.description || null,
-                  mention.nature || null,
-                  mention.competence || null,
-                  fileName,
-                  fileSectionName,
+              const [rawConn] = await pool.getConnection().then(c => [c]);
+              try {
+                await rawConn.execute(
+                  `INSERT INTO projet_mentions (id, commune_id, deliberation_id, nom, description, nature, competence, source_file, source_section)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                   ON DUPLICATE KEY UPDATE
+                     commune_id = VALUES(commune_id),
+                     deliberation_id = VALUES(deliberation_id),
+                     nom = VALUES(nom),
+                     description = VALUES(description),
+                     nature = VALUES(nature),
+                     competence = VALUES(competence),
+                     source_file = VALUES(source_file),
+                     source_section = VALUES(source_section)`,
+                  [
+                    mId,
+                    communeId,
+                    delibId,
+                    mention.nom,
+                    mention.description || null,
+                    mention.nature || null,
+                    mention.competence || null,
+                    fileName,
+                    fileSectionName,
+                  ]
                 );
+              } finally {
+                rawConn.release();
+              }
             }
           }
         }
@@ -242,65 +306,90 @@ function importCity(cityFolder: string): { conseils: number; deliberations: numb
           totalMentions++;
 
           if (!dryRun) {
-            sqlite.prepare(`INSERT OR REPLACE INTO projet_mentions (id, commune_id, deliberation_id, nom, description, nature, competence, source_file, source_section)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-              .run(
-                mId,
-                communeId,
-                null,
-                mention.nom,
-                mention.description || null,
-                mention.nature || null,
-                mention.competence || null,
-                fileName,
-                fileSectionName,
+            const [rawConn] = await pool.getConnection().then(c => [c]);
+            try {
+              await rawConn.execute(
+                `INSERT INTO projet_mentions (id, commune_id, deliberation_id, nom, description, nature, competence, source_file, source_section)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 ON DUPLICATE KEY UPDATE
+                   commune_id = VALUES(commune_id),
+                   deliberation_id = VALUES(deliberation_id),
+                   nom = VALUES(nom),
+                   description = VALUES(description),
+                   nature = VALUES(nature),
+                   competence = VALUES(competence),
+                   source_file = VALUES(source_file),
+                   source_section = VALUES(source_section)`,
+                [
+                  mId,
+                  communeId,
+                  null,
+                  mention.nom,
+                  mention.description || null,
+                  mention.nature || null,
+                  mention.competence || null,
+                  fileName,
+                  fileSectionName,
+                ]
               );
+            } finally {
+              rawConn.release();
+            }
           }
         }
       }
     }
   }
 
+  if (conseilDates.length > 0) process.stdout.write('\n');
+
   return { conseils: totalConseils, deliberations: totalDelibs, mentions: totalMentions };
 }
 
 // --- Run ---
-if (allMode) {
-  const citiesDir = pathArg;
-  if (!fs.existsSync(citiesDir)) {
-    console.error(`Directory not found: ${citiesDir}`);
-    process.exit(1);
-  }
-
-  const cityFolders = fs.readdirSync(citiesDir)
-    .filter((f) => fs.statSync(path.join(citiesDir, f)).isDirectory())
-    .sort();
-
-  console.log(`Importing ${cityFolders.length} cities...${dryRun ? ' (DRY RUN)' : ''}`);
-
-  let grandTotal = { conseils: 0, deliberations: 0, mentions: 0 };
-
-  for (const folder of cityFolders) {
-    const result = importCity(path.join(citiesDir, folder));
-    grandTotal.conseils += result.conseils;
-    grandTotal.deliberations += result.deliberations;
-    grandTotal.mentions += result.mentions;
-
-    if (result.conseils > 0 || verbose) {
-      console.log(`  ${folder}: ${result.conseils} conseils, ${result.deliberations} délibérations, ${result.mentions} mentions`);
+async function run() {
+  if (allMode) {
+    const citiesDir = pathArg!;
+    if (!fs.existsSync(citiesDir)) {
+      console.error(`Directory not found: ${citiesDir}`);
+      process.exit(1);
     }
+
+    const cityFolders = fs.readdirSync(citiesDir)
+      .filter((f) => fs.statSync(path.join(citiesDir, f)).isDirectory())
+      .sort();
+
+    console.log(`Importing ${cityFolders.length} cities...${dryRun ? ' (DRY RUN)' : ''}`);
+
+    let grandTotal = { conseils: 0, deliberations: 0, mentions: 0 };
+
+    for (const folder of cityFolders) {
+      const result = await importCity(path.join(citiesDir, folder));
+      grandTotal.conseils += result.conseils;
+      grandTotal.deliberations += result.deliberations;
+      grandTotal.mentions += result.mentions;
+
+      if (result.conseils > 0 || verbose) {
+        console.log(`  ${folder}: ${result.conseils} conseils, ${result.deliberations} délibérations, ${result.mentions} mentions`);
+      }
+    }
+
+    console.log(`\nTotal: ${grandTotal.conseils} conseils, ${grandTotal.deliberations} délibérations, ${grandTotal.mentions} mentions`);
+  } else {
+    if (!fs.existsSync(pathArg!)) {
+      console.error(`Directory not found: ${pathArg}`);
+      process.exit(1);
+    }
+
+    console.log(`Importing from ${pathArg}...${dryRun ? ' (DRY RUN)' : ''}`);
+    const result = await importCity(pathArg!);
+    console.log(`Done: ${result.conseils} conseils, ${result.deliberations} délibérations, ${result.mentions} mentions`);
   }
 
-  console.log(`\nTotal: ${grandTotal.conseils} conseils, ${grandTotal.deliberations} délibérations, ${grandTotal.mentions} mentions`);
-} else {
-  if (!fs.existsSync(pathArg)) {
-    console.error(`Directory not found: ${pathArg}`);
-    process.exit(1);
-  }
-
-  console.log(`Importing from ${pathArg}...${dryRun ? ' (DRY RUN)' : ''}`);
-  const result = importCity(pathArg);
-  console.log(`Done: ${result.conseils} conseils, ${result.deliberations} délibérations, ${result.mentions} mentions`);
+  await pool.end();
 }
 
-sqlite.close();
+run().catch((err) => {
+  console.error('Import failed:', err);
+  process.exit(1);
+});

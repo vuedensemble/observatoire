@@ -8,13 +8,13 @@ interface PageProps {
 
 export default async function AdminCommuneProjetsPage({ params }: PageProps) {
   const { commune: communeSlug } = await params;
-  const commune = getCommuneBySlug(communeSlug);
+  const commune = await getCommuneBySlug(communeSlug);
 
   if (!commune) {
     notFound();
   }
 
-  const groups = getProjetGroupesByCommune(commune.id);
+  const groups = await getProjetGroupesByCommune(commune.id);
   const pendingGroups = groups
     .filter((g) => g.statut === 'proposition')
     .sort((a, b) => b.mentions.length - a.mentions.length);

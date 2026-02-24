@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   const dateFin = searchParams.get('date_fin') || undefined;
 
   // Search both projets and communes
-  const projets = searchProjets({
+  const projets = await searchProjets({
     query,
     commune,
     thematique,
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     dateFin,
   });
 
-  const communes = query ? searchCommunes(query) : [];
+  const communes = query ? await searchCommunes(query) : [];
 
   return NextResponse.json({
     projets,

@@ -8,15 +8,15 @@ export async function GET(
   const { id } = await params;
 
   // Find commune by ID or slug
-  let commune = getCommuneById(id);
+  let commune = await getCommuneById(id);
   if (!commune) {
-    commune = getCommuneBySlug(id);
+    commune = await getCommuneBySlug(id);
   }
 
   if (!commune) {
     return NextResponse.json({ error: 'Commune not found' }, { status: 404 });
   }
 
-  const projets = getProjetsByCommune(commune.id);
+  const projets = await getProjetsByCommune(commune.id);
   return NextResponse.json(projets);
 }

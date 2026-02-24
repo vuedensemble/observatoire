@@ -21,18 +21,18 @@ function formatNumber(n: number): string {
 
 export default async function CommunePage({ params }: PageProps) {
   const { slug } = await params;
-  const commune = getCommuneBySlug(slug);
+  const commune = await getCommuneBySlug(slug);
 
   if (!commune) {
     notFound();
   }
 
-  const validatedProjets = getProjetsByCommune(commune.id);
-  const unvalidatedProjets = getUnvalidatedProjetsForCommune(commune.id);
+  const validatedProjets = await getProjetsByCommune(commune.id);
+  const unvalidatedProjets = await getUnvalidatedProjetsForCommune(commune.id);
   const projets = [...validatedProjets, ...unvalidatedProjets]
     .sort((a, b) => b.deliberations.length - a.deliberations.length);
-  const conseils = getConseilsByCommune(commune.id);
-  const thematiques = getAllThematiques();
+  const conseils = await getConseilsByCommune(commune.id);
+  const thematiques = await getAllThematiques();
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -122,7 +122,7 @@ export default async function CommunePage({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const commune = getCommuneBySlug(slug);
+  const commune = await getCommuneBySlug(slug);
 
   if (!commune) {
     return { title: 'Commune non trouvée' };
