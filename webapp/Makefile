@@ -42,11 +42,11 @@ import-all:
 
 # Import a single city (usage: make import-city path=/path/to/Anglet)
 import-city:
-	docker compose run --rm -v $(path):/app/data/city migrate npx tsx scripts/import-city.ts ./data/city
+	docker compose run --rm -v $(dir $(path)):/app/data migrate npx tsx scripts/import-city.ts ./data/$(notdir $(path))
 
 # Import a single city + deduplicate (usage: make import-city-dedup path=/path/to/Anglet slug=anglet)
 import-city-dedup:
-	docker compose run --rm -v $(path):/app/data/city migrate npx tsx scripts/import-city.ts ./data/city
+	docker compose run --rm -v $(dir $(path)):/app/data migrate npx tsx scripts/import-city.ts ./data/$(notdir $(path))
 	docker compose run --rm migrate npx tsx scripts/dedup-projects.ts $(slug)
 
 # Delete a city (usage: make delete-city name=Bayonne)
