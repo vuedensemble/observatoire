@@ -1,4 +1,4 @@
-import { eq, sql, inArray } from 'drizzle-orm';
+import { eq, sql, inArray, and } from 'drizzle-orm';
 import { db } from './db/index';
 import {
   communes,
@@ -607,4 +607,114 @@ export async function mergeProjetGroupes(
   }
 
   return { mergedGroupeId: targetId };
+}
+
+// --- Admin: CRUD operations ---
+
+export async function updateCommune(
+  id: string,
+  data: { nom?: string; slug?: string; code_postal?: string; population?: number; maire?: string; infos_generales?: Record<string, unknown> | null },
+): Promise<void> {
+  const updates: Record<string, unknown> = {};
+  if (data.nom !== undefined) updates.nom = data.nom;
+  if (data.slug !== undefined) updates.slug = data.slug;
+  if (data.code_postal !== undefined) updates.code_postal = data.code_postal;
+  if (data.population !== undefined) updates.population = data.population;
+  if (data.maire !== undefined) updates.maire = data.maire;
+  if (data.infos_generales !== undefined) updates.infos_generales = data.infos_generales;
+
+  if (Object.keys(updates).length > 0) {
+    await db.update(communes).set(updates).where(eq(communes.id, id));
+  }
+}
+
+export async function updateConseil(
+  id: string,
+  data: { date?: string; presents?: string[]; absents?: string[]; pdf_url?: string },
+): Promise<void> {
+  const updates: Record<string, unknown> = {};
+  if (data.date !== undefined) updates.date = data.date;
+  if (data.presents !== undefined) updates.presents = data.presents;
+  if (data.absents !== undefined) updates.absents = data.absents;
+  if (data.pdf_url !== undefined) updates.pdf_url = data.pdf_url;
+
+  if (Object.keys(updates).length > 0) {
+    await db.update(conseilsMunicipaux).set(updates).where(eq(conseilsMunicipaux.id, id));
+  }
+}
+
+export async function updateDeliberation(
+  id: string,
+  data: { numero?: string; objet?: string; detail?: string; decision?: string; votants?: { pour?: number; contre?: number; abstention?: number } | null },
+): Promise<void> {
+  const updates: Record<string, unknown> = {};
+  if (data.numero !== undefined) updates.numero = data.numero;
+  if (data.objet !== undefined) updates.objet = data.objet;
+  if (data.detail !== undefined) updates.detail = data.detail;
+  if (data.decision !== undefined) updates.decision = data.decision;
+  if (data.votants !== undefined) updates.votants = data.votants;
+
+  if (Object.keys(updates).length > 0) {
+    await db.update(deliberations).set(updates).where(eq(deliberations.id, id));
+  }
+}
+
+export async function updateProjet(
+  id: string,
+  data: { nom?: string; slug?: string; description?: string; nature?: string; competence?: string; statut?: 'en_cours' | 'realise' | 'abandonne'; montant?: number | null },
+): Promise<void> {
+  const updates: Record<string, unknown> = {};
+  if (data.nom !== undefined) updates.nom = data.nom;
+  if (data.slug !== undefined) updates.slug = data.slug;
+  if (data.description !== undefined) updates.description = data.description;
+  if (data.nature !== undefined) updates.nature = data.nature;
+  if (data.competence !== undefined) updates.competence = data.competence;
+  if (data.statut !== undefined) updates.statut = data.statut;
+  if (data.montant !== undefined) updates.montant = data.montant;
+
+  if (Object.keys(updates).length > 0) {
+    await db.update(projets).set(updates).where(eq(projets.id, id));
+  }
+}
+
+export async function setProjetThematiques(
+  projetId: string,
+  thematiqueIds: string[],
+): Promise<void> {
+  // Delete existing links
+  await db.delete(projetThematiques).where(eq(projetThematiques.projet_id, projetId));
+
+  // Insert new links
+  for (const thematiqueId of thematiqueIds) {
+    await db.insert(projetThematiques).values({
+      projet_id: projetId,
+      thematique_id: thematiqueId,
+    });
+  }
+}
+
+export async function createThematique(
+  data: { id: string; nom: string; description: string; couleur: string },
+): Promise<void> {
+  await db.insert(thematiques).values(data);
+}
+
+export async function updateThematique(
+  id: string,
+  data: { nom?: string; description?: string; couleur?: string },
+): Promise<void> {
+  const updates: Record<string, unknown> = {};
+  if (data.nom !== undefined) updates.nom = data.nom;
+  if (data.description !== undefined) updates.description = data.description;
+  if (data.couleur !== undefined) updates.couleur = data.couleur;
+
+  if (Object.keys(updates).length > 0) {
+    await db.update(thematiques).set(updates).where(eq(thematiques.id, id));
+  }
+}
+
+export async function deleteThematique(id: string): Promise<void> {
+  // Remove junction rows first
+  await db.delete(projetThematiques).where(eq(projetThematiques.thematique_id, id));
+  await db.delete(thematiques).where(eq(thematiques.id, id));
 }

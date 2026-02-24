@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validateProjetGroupe, rejectProjetGroupe, updateProjetGroupe } from '@/lib/db';
+import { requireAuthAPI } from '@/lib/auth-utils';
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -7,6 +8,9 @@ interface RouteContext {
 
 // PUT: Update group details (nom_canonique, description, etc.)
 export async function PUT(request: NextRequest, context: RouteContext) {
+  const authError = await requireAuthAPI(request);
+  if (authError) return authError;
+
   const { id } = await context.params;
 
   try {
@@ -20,6 +24,9 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
 // POST: Validate or reject a group
 export async function POST(request: NextRequest, context: RouteContext) {
+  const authError = await requireAuthAPI(request);
+  if (authError) return authError;
+
   const { id } = await context.params;
 
   try {
