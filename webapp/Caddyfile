@@ -1,0 +1,3 @@
+obs.vuedensemble.fr {
+	reverse_proxy webapp:3000
+}
