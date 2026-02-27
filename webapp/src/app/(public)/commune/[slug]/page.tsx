@@ -52,7 +52,7 @@ export default async function CommunePage({ params }: PageProps) {
         </svg>
 
         {/* Stats */}
-        <div className="space-y-5">
+        <div className="grid grid-cols-3 gap-4 lg:grid-cols-1 lg:gap-0 lg:space-y-5">
           <div>
             <div className="text-2xl font-bold" style={{ color: 'var(--violet)' }}>{formatNumber(commune.population)}</div>
             <div className="text-black/50 text-sm">Habitants</div>
@@ -73,8 +73,19 @@ export default async function CommunePage({ params }: PageProps) {
           <div className="font-medium text-black">{commune.maire}</div>
         </div>
 
-        {/* Encart don */}
-        <div className="mt-8 bg-[#E8E3F9] rounded-lg p-5">
+        {/* Encart don — masqué en mobile, petit lien à la place */}
+        <a
+          href="https://www.helloasso.com/associations/association-vue-d-ensemble"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="lg:hidden mt-6 inline-flex items-center gap-1.5 text-sm text-[var(--violet)] hover:underline"
+        >
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+          Soutenir le projet
+        </a>
+        <div className="hidden lg:block mt-8 bg-[#E8E3F9] rounded-lg p-5">
           <p className="text-sm text-[var(--violet-dark)] mb-4">
             Chaque commune analysée coûte environ <strong>10&nbsp;€</strong> à l&apos;association.
             Soutenez-nous pour que nous puissions couvrir plus de villes&nbsp;!

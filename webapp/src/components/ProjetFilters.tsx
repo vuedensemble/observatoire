@@ -103,9 +103,10 @@ export default function ProjetFilters({ projets, thematiques }: ProjetFiltersPro
   return (
     <div>
       {/* Ligne de filtres */}
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex flex-wrap items-center gap-3 mb-3">
         {/* Loupe */}
         <svg
+          className="hidden sm:block"
           style={{ width: '1rem', height: '1rem', color: 'var(--neutre)', flexShrink: 0 }}
           fill="none"
           stroke="currentColor"
@@ -173,7 +174,7 @@ export default function ProjetFilters({ projets, thematiques }: ProjetFiltersPro
 
       {/* Chips des sélections */}
       {hasActiveFilters && (
-        <div className="flex flex-wrap items-center gap-2 mb-6" style={{ marginLeft: 'calc(1rem + 0.75rem)' }}>
+        <div className="flex flex-wrap items-center gap-2 mb-6 sm:ml-[calc(1rem+0.75rem)]">
           {selectedThematiques.map((id) => {
             const thematique = thematiques.find((t) => t.id === id);
             return (
