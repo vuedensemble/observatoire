@@ -153,6 +153,26 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Communes suivies */}
+      <section className="py-10">
+        <div className="container">
+          <h2 className="text-2xl lg:text-3xl font-bold text-[var(--violet)] mb-6 text-center">
+            Communes suivies
+          </h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            {communes.map((commune) => (
+              <Link
+                key={commune.slug}
+                href={`/commune/${commune.slug}`}
+                className="px-4 py-2 bg-white rounded-full text-sm font-medium text-[var(--violet-dark)] border border-black/10 hover:bg-[var(--violet)] hover:text-white hover:no-underline transition-colors"
+              >
+                {commune.nom}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Suggestion Commune Section */}
       <section className="section">
         <div className="container">

@@ -52,15 +52,16 @@ export default function Header() {
             {/* Titre + logo */}
             <div className="flex items-center gap-2 shrink-0">
               <Link href="/" className="text-lg font-bold no-underline hover:no-underline whitespace-nowrap" style={{ color: 'white' }}>
-                Observatoire citoyen des collectivités
+                <span className="lg:hidden">Observatoire</span>
+                <span className="hidden lg:inline">Observatoire citoyen des collectivités</span>
               </Link>
-              <span className="text-sm whitespace-nowrap" style={{ color: 'white' }}>par</span>
+              <span className="hidden lg:inline text-sm whitespace-nowrap" style={{ color: 'white' }}>par</span>
               <Image
                 src="/Logo-VE-color1.svg"
                 alt="Vue d'Ensemble"
                 width={70}
                 height={17}
-                className="h-3.5 w-auto brightness-0 invert"
+                className="hidden lg:block h-3.5 w-auto brightness-0 invert"
                 priority
               />
             </div>
@@ -130,42 +131,44 @@ export default function Header() {
           </div>
 
           {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <nav className="lg:hidden py-4 border-t border-white/20">
-              <div className="flex flex-col gap-4">
-                <SearchInput
-                  variant="header"
-                  placeholder="Commune"
-                  className="w-full"
-                />
-                {navLinks.map((link) =>
-                  link.external ? (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-colors no-underline hover:no-underline"
-                      style={{ color: 'white' }}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="transition-colors no-underline hover:no-underline"
-                      style={{ color: 'white' }}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  )
-                )}
-              </div>
-            </nav>
-          )}
+          <nav
+            className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+              mobileMenuOpen ? 'max-h-96 opacity-100 py-4 border-t border-white/20' : 'max-h-0 opacity-0'
+            }`}
+          >
+            <div className="flex flex-col gap-4">
+              <SearchInput
+                variant="header"
+                placeholder="Commune"
+                className="w-full"
+              />
+              {navLinks.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors no-underline hover:no-underline"
+                    style={{ color: 'white' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="transition-colors no-underline hover:no-underline"
+                    style={{ color: 'white' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+            </div>
+          </nav>
         </div>
       </header>
     </div>

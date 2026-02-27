@@ -45,7 +45,7 @@ export default function SidePanel({ isOpen, onClose, children }: SidePanelProps)
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-[var(--neutre)] hover:text-[var(--violet-dark)] transition-colors z-10"
+          className="absolute top-4 right-4 p-3 text-[var(--neutre)] hover:text-[var(--violet-dark)] transition-colors z-10"
           aria-label="Fermer"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +54,7 @@ export default function SidePanel({ isOpen, onClose, children }: SidePanelProps)
         </button>
 
         {/* Content */}
-        <div className="h-full overflow-y-auto p-6 pt-14">
+        <div className="h-full overflow-y-auto p-4 sm:p-6 pt-14">
           {children}
         </div>
       </div>
