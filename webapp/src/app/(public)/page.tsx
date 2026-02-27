@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SearchInput from '@/components/SearchInput';
 import QuoteBlock from '@/components/QuoteBlock';
+import SuggestionCommuneForm from '@/components/SuggestionCommuneForm';
 import { getAllCommunes, countProjets, countDeliberations } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
@@ -148,6 +149,22 @@ export default async function Home() {
               <div className="stat-value">{totalDelibs}</div>
               <div className="stat-label">Délibérations</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Suggestion Commune Section */}
+      <section className="section">
+        <div className="container">
+          <div className="bg-white rounded-lg p-8 lg:p-12 border border-black/10">
+            <h2 className="text-2xl lg:text-3xl font-bold text-[var(--violet)] mb-4 text-center">
+              Votre commune n&apos;apparaît pas encore ?
+            </h2>
+            <p className="text-[var(--neutre)] text-center mb-8 max-w-2xl mx-auto">
+              Proposez-nous une commune à ajouter à l&apos;observatoire. Il nous suffit de l&apos;adresse du site
+              où sont publiées les délibérations du conseil municipal.
+            </p>
+            <SuggestionCommuneForm />
           </div>
         </div>
       </section>

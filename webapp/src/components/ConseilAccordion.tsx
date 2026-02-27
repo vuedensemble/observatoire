@@ -87,6 +87,59 @@ export default function ConseilAccordion({ conseils }: ConseilAccordionProps) {
             </button>
             {isOpen && (
               <div className="px-5 pb-5">
+                {/* Documents disponibles */}
+                {(() => {
+                  const sourceFiles = [
+                    ...new Set(
+                      conseil.deliberations
+                        .map((d) => d.source_file)
+                        .filter((f): f is string => !!f)
+                    ),
+                  ];
+                  const hasDocuments = conseil.pdf_url || sourceFiles.length > 0;
+                  if (!hasDocuments) return null;
+
+                  return (
+                    <div className="mb-4 p-4 bg-[var(--creme)] rounded-lg">
+                      <h4 className="text-sm font-semibold text-[var(--violet-dark)] mb-3">
+                        Documents disponibles
+                      </h4>
+                      <div className="space-y-2">
+                        {conseil.pdf_url && (
+                          <a
+                            href={conseil.pdf_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-sm text-[var(--violet)] hover:underline font-medium"
+                          >
+                            <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Compte-rendu du conseil (PDF)
+                          </a>
+                        )}
+                        {sourceFiles.map((file) => {
+                          const delib = conseil.deliberations.find((d) => d.source_file === file);
+                          return (
+                            <a
+                              key={file}
+                              href={file}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-sm text-[var(--violet)] hover:underline"
+                            >
+                              <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                              Document source{delib ? ` — Délibération N°${delib.numero}` : ''}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
+
                 <div className="divide-y divide-black/10 pt-1">
                   {conseil.deliberations.map((delib, index) => (
                     <DeliberationCard

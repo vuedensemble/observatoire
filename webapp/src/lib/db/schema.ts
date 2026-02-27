@@ -76,6 +76,16 @@ export const projetThematiques = mysqlTable('projet_thematiques', {
   thematique_id: varchar('thematique_id', { length: 255 }).notNull().references(() => thematiques.id),
 });
 
+// --- Suggestion table ---
+
+export const communeSuggestions = mysqlTable('commune_suggestions', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  nom: text('nom').notNull(),
+  code_postal: text('code_postal').notNull(),
+  url_deliberations: text('url_deliberations').notNull(),
+  created_at: text('created_at'),
+});
+
 // --- Deduplication tables ---
 
 export const projetMentions = mysqlTable('projet_mentions', {
