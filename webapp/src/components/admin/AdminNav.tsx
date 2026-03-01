@@ -8,6 +8,7 @@ const navLinks = [
   { href: '/admin', label: 'Communes' },
   { href: '/admin/thematiques', label: 'Thematiques' },
   { href: '/admin/projets', label: 'Dedup projets' },
+  { href: '/admin/suggestions', label: 'Suggestions' },
 ];
 
 export default function AdminNav() {
