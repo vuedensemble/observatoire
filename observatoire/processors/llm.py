@@ -731,6 +731,7 @@ def ocr_folder(
     skip_existing: bool = True,
     model: str = "mistral-ocr-latest",
     include_image_base64: bool = True,
+    manifest_path: str | None = None,
 ) -> dict[str, str]:
     """
     Run OCR on all PDF files in a folder using Mistral's batch API.
@@ -741,27 +742,52 @@ def ocr_folder(
         skip_existing: If True, skip PDFs that already have a corresponding _ocr.json file
         model: Mistral OCR model to use
         include_image_base64: Whether to include base64 images in OCR response
+        manifest_path: Optional path to a filter manifest JSON file. When provided,
+            only PDFs listed in the manifest are processed instead of all PDFs in the folder.
 
     Returns:
         Dict mapping input pdf_path to output JSON file path
     """
     folder_path = os.path.abspath(folder_path)
 
-    # Find all PDF files
-    if recursive:
-        pdf_paths = []
-        for root, _, files in os.walk(folder_path):
-            for f in files:
-                if f.lower().endswith(".pdf"):
-                    pdf_paths.append(os.path.join(root, f))
-    else:
-        pdf_paths = [
-            os.path.join(folder_path, f)
-            for f in os.listdir(folder_path)
-            if f.lower().endswith(".pdf")
-        ]
+    if manifest_path:
+        # Load manifest and build list of allowed PDF paths
+        import json
 
-    pdf_paths = sorted(pdf_paths)
+        with open(manifest_path, encoding="utf-8") as f:
+            manifest = json.load(f)
+
+        allowed_paths = set()
+        for city_entry in manifest:
+            for file_entry in city_entry.get("files", []):
+                # Manifest paths are relative like "section_0001/file.pdf"
+                # Resolve them against folder_path
+                allowed_paths.add(
+                    os.path.normpath(os.path.join(folder_path, city_entry["city"], file_entry["path"]))
+                )
+
+        pdf_paths = sorted(p for p in allowed_paths if os.path.exists(p))
+        logger.info(
+            "Manifest loaded: %d files listed, %d found on disk",
+            len(allowed_paths),
+            len(pdf_paths),
+        )
+    else:
+        # Find all PDF files
+        if recursive:
+            pdf_paths = []
+            for root, _, files in os.walk(folder_path):
+                for f in files:
+                    if f.lower().endswith(".pdf"):
+                        pdf_paths.append(os.path.join(root, f))
+        else:
+            pdf_paths = [
+                os.path.join(folder_path, f)
+                for f in os.listdir(folder_path)
+                if f.lower().endswith(".pdf")
+            ]
+
+        pdf_paths = sorted(pdf_paths)
     logger.info("Found %d PDF files in %s", len(pdf_paths), folder_path)
 
     # Filter out PDFs that already have OCR results
