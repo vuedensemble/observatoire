@@ -15,6 +15,10 @@ function isEmailAllowed(email: string): boolean {
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: 'mysql' }),
+  trustedOrigins: (process.env.TRUSTED_ORIGINS || '')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean),
   emailAndPassword: {
     enabled: true,
   },
