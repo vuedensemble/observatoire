@@ -3,12 +3,18 @@ Filter PDFs to keep only council meeting reports (compte-rendu, procès-verbal).
 
 Uses multi-layered metadata heuristics (filename patterns, link text, URLs,
 section metadata) to classify each PDF. No OCR or LLM calls needed.
+
+For large PDFs (50+ pages), a two-tier content validation can optionally check
+the first few pages for council report keywords before committing to full OCR.
 """
 
+import io
 import json
 import logging
 import re
 from pathlib import Path
+
+from pypdf import PdfReader, PdfWriter
 
 logger = logging.getLogger(__name__)
 
@@ -361,3 +367,260 @@ def build_manifest(results: dict) -> list[dict]:
             "files": city["files"],
         })
     return manifest
+
+
+# --- Large PDF content validation ---
+
+# Keyword categories for council report content detection.
+# Require >=2 distinct categories matched to classify as a council report.
+_COUNCIL_CONTENT_PATTERNS: dict[str, re.Pattern] = {
+    "conseil_municipal": re.compile(r"conseil\s+municipal", re.IGNORECASE),
+    "pv_cr": re.compile(r"proc[èe]s[- ]verbal|compte[- ]rendu", re.IGNORECASE),
+    "deliberation": re.compile(r"d[ée]lib[ée]ration", re.IGNORECASE),
+    "seance": re.compile(r"s[ée]ance\s+du|ordre\s+du\s+jour", re.IGNORECASE),
+    "elus": re.compile(
+        r"maire|adjoint|conseillers?\s+municipa", re.IGNORECASE
+    ),
+    "attendance": re.compile(
+        r"pr[ée]sents?|excus[ée]s?|secr[ée]taire\s+de\s+s[ée]ance", re.IGNORECASE
+    ),
+    "vote": re.compile(r"vote|adopt[ée]|unanimit[ée]", re.IGNORECASE),
+}
+
+
+def extract_text_from_pages(pdf_path: Path, max_pages: int = 3) -> str:
+    """Extract text from the first N pages of a PDF using PyPDF."""
+    reader = PdfReader(pdf_path)
+    pages_to_read = min(max_pages, len(reader.pages))
+    parts = []
+    for i in range(pages_to_read):
+        text = reader.pages[i].extract_text()
+        if text:
+            parts.append(text)
+    return "\n".join(parts)
+
+
+def extract_pages_as_pdf_bytes(pdf_path: Path, max_pages: int = 3) -> bytes:
+    """Create an in-memory PDF containing only the first N pages."""
+    reader = PdfReader(pdf_path)
+    writer = PdfWriter()
+    pages_to_copy = min(max_pages, len(reader.pages))
+    for i in range(pages_to_copy):
+        writer.add_page(reader.pages[i])
+    buf = io.BytesIO()
+    writer.write(buf)
+    return buf.getvalue()
+
+
+def has_council_content(
+    text: str, min_categories: int = 2
+) -> tuple[bool, list[str]]:
+    """
+    Check if text contains council report keywords from multiple categories.
+
+    Returns (is_council, matched_categories).
+    """
+    matched = [
+        name
+        for name, pattern in _COUNCIL_CONTENT_PATTERNS.items()
+        if pattern.search(text)
+    ]
+    return len(matched) >= min_categories, matched
+
+
+def validate_large_pdf(
+    pdf_path: Path,
+    mistral_client=None,
+    max_preview_pages: int = 3,
+) -> dict:
+    """
+    Validate whether a large PDF is actually a council report.
+
+    Tier 1: Extract text with PyPDF. If enough text is found (>100 chars),
+    check for council keywords.
+
+    Tier 2: If the PDF is scanned (<100 chars of text), create a subset PDF
+    and send to Mistral OCR, then check the OCR output for keywords.
+
+    On any error, defaults to keeping the PDF (conservative).
+
+    Returns dict with keys: keep, method, categories, error (optional).
+    """
+    try:
+        text = extract_text_from_pages(pdf_path, max_pages=max_preview_pages)
+    except Exception as e:
+        logger.warning("Failed to read %s with PyPDF: %s", pdf_path, e)
+        return {"keep": True, "method": "error_fallback", "categories": [], "error": str(e)}
+
+    # Tier 1: text-based check
+    if len(text.strip()) > 100:
+        is_council, categories = has_council_content(text)
+        return {
+            "keep": is_council,
+            "method": "text_extraction",
+            "categories": categories,
+        }
+
+    # Tier 2: scanned PDF — use OCR on first few pages
+    if mistral_client is None:
+        logger.info("No Mistral client for scanned PDF %s, keeping by default", pdf_path)
+        return {"keep": True, "method": "no_ocr_client", "categories": []}
+
+    try:
+        subset_bytes = extract_pages_as_pdf_bytes(pdf_path, max_pages=max_preview_pages)
+    except Exception as e:
+        logger.warning("Failed to extract pages from %s: %s", pdf_path, e)
+        return {"keep": True, "method": "error_fallback", "categories": [], "error": str(e)}
+
+    try:
+        from observatoire.processors.llm import ocr_pdf
+
+        ocr_result = ocr_pdf(mistral_client, bytes=subset_bytes)
+        ocr_text = "\n".join(
+            page.markdown for page in ocr_result.pages if page.markdown
+        )
+    except Exception as e:
+        logger.warning("OCR failed for %s: %s", pdf_path, e)
+        return {"keep": True, "method": "error_fallback", "categories": [], "error": str(e)}
+
+    is_council, categories = has_council_content(ocr_text)
+    return {
+        "keep": is_council,
+        "method": "ocr_validation",
+        "categories": categories,
+    }
+
+
+def _get_page_count(pdf_path: Path) -> int | None:
+    """Return number of pages in a PDF, or None on error."""
+    try:
+        reader = PdfReader(pdf_path)
+        return len(reader.pages)
+    except Exception:
+        return None
+
+
+def validate_large_pdfs_in_manifest(
+    manifest: list[dict],
+    cities_dir: Path,
+    page_threshold: int = 50,
+    mistral_client=None,
+) -> tuple[list[dict], dict]:
+    """
+    Validate large PDFs in a manifest and remove those that aren't council reports.
+
+    Args:
+        manifest: List of per-city manifest entries from build_manifest().
+        cities_dir: Base path to city directories.
+        page_threshold: Only validate PDFs with >= this many pages.
+        mistral_client: Optional Mistral client for Tier 2 OCR validation.
+
+    Returns:
+        (updated_manifest, stats) where stats has validation summary info.
+    """
+    stats = {
+        "total_large": 0,
+        "validated_keep": 0,
+        "validated_exclude": 0,
+        "errors": 0,
+        "pages_before": 0,
+        "pages_after": 0,
+        "by_method": {},
+        "excluded_files": [],
+    }
+
+    updated_manifest = []
+    for city_entry in manifest:
+        city_name = city_entry["city"]
+        city_dir = cities_dir / city_name
+        kept_files = []
+
+        for file_entry in city_entry["files"]:
+            pdf_path = city_dir / file_entry["path"]
+            page_count = _get_page_count(pdf_path)
+
+            if page_count is None or page_count < page_threshold:
+                # Small PDF or unreadable — keep as-is
+                kept_files.append(file_entry)
+                if page_count is not None:
+                    stats["pages_before"] += page_count
+                    stats["pages_after"] += page_count
+                continue
+
+            # Large PDF — validate
+            stats["total_large"] += 1
+            stats["pages_before"] += page_count
+
+            logger.info(
+                "Validating large PDF (%d pages): %s/%s",
+                page_count, city_name, file_entry["path"],
+            )
+
+            result = validate_large_pdf(
+                pdf_path,
+                mistral_client=mistral_client,
+            )
+
+            method = result["method"]
+            stats["by_method"][method] = stats["by_method"].get(method, 0) + 1
+
+            if result.get("error"):
+                stats["errors"] += 1
+
+            if result["keep"]:
+                stats["validated_keep"] += 1
+                stats["pages_after"] += page_count
+                file_entry["validation"] = {
+                    "method": method,
+                    "categories": result["categories"],
+                    "pages": page_count,
+                }
+                kept_files.append(file_entry)
+            else:
+                stats["validated_exclude"] += 1
+                stats["excluded_files"].append({
+                    "city": city_name,
+                    "path": file_entry["path"],
+                    "pages": page_count,
+                    "method": method,
+                    "categories": result["categories"],
+                })
+
+        updated_entry = dict(city_entry)
+        updated_entry["files"] = kept_files
+        updated_entry["matched_pdfs"] = len(kept_files)
+        updated_manifest.append(updated_entry)
+
+    return updated_manifest, stats
+
+
+def generate_validation_report(stats: dict) -> str:
+    """Produce a human-readable summary of large PDF validation results."""
+    lines = [
+        "",
+        "Large PDF Validation Results",
+        "=" * 50,
+        f"Large PDFs checked:     {stats['total_large']:,}",
+        f"  Kept:                 {stats['validated_keep']:,}",
+        f"  Excluded:             {stats['validated_exclude']:,}",
+        f"  Errors (kept):        {stats['errors']:,}",
+        f"Pages before:           {stats['pages_before']:,}",
+        f"Pages after:            {stats['pages_after']:,}",
+        f"Pages saved:            {stats['pages_before'] - stats['pages_after']:,}",
+    ]
+
+    if stats["by_method"]:
+        lines.append("\nValidation methods:")
+        for method, count in sorted(stats["by_method"].items(), key=lambda x: -x[1]):
+            lines.append(f"  {method}: {count:,}")
+
+    if stats["excluded_files"]:
+        lines.append(f"\nExcluded files ({len(stats['excluded_files'])}):")
+        for entry in stats["excluded_files"]:
+            cats = ", ".join(entry["categories"]) if entry["categories"] else "none"
+            lines.append(
+                f"  {entry['city']}/{entry['path']} "
+                f"({entry['pages']} pages, categories: {cats})"
+            )
+
+    return "\n".join(lines)

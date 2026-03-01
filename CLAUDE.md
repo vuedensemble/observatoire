@@ -29,16 +29,120 @@ Available commands:
 
 - `scrape` - Scrape city websites from a CSV file
 - `classify` - Classify sections as municipal council related using LLM batch API
+- `filter-pdfs` - Filter PDFs to keep only council reports (metadata heuristics + optional content validation)
 - `ocr` - Run Mistral OCR on all PDFs in a folder
+- `extract-deliberations` - Extract deliberation data from OCR results
+- `structure-json` - Convert extraction markdown to structured JSON
+- `pipeline` - Run OCR + extract + structure in sequence
 
-Examples:
+### End-to-end data pipeline
+
+#### Step 1: Scrape city websites
 
 ```bash
-# Run OCR on all PDFs in a folder
-uv run python -m observatoire.cli.run ocr /path/to/pdfs/
+uv run python -m observatoire.cli.run scrape cities.csv datasets/cities/
+```
 
-# Run OCR recursively
-uv run python -m observatoire.cli.run ocr /path/to/pdfs/ -r -v
+Crawls each city's website, downloads PDFs into `datasets/cities/<city>/section_XXXX/` with `section.json` metadata. Output: ~27K PDFs across all cities.
+
+#### Step 2: Filter PDFs (metadata heuristics)
+
+```bash
+uv run python -m observatoire.cli.run filter-pdfs datasets/cities/ -o manifest.json -v
+```
+
+Uses filename patterns, link text, section titles, and URL signals to keep only council meeting reports. No OCR, no API calls. Output: `manifest.json` with ~5,950 matched PDFs (~78% reduction).
+
+#### Step 3: Validate large PDFs (optional content check)
+
+```bash
+uv run python -m observatoire.cli.run filter-pdfs datasets/cities/ --validate-large -o manifest.json -v
+```
+
+Adds content validation for PDFs with 50+ pages (352 files, ~98K pages — 79% of all filtered pages). Two tiers:
+
+- **Tier 1 (free):** PyPDF extracts text from first 3 pages. If >100 chars, checks for council keywords (needs >=2 categories from: conseil municipal, PV/CR, deliberation, seance, elus, attendance, vote).
+- **Tier 2 (scanned PDFs):** If <100 chars extracted, creates a 3-page subset and sends to Mistral OCR, then checks keywords. Cost: ~3 pages per file instead of 50-2911.
+- **On error:** conservatively keeps the PDF.
+
+Use `--page-threshold N` to change the page count cutoff (default: 50).
+
+#### Step 4: Run OCR on filtered PDFs
+
+```bash
+uv run python -m observatoire.cli.run ocr datasets/cities/ --manifest manifest.json -v
+```
+
+Sends each PDF in the manifest to Mistral OCR. Saves `<filename>_ocr.json`.
+
+#### Step 5: Extract deliberations
+
+```bash
+uv run python -m observatoire.cli.run extract-deliberations datasets/cities/
+```
+
+Uses Mistral LLM to extract structured deliberation data from OCR results. Saves `<filename>_extraction.md`.
+
+#### Step 6: Structure as JSON
+
+```bash
+uv run python -m observatoire.cli.run structure-json datasets/cities/
+```
+
+Converts extraction markdown to structured JSON. Saves `<filename>_structured.json`.
+
+Steps 4-6 can be run together:
+
+```bash
+uv run python -m observatoire.cli.run pipeline datasets/cities/
+```
+
+#### Step 7: Set up the database
+
+```bash
+cd webapp
+npm run db:setup    # Create MySQL database and app user
+npm run db:push     # Apply Drizzle ORM migrations
+npm run db:seed     # Populate with mock data (optional, for dev)
+```
+
+Requires `DB_ADMIN_USER`, `DB_ADMIN_PASSWORD`, and `DATABASE_URL` environment variables.
+
+#### Step 8: Import structured data into the database
+
+```bash
+cd webapp
+npm run db:import -- ../datasets/cities/Bayonne    # Import one city
+npm run db:import-all -- ../datasets/cities/        # Import all cities
+```
+
+Reads `_structured.json` files produced by step 6 and imports communes, conseils municipaux, deliberations, and project mentions into MySQL. Use `npm run db:delete-city -- <slug>` to remove a city's data before re-importing.
+
+#### Step 9: Deduplicate projects
+
+```bash
+cd webapp
+npm run db:dedup
+```
+
+Groups similar project mentions within each commune using fuzzy string matching (exact normalization, prefix matching, Dice coefficient >0.8) and assigns them to canonical `projet_groupe` entries.
+
+### Database scripts reference (webapp/scripts/)
+
+| Script | npm command | Purpose |
+|--------|------------|---------|
+| `setup-db.ts` | `npm run db:setup` | Create MySQL database and app user |
+| `seed.ts` | `npm run db:seed` | Populate database with mock data |
+| `import-city.ts` | `npm run db:import` / `db:import-all` | Import structured JSON into database |
+| `delete-city.ts` | `npm run db:delete-city` | Remove a city's data |
+| `dedup-projects.ts` | `npm run db:dedup` | Deduplicate project mentions |
+| `import-helpers.ts` | — | Shared utilities (date conversion, slug, vote parsing) |
+
+Other useful commands:
+
+```bash
+npm run db:generate  # Generate Drizzle ORM migrations
+npm run db:studio    # Open Drizzle Studio (database GUI)
 ```
 
 ## Web Application
