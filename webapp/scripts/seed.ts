@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-config({ path: '.env.local' });
+config({ path: '.env' });
 import mysql from 'mysql2/promise';
 import { drizzle } from 'drizzle-orm/mysql2';
 import * as schema from '../src/lib/db/schema';

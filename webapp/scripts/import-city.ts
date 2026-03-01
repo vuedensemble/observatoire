@@ -7,7 +7,7 @@
  */
 
 import { config } from 'dotenv';
-config({ path: '.env.local' });
+config({ path: '.env' });
 import * as fs from 'fs';
 import * as path from 'path';
 import mysql from 'mysql2/promise';
