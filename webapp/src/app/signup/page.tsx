@@ -1,26 +1,23 @@
-import { Suspense } from 'react';
 import Link from 'next/link';
-import LoginForm from '@/components/admin/LoginForm';
+import SignUpForm from '@/components/admin/SignUpForm';
 
 export const metadata = {
-  title: 'Connexion - Admin Observatoire',
+  title: 'Créer un compte - Admin Observatoire',
 };
 
-export default function LoginPage() {
+export default function SignUpPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--creme)]">
       <div className="w-full max-w-sm">
         <div className="bg-white rounded-lg shadow-md p-8">
           <h1 className="text-2xl font-bold text-center text-[var(--violet-fonce)] mb-6">
-            Admin Observatoire
+            Créer un compte
           </h1>
-          <Suspense>
-            <LoginForm />
-          </Suspense>
+          <SignUpForm />
           <p className="mt-4 text-center text-sm text-gray-600">
-            Pas encore de compte ?{' '}
-            <Link href="/signup" className="text-[var(--violet)] hover:underline">
-              Créer un compte
+            Déjà un compte ?{' '}
+            <Link href="/login" className="text-[var(--violet)] hover:underline">
+              Se connecter
             </Link>
           </p>
         </div>

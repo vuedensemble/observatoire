@@ -1,20 +1,4 @@
 services:
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
-    volumes:
-      - mysql_data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-
   migrate:
     build:
       context: .
@@ -25,10 +9,9 @@ services:
       MYSQL_PORT: "3306"
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
-    depends_on:
-      db:
-        condition: service_healthy
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - observatoire
 
   webapp:
     build: .
@@ -37,15 +20,16 @@ services:
       MYSQL_PORT: "3306"
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
       BETTER_AUTH_URL: https://observatoire.vuedensemble.fr
+      ALLOWED_EMAILS: ${ALLOWED_EMAILS}
     depends_on:
-      db:
-        condition: service_healthy
       migrate:
         condition: service_completed_successfully
     restart: unless-stopped
+    networks:
+      - observatoire
 
   caddy:
     image: caddy:2-alpine
@@ -60,8 +44,14 @@ services:
     depends_on:
       - webapp
     restart: unless-stopped
+    networks:
+      - observatoire
 
 volumes:
-  mysql_data:
   caddy_data:
   caddy_config:
+
+networks:
+  observatoire:
+    name: observatoire
+    external: true

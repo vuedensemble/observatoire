@@ -13,7 +13,7 @@
  *   MYSQL_ADMINUSER, MYSQL_ADMIN_PASSWORD - admin credentials
  *   MYSQL_HOST, MYSQL_PORT - server connection
  *   MYSQL_DATABASE - database name to create
- *   MYSQL_USER, MYSQL_USER_PASSWORD - app user to create
+ *   MYSQL_USER, MYSQL_PASSWORD - app user to create
  */
 
 import { config } from 'dotenv';
@@ -27,12 +27,12 @@ async function main() {
   const adminPassword = process.env.MYSQL_ADMIN_PASSWORD;
   const database = process.env.MYSQL_DATABASE;
   const appUser = process.env.MYSQL_USER;
-  const appPassword = process.env.MYSQL_USER_PASSWORD;
+  const appPassword = process.env.MYSQL_PASSWORD;
 
   if (!host || !adminUser || !adminPassword || !database || !appUser || !appPassword) {
     console.error('Missing required env vars. Check .env.local for:');
     console.error('  MYSQL_HOST, MYSQL_PORT, MYSQL_ADMINUSER, MYSQL_ADMIN_PASSWORD');
-    console.error('  MYSQL_DATABASE, MYSQL_USER, MYSQL_USER_PASSWORD');
+    console.error('  MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD');
     process.exit(1);
   }
 
