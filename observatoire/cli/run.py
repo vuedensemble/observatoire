@@ -14,6 +14,8 @@ from observatoire.processors.pdf_filter import (
     filter_all_cities,
     generate_report,
     build_manifest,
+    validate_large_pdfs_in_manifest,
+    generate_validation_report,
 )
 
 
@@ -199,9 +201,28 @@ def filter_pdfs_command(args):
     )
     print(report)
 
+    manifest = build_manifest(results)
+
+    # Validate large PDFs if requested
+    if args.validate_large:
+        mistral_client = None
+        try:
+            from observatoire.processors.llm import get_mistral_client
+            mistral_client = get_mistral_client()
+        except Exception as e:
+            print(f"\nWarning: Could not create Mistral client ({e}). "
+                  "Tier 2 OCR validation will be skipped for scanned PDFs.")
+
+        manifest, validation_stats = validate_large_pdfs_in_manifest(
+            manifest=manifest,
+            cities_dir=cities_dir,
+            page_threshold=args.page_threshold,
+            mistral_client=mistral_client,
+        )
+        print(generate_validation_report(validation_stats))
+
     # Write manifest JSON if requested
     if args.output:
-        manifest = build_manifest(results)
         output_path = Path(args.output)
         output_path.write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2),
@@ -563,12 +584,22 @@ Examples:
   # Write manifest JSON for use with OCR
   %(prog)s datasets/cities/ -o filter_manifest.json
 
+  # Validate large PDFs (50+ pages) before OCR
+  %(prog)s datasets/cities/ --validate-large -o manifest.json
+
+  # Validate with custom page threshold
+  %(prog)s datasets/cities/ --validate-large --page-threshold 30
+
   # Show excluded files too
   %(prog)s datasets/cities/ -v --list-excluded
 
 Uses filename patterns, link text, and section metadata to identify
 council reports without OCR or LLM calls. Typically achieves ~80%%
 reduction in files to process.
+
+With --validate-large, large PDFs are checked by reading the first
+few pages (text extraction or OCR) and looking for council report
+keywords. This avoids running full OCR on non-council documents.
 """,
     )
     filter_parser.add_argument(
@@ -588,6 +619,17 @@ reduction in files to process.
         "--list-excluded",
         action="store_true",
         help="Also list excluded files in verbose output",
+    )
+    filter_parser.add_argument(
+        "--validate-large",
+        action="store_true",
+        help="Validate large PDFs by checking first pages for council report content",
+    )
+    filter_parser.add_argument(
+        "--page-threshold",
+        type=int,
+        default=50,
+        help="Page count threshold for large PDF validation (default: 50)",
     )
     filter_parser.add_argument(
         "-v", "--verbose",
