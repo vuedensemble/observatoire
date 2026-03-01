@@ -1,7 +1,7 @@
 /**
  * Setup MySQL database and user for the observatoire webapp.
  *
- * Uses the admin credentials from .env.local to:
+ * Uses the admin credentials from .env to:
  * 1. Create the database (MYSQL_DATABASE) if it doesn't exist
  * 2. Create the app user (MYSQL_USER) if it doesn't exist
  * 3. Grant all privileges on the database to the app user
@@ -9,7 +9,7 @@
  * Usage:
  *   npx tsx scripts/setup-db.ts
  *
- * Required env vars (in .env.local):
+ * Required env vars (in .env):
  *   MYSQL_ADMINUSER, MYSQL_ADMIN_PASSWORD - admin credentials
  *   MYSQL_HOST, MYSQL_PORT - server connection
  *   MYSQL_DATABASE - database name to create
@@ -17,7 +17,7 @@
  */
 
 import { config } from 'dotenv';
-config({ path: '.env.local' });
+config({ path: '.env' });
 import mysql from 'mysql2/promise';
 
 async function main() {
@@ -30,7 +30,7 @@ async function main() {
   const appPassword = process.env.MYSQL_PASSWORD;
 
   if (!host || !adminUser || !adminPassword || !database || !appUser || !appPassword) {
-    console.error('Missing required env vars. Check .env.local for:');
+    console.error('Missing required env vars. Check .env for:');
     console.error('  MYSQL_HOST, MYSQL_PORT, MYSQL_ADMINUSER, MYSQL_ADMIN_PASSWORD');
     console.error('  MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD');
     process.exit(1);
