@@ -10,6 +10,11 @@ from observatoire.processors.llm import (
     extract_structured_json_batch,
     run_full_extraction_pipeline,
 )
+from observatoire.processors.pdf_filter import (
+    filter_all_cities,
+    generate_report,
+    build_manifest,
+)
 
 
 def scrape_command(args):
@@ -72,6 +77,7 @@ def ocr_command(args):
         skip_existing=not args.no_skip,
         model=args.model,
         include_image_base64=not args.no_images,
+        manifest_path=args.manifest,
     )
 
     print(f"Processed {len(results)} PDFs")
@@ -168,6 +174,42 @@ def pipeline_command(args):
     print(f"  Structure JSON: {len(results['structure_json'])} files")
 
 
+def filter_pdfs_command(args):
+    if args.verbose:
+        logging.getLogger().setLevel(logging.INFO)
+
+    import json
+    from pathlib import Path
+
+    cities_dir = Path(args.cities_dir)
+    if not cities_dir.is_dir():
+        print(f"Error: {cities_dir} is not a directory")
+        return
+
+    results = filter_all_cities(
+        cities_dir=cities_dir,
+        city_names=args.cities if args.cities else None,
+    )
+
+    # Print human-readable report
+    report = generate_report(
+        results,
+        verbose=args.verbose,
+        list_excluded=args.list_excluded,
+    )
+    print(report)
+
+    # Write manifest JSON if requested
+    if args.output:
+        manifest = build_manifest(results)
+        output_path = Path(args.output)
+        output_path.write_text(
+            json.dumps(manifest, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        print(f"\nManifest written to {output_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Observatoire CLI tools",
@@ -197,6 +239,12 @@ Examples:
 
   # Run full pipeline (OCR + extract + structure)
   %(prog)s pipeline /path/to/folder/
+
+  # Filter PDFs to keep only council reports
+  %(prog)s filter-pdfs datasets/cities/
+
+  # Filter and write manifest JSON
+  %(prog)s filter-pdfs datasets/cities/ -o manifest.json
 """,
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -340,6 +388,11 @@ Examples:
         "--no-images",
         action="store_true",
         help="Don't include base64 images in OCR output",
+    )
+    ocr_parser.add_argument(
+        "--manifest",
+        default=None,
+        help="Path to filter manifest JSON (from filter-pdfs command). Only OCR files in the manifest.",
     )
     ocr_parser.add_argument(
         "-v", "--verbose",
@@ -490,6 +543,58 @@ Runs three steps in sequence:
         help="Enable debug logging",
     )
     pipeline_parser.set_defaults(func=pipeline_command)
+
+    # Filter PDFs command
+    filter_parser = subparsers.add_parser(
+        "filter-pdfs",
+        help="Filter PDFs to keep only council meeting reports (compte-rendu, procès-verbal)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Filter all cities and show summary
+  %(prog)s datasets/cities/
+
+  # Filter with per-city details
+  %(prog)s datasets/cities/ -v
+
+  # Filter specific cities only
+  %(prog)s datasets/cities/ -c Anglet Boucau
+
+  # Write manifest JSON for use with OCR
+  %(prog)s datasets/cities/ -o filter_manifest.json
+
+  # Show excluded files too
+  %(prog)s datasets/cities/ -v --list-excluded
+
+Uses filename patterns, link text, and section metadata to identify
+council reports without OCR or LLM calls. Typically achieves ~80%%
+reduction in files to process.
+""",
+    )
+    filter_parser.add_argument(
+        "cities_dir",
+        help="Path to directory containing city folders (e.g., 'datasets/cities/')",
+    )
+    filter_parser.add_argument(
+        "-c", "--cities",
+        nargs="+",
+        help="Only process these city folder names (default: all cities)",
+    )
+    filter_parser.add_argument(
+        "-o", "--output",
+        help="Write manifest JSON to this file path",
+    )
+    filter_parser.add_argument(
+        "--list-excluded",
+        action="store_true",
+        help="Also list excluded files in verbose output",
+    )
+    filter_parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Show per-city details",
+    )
+    filter_parser.set_defaults(func=filter_pdfs_command)
 
     args = parser.parse_args()
     args.func(args)

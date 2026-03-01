@@ -1,3 +1,5 @@
+import argparse
+import json
 from pathlib import Path
 import statistics
 from pypdf import PdfReader
@@ -12,12 +14,36 @@ def count_pages(pdf_path: Path) -> int:
         return 0
 
 
-def main():
-    # Find all PDFs
-    pdf_dir = Path('datasets/cities')
-    pdf_files = list(pdf_dir.rglob('*.pdf'))
+def load_manifest_paths(manifest_path: str, base_dir: Path) -> set[Path]:
+    """Load PDF paths from a filter manifest JSON file."""
+    with open(manifest_path, encoding="utf-8") as f:
+        manifest = json.load(f)
+    paths = set()
+    for city_entry in manifest:
+        city = city_entry["city"]
+        for file_entry in city_entry.get("files", []):
+            paths.add(base_dir / city / file_entry["path"])
+    return paths
 
-    print(f'Found {len(pdf_files)} PDF files')
+
+def main():
+    parser = argparse.ArgumentParser(description="Count pages in PDF files")
+    parser.add_argument(
+        "--manifest",
+        help="Path to filter manifest JSON (from filter-pdfs). Only count pages for matched PDFs.",
+    )
+    args = parser.parse_args()
+
+    # Find PDFs
+    pdf_dir = Path('datasets/cities')
+
+    if args.manifest:
+        allowed = load_manifest_paths(args.manifest, pdf_dir)
+        pdf_files = sorted(p for p in allowed if p.exists())
+        print(f'Found {len(pdf_files)} PDF files from manifest ({len(allowed)} listed)')
+    else:
+        pdf_files = list(pdf_dir.rglob('*.pdf'))
+        print(f'Found {len(pdf_files)} PDF files')
     print()
 
     # Count pages for each PDF
