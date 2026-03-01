@@ -546,6 +546,18 @@ export async function validateProjetGroupe(
     });
   }
 
+  // Infer and persist thematiques
+  const allThems = await db.select().from(thematiques);
+  const textsForInference = [groupe.nature || '', groupe.competence || ''];
+  for (const m of mentions) {
+    if (m.nature) textsForInference.push(m.nature);
+    if (m.competence) textsForInference.push(m.competence);
+  }
+  const matchedThems = inferThematiques(textsForInference, allThems);
+  if (matchedThems.length > 0) {
+    await setProjetThematiques(projetId, matchedThems.map(t => t.id));
+  }
+
   // Update groupe status
   await db.update(projetGroupes)
     .set({ statut: 'valide', projet_id: projetId })

@@ -50,6 +50,48 @@ const pool = mysql.createPool({
 
 const db = drizzle(pool, { schema, mode: 'default' });
 
+// --- Thématiques reference data ---
+const THEMATIQUES = [
+  { id: 'th-1', nom: 'Urbanisme', description: 'Aménagement du territoire, PLU, permis de construire', couleur: '#E57C3A' },
+  { id: 'th-2', nom: 'Environnement', description: 'Écologie, espaces verts, développement durable', couleur: '#2EAD6B' },
+  { id: 'th-3', nom: 'Budget', description: 'Finances, fiscalité, investissements', couleur: '#6B5CE7' },
+  { id: 'th-4', nom: 'Social', description: 'Solidarité, logement social, aide aux personnes', couleur: '#3B82F6' },
+  { id: 'th-5', nom: 'Culture', description: 'Événements culturels, patrimoine, associations', couleur: '#EC4899' },
+  { id: 'th-6', nom: 'Mobilités & transports', description: 'Mobilité, voirie, transports en commun', couleur: '#EAB308' },
+  { id: 'th-7', nom: 'Éducation & jeunesse', description: 'Écoles, crèches, périscolaire', couleur: '#14B8A6' },
+  { id: 'th-8', nom: 'Sport', description: 'Équipements sportifs, clubs, événements', couleur: '#F97316' },
+  { id: 'th-9', nom: 'Logement', description: 'Habitat, logement social, locations', couleur: '#8B5CF6' },
+  { id: 'th-10', nom: 'Économie', description: 'Commerce, emploi, développement économique', couleur: '#059669' },
+  { id: 'th-11', nom: 'Sécurité', description: 'Sécurité publique, prévention', couleur: '#DC2626' },
+  { id: 'th-12', nom: 'Administration', description: 'Gestion communale, services publics', couleur: '#6B7280' },
+  { id: 'th-13', nom: 'Numérique', description: 'Réseaux, télécommunications, digital', couleur: '#0EA5E9' },
+  { id: 'th-14', nom: 'Tourisme', description: 'Attractivité touristique, hébergement, événements', couleur: '#D946EF' },
+];
+
+async function upsertThematiques() {
+  if (dryRun) {
+    console.log('  [DRY RUN] Would upsert 14 thématiques');
+    return;
+  }
+  const [rawConn] = await pool.getConnection().then(c => [c]);
+  try {
+    for (const t of THEMATIQUES) {
+      await rawConn.execute(
+        `INSERT INTO thematiques (id, nom, description, couleur)
+         VALUES (?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE
+           nom = VALUES(nom),
+           description = VALUES(description),
+           couleur = VALUES(couleur)`,
+        [t.id, t.nom, t.description, t.couleur]
+      );
+    }
+  } finally {
+    rawConn.release();
+  }
+  console.log('  ✓ 14 thématiques upserted');
+}
+
 // --- Existing commune data (for merge) ---
 async function getExistingCommune(slug: string) {
   const [row] = await db.select().from(schema.communes).where(eq(schema.communes.slug, slug)).limit(1);
@@ -348,6 +390,9 @@ async function importCity(cityFolder: string): Promise<{ conseils: number; delib
 
 // --- Run ---
 async function run() {
+  // Always upsert thématiques first (idempotent)
+  await upsertThematiques();
+
   if (allMode) {
     const citiesDir = pathArg!;
     if (!fs.existsSync(citiesDir)) {
