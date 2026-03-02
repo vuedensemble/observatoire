@@ -1,0 +1,3713 @@
+[
+  {
+    "city": "Sceaux",
+    "total_pdfs": 10743,
+    "matched_pdfs": 266,
+    "files": [
+      {
+        "path": "section_0330/2025-055_dde-subvention-drac.pdf",
+        "section_title": "2025, 2025-55",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_0716/2024-066_contrat-conferencier.pdf",
+        "section_title": "2024, 2024-66",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_0992/2024-343_assistance-technique-touriz.pdf",
+        "section_title": "2024, 2024-343",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_1050/2023-02-requete-delib.-cm-16-dec.-2021-requete_0.pdf",
+        "section_title": "2023, 2023-02",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_1088/2023-40-requete-projet-place-de-gaulle_0.pdf",
+        "section_title": "2023, 2023-40",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_1119/2023-72-dde-subventions-drac_0.pdf",
+        "section_title": "2023, 2023-72",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_1157/2023-110-requete-sceaux-ensemble-hono_0.pdf",
+        "section_title": "2023, 2023-110",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_1601/2022-200-requete-sceaux-ensemble_0.pdf",
+        "section_title": "2022, . 2022-200",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_1674/2022-273_requete-sceaux-ensemble-hono_0.pdf",
+        "section_title": "2022, . 2022-273",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_1742/2021-07_dc-hono.-requete-annul.-delib.-151118.pdf",
+        "section_title": "2021, . 2021-07",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_1981/2021-246_dc-requete-delib.projet-degaulle-hono.pdf",
+        "section_title": "2021, . 2021-246",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_2112/2020-240.pdf",
+        "section_title": "2020, . 2020-240",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_2125/2020-253.pdf",
+        "section_title": "2020, 2020-253",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_2324/2025-055_dde-subvention-drac.pdf",
+        "section_title": "2025, 2025-55",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_2710/2024-066_contrat-conferencier.pdf",
+        "section_title": "2024, 2024-66",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_2986/2024-343_assistance-technique-touriz.pdf",
+        "section_title": "2024, 2024-343",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_3044/2023-02-requete-delib.-cm-16-dec.-2021-requete_0.pdf",
+        "section_title": "2023, 2023-02",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_3082/2023-40-requete-projet-place-de-gaulle_0.pdf",
+        "section_title": "2023, 2023-40",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_3113/2023-72-dde-subventions-drac_0.pdf",
+        "section_title": "2023, 2023-72",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_3151/2023-110-requete-sceaux-ensemble-hono_0.pdf",
+        "section_title": "2023, 2023-110",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_3595/2022-200-requete-sceaux-ensemble_0.pdf",
+        "section_title": "2022, . 2022-200",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_3668/2022-273_requete-sceaux-ensemble-hono_0.pdf",
+        "section_title": "2022, . 2022-273",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_3736/2021-07_dc-hono.-requete-annul.-delib.-151118.pdf",
+        "section_title": "2021, . 2021-07",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_3975/2021-246_dc-requete-delib.projet-degaulle-hono.pdf",
+        "section_title": "2021, . 2021-246",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_4106/2020-240.pdf",
+        "section_title": "2020, . 2020-240",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_4119/2020-253.pdf",
+        "section_title": "2020, 2020-253",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_4358/proces-verbal-cm-11-decembre-2025-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre), le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 112
+        }
+      },
+      {
+        "path": "section_4376/proces-verbal-cm-11-decembre-2025-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre), le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 112
+        }
+      },
+      {
+        "path": "section_4394/proces-verbal-250925-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 57
+        }
+      },
+      {
+        "path": "section_4413/proces-verbal-250925-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 57
+        }
+      },
+      {
+        "path": "section_4432/proces-verbal-approuve-seance-26-juin-2025.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 102
+        }
+      },
+      {
+        "path": "section_4433/proces-verbal-250925-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 57
+        }
+      },
+      {
+        "path": "section_4448/proces-verbal-approuve-seance-26-juin-2025.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 102
+        }
+      },
+      {
+        "path": "section_4449/proces-verbal-250925-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 57
+        }
+      },
+      {
+        "path": "section_4464/proces-verbal-seance-cm-22-mai-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4465/proces-verbal-approuve-seance-26-juin-2025.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 102
+        }
+      },
+      {
+        "path": "section_4493/proces-verbal-seance-cm-22-mai-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4494/proces-verbal-approuve-seance-26-juin-2025.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 102
+        }
+      },
+      {
+        "path": "section_4522/proces-verbal-seance-27-mars-2025-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre, 1 abstention) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_4523/proces-verbal-seance-cm-22-mai-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4535/proces-verbal-seance-27-mars-2025-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre, 1 abstention) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_4536/proces-verbal-seance-cm-22-mai-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4548/proces-verbal-seance-6-fevrier-2025-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité des votants (1 abstention) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_4549/proces-verbal-seance-27-mars-2025-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_4562/proces-verbal-seance-6-fevrier-2025-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité des votants (1 abstention) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_4563/proces-verbal-seance-27-mars-2025-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_4576/proces-verbal-seance-10-decembre-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4577/proces-verbal-seance-6-fevrier-2025-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_4588/proces-verbal-seance-10-decembre-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4589/proces-verbal-seance-6-fevrier-2025-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_4600/proces-verbal-25-septembre-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 83
+        }
+      },
+      {
+        "path": "section_4601/proces-verbal-seance-10-decembre-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4621/proces-verbal-25-septembre-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 83
+        }
+      },
+      {
+        "path": "section_4622/proces-verbal-seance-10-decembre-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-Verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4642/proces-verbal-seance-27-juin-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4643/proces-verbal-25-septembre-2024-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Ressources",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 83
+        }
+      },
+      {
+        "path": "section_4656/13-enregistrement-meuble-tourisme.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nMise en place de l'enregistrement des meublés de tourisme\n, Séance publique du 25 septembre 2024",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4656/13_enregistrement-meubles-tourisme.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nMise en place de l'enregistrement des meublés de tourisme\n, Séance publique du 25 septembre 2024",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4665/proces-verbal-seance-27-juin-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4666/proces-verbal-25-septembre-2024-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      Ressources",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 83
+        }
+      },
+      {
+        "path": "section_4679/13-enregistrement-meuble-tourisme.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nMise en place de l'enregistrement des meublés de tourisme\n, Séance publique du 25 septembre 2024",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4679/13_enregistrement-meubles-tourisme.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nMise en place de l'enregistrement des meublés de tourisme\n, Séance publique du 25 septembre 2024",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4688/proces-verbal-seance-du-23-mai-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4689/proces-verbal-seance-27-juin-2024-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      Ressources",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4696/07-pj-comptes-dodeca-2023.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nExploitation de la fourrière automobile - rapport sur l'exécution de la délégation de service public pour l'exercice 2023\n, Séance publique du 27 juin 2024",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_4707/proces-verbal-seance-du-23-mai-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4708/proces-verbal-seance-27-juin-2024-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      Ressources",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_4715/07-pj-comptes-dodeca-2023.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nExploitation de la fourrière automobile - rapport sur l'exécution de la délégation de service public pour l'exercice 2023\n, Séance publique du 27 juin 2024",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_4726/proces-verbal-seance-28-mars-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_4727/proces-verbal-seance-du-23-mai-2024-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4742/proces-verbal-seance-28-mars-2024-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_4743/proces-verbal-seance-du-23-mai-2024-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_4758/proces-verbal-approuve-seance-8-fevrier-2024.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 84
+        }
+      },
+      {
+        "path": "section_4759/proces-verbal-seance-28-mars-2024-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_4776/proces-verbal-approuve-seance-8-fevrier-2024.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 84
+        }
+      },
+      {
+        "path": "section_4777/proces-verbal-seance-28-mars-2024-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_4794/pv-seance-8-decembre-2023.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_4795/proces-verbal-approuve-seance-8-fevrier-2024.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 84
+        }
+      },
+      {
+        "path": "section_4808/pv-seance-8-decembre-2023.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_4809/proces-verbal-approuve-seance-8-fevrier-2024.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 84
+        }
+      },
+      {
+        "path": "section_4822/proces-verbal-27-septembre-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 94
+        }
+      },
+      {
+        "path": "section_4823/pv-seance-8-decembre-2023.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_4848/proces-verbal-27-septembre-approuve.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 94
+        }
+      },
+      {
+        "path": "section_4849/pv-seance-8-decembre-2023.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_4875/proces-verbal-27-septembre-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 94
+        }
+      },
+      {
+        "path": "section_4896/proces-verbal-27-septembre-approuve.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 94
+        }
+      },
+      {
+        "path": "section_4916/proces-verbal-25-mai-2023-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4917/proces-verbal-seance-du-22-juin-2023_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_4939/proces-verbal-25-mai-2023-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4940/proces-verbal-seance-du-22-juin-2023_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_4962/proces-verbal-approuve-cm-23-mars-2023_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_4963/proces-verbal-25-mai-2023-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4973/proces-verbal-approuve-cm-23-mars-2023_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_4974/proces-verbal-25-mai-2023-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 75
+        }
+      },
+      {
+        "path": "section_4984/proces-verbal-seance-du-9-fevrier-2023_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (5 votes contre) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 117
+        }
+      },
+      {
+        "path": "section_4985/proces-verbal-approuve-cm-23-mars-2023_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_5009/proces-verbal-seance-du-9-fevrier-2023_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (5 votes contre) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 117
+        }
+      },
+      {
+        "path": "section_5010/proces-verbal-approuve-cm-23-mars-2023_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 111
+        }
+      },
+      {
+        "path": "section_5034/proces-verbal-approuve-seance-15-12-22_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5035/proces-verbal-seance-du-9-fevrier-2023_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 117
+        }
+      },
+      {
+        "path": "section_5050/proces-verbal-approuve-seance-15-12-22_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5051/proces-verbal-seance-du-9-fevrier-2023_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 117
+        }
+      },
+      {
+        "path": "section_5066/proces-verbal-seance-11-octobre-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5067/proces-verbal-approuve-seance-15-12-22_0.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5091/proces-verbal-seance-11-octobre-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5092/proces-verbal-approuve-seance-15-12-22_0.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5116/proces-verbal-approuve-cm-23-juin-2022_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_5117/proces-verbal-seance-11-octobre-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5132/proces-verbal-approuve-cm-23-juin-2022_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_5133/proces-verbal-seance-11-octobre-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5148/proces-verbal-seance-du-19-mai-2022-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 59
+        }
+      },
+      {
+        "path": "section_5149/proces-verbal-approuve-cm-23-juin-2022_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_5171/proces-verbal-seance-du-19-mai-2022-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 59
+        }
+      },
+      {
+        "path": "section_5172/proces-verbal-approuve-cm-23-juin-2022_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 93
+        }
+      },
+      {
+        "path": "section_5194/pv-seance-24-mars-2022-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 89
+        }
+      },
+      {
+        "path": "section_5195/proces-verbal-seance-du-19-mai-2022-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 59
+        }
+      },
+      {
+        "path": "section_5210/pv-seance-24-mars-2022-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 89
+        }
+      },
+      {
+        "path": "section_5211/proces-verbal-seance-du-19-mai-2022-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS-VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 59
+        }
+      },
+      {
+        "path": "section_5226/proces-verbal-3-fevrier-2022_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5227/pv-seance-24-mars-2022-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 89
+        }
+      },
+      {
+        "path": "section_5245/proces-verbal-3-fevrier-2022_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, A l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5246/pv-seance-24-mars-2022-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 89
+        }
+      },
+      {
+        "path": "section_5264/proces-verbal-cm-16-decembre-2021-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5265/proces-verbal-3-fevrier-2022_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5277/proces-verbal-cm-16-decembre-2021-approuve_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5278/proces-verbal-3-fevrier-2022_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 91
+        }
+      },
+      {
+        "path": "section_5290/proces-verbal-seance-25-novembre-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 87
+        }
+      },
+      {
+        "path": "section_5291/proces-verbal-cm-16-decembre-2021-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5309/proces-verbal-seance-25-novembre-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 87
+        }
+      },
+      {
+        "path": "section_5310/proces-verbal-cm-16-decembre-2021-approuve_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5328/proces-verbal-seance-du-6-octobre-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé les procès-verbaux des séances des",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 96
+        }
+      },
+      {
+        "path": "section_5329/proces-verbal-seance-du-16-octobre-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, et",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_5330/proces-verbal-seance-25-novembre-2021.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 87
+        }
+      },
+      {
+        "path": "section_5348/proces-verbal-seance-du-6-octobre-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé les procès-verbaux des séances des",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 96
+        }
+      },
+      {
+        "path": "section_5349/proces-verbal-seance-du-16-octobre-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, et",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_5350/proces-verbal-seance-25-novembre-2021.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 87
+        }
+      },
+      {
+        "path": "section_5368/proces-verbal-seance-du-16-octobre-2021.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_5373/proces-verbal-seance-du-16-octobre-2021.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_5378/proces-verbal-seance-24-juin-2021_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 97
+        }
+      },
+      {
+        "path": "section_5379/proces-verbal-seance-du-6-octobre-2021.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 96
+        }
+      },
+      {
+        "path": "section_5397/proces-verbal-seance-24-juin-2021_0.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 97
+        }
+      },
+      {
+        "path": "section_5398/proces-verbal-seance-du-6-octobre-2021.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 96
+        }
+      },
+      {
+        "path": "section_5416/proces-verbal-seance-20-mai-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre), le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5417/proces-verbal-seance-24-juin-2021_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 97
+        }
+      },
+      {
+        "path": "section_5436/proces-verbal-seance-20-mai-2021.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (1 vote contre), le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5437/proces-verbal-seance-24-juin-2021_0.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 97
+        }
+      },
+      {
+        "path": "section_5456/proces-verbal-cm-25-mars-2021-adopte.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 104
+        }
+      },
+      {
+        "path": "section_5457/proces-verbal-seance-20-mai-2021.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5466/20210520-pj-09-voeu-peuple-birman.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nVœu de soutien au peuple birman\n, Séance publique du 20 mai 2021",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_5467/20210520-pj-10-voeu-poste-des-blagis.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nVœu demandant le maintien du bureau de Poste dans le quartier des Blagis\n, Séance publique du 20 mai 2021",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_5470/proces-verbal-cm-25-mars-2021-adopte.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À l’unanimité, le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 104
+        }
+      },
+      {
+        "path": "section_5471/proces-verbal-seance-20-mai-2021.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 106
+        }
+      },
+      {
+        "path": "section_5480/20210520-pj-09-voeu-peuple-birman.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nVœu de soutien au peuple birman\n, Séance publique du 20 mai 2021",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_5481/20210520-pj-10-voeu-poste-des-blagis.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nVœu demandant le maintien du bureau de Poste dans le quartier des Blagis\n, Séance publique du 20 mai 2021",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_5484/proces-verbal-approuve040221.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 130
+        }
+      },
+      {
+        "path": "section_5485/proces-verbal-cm-25-mars-2021-adopte.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 104
+        }
+      },
+      {
+        "path": "section_5507/proces-verbal-approuve040221.pdf",
+        "section_title": "APPROBATION DU PROCÈS-VERBAL, À la majorité (4 votes contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 130
+        }
+      },
+      {
+        "path": "section_5508/proces-verbal-cm-25-mars-2021-adopte.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 104
+        }
+      },
+      {
+        "path": "section_5530/proces-verbal-cm-171220.pdf",
+        "section_title": "COMMUNICATION DU MAIRE // Approbation du procès-verbal, A la majorité (4 votes contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 190
+        }
+      },
+      {
+        "path": "section_5531/proces-verbal-approuve040221.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 130
+        }
+      },
+      {
+        "path": "section_5551/proces-verbal-cm-171220.pdf",
+        "section_title": "COMMUNICATION DU MAIRE // Approbation du procès-verbal, A la majorité (4 votes contre) , le conseil a approuvé le",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 190
+        }
+      },
+      {
+        "path": "section_5552/proces-verbal-approuve040221.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 130
+        }
+      },
+      {
+        "path": "section_5572/proces-verbal-cm-171220.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 190
+        }
+      },
+      {
+        "path": "section_5611/proces-verbal-cm-171220.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "attendance",
+            "vote"
+          ],
+          "pages": 190
+        }
+      },
+      {
+        "path": "section_5650/proces-verbal-cm-8-octobre-2020.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 107
+        }
+      },
+      {
+        "path": "section_5673/proces-verbal-cm-8-octobre-2020.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 107
+        }
+      },
+      {
+        "path": "section_5696/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9.pdf",
+        "section_title": "IV - APPROBATION DU PROCÈS-VERBAL DE LA SÉANCE DU 11 JUIN 2020, À l’unanimité , le conseil a approuvé le",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 88
+        }
+      },
+      {
+        "path": "section_5697/Proc%C3%A8s-verbal%209%20juillet%202020.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 77
+        }
+      },
+      {
+        "path": "section_5698/PV_succinct_s%C3%A9ance_CM_09072020.pdf",
+        "section_title": "Informations annexes au site // \n      Compte rendu succinct du 9 juillet 2020 // \n      Compte rendu succinct du 9 juillet 2020",
+        "reason": "filename_crpv_abbrev"
+      },
+      {
+        "path": "section_5730/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9.pdf",
+        "section_title": "IV - APPROBATION DU PROCÈS-VERBAL DE LA SÉANCE DU 11 JUIN 2020, À l’unanimité , le conseil a approuvé le",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 88
+        }
+      },
+      {
+        "path": "section_5731/Proc%C3%A8s-verbal%209%20juillet%202020.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 77
+        }
+      },
+      {
+        "path": "section_5732/PV_succinct_s%C3%A9ance_CM_09072020.pdf",
+        "section_title": "Informations annexes au site // \n      Compte rendu succinct du 9 juillet 2020 // \n      Compte rendu succinct du 9 juillet 2020",
+        "reason": "filename_crpv_abbrev"
+      },
+      {
+        "path": "section_5765/Proc%C3%A8s-verbal%20CM%203%20juillet%202020.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_5767/Proc%C3%A8s-verbal%20CM%203%20juillet%202020.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_5768/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020.pdf",
+        "section_title": "Approbation du procès-verbal, À l’unanimité des votants (1 abstention), le conseil a approuvé le",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 51
+        }
+      },
+      {
+        "path": "section_5769/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 88
+        }
+      },
+      {
+        "path": "section_5789/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020.pdf",
+        "section_title": "Approbation du procès-verbal, À l’unanimité des votants (1 abstention), le conseil a approuvé le",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 51
+        }
+      },
+      {
+        "path": "section_5790/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 88
+        }
+      },
+      {
+        "path": "section_5812/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 51
+        }
+      },
+      {
+        "path": "section_5825/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 51
+        }
+      },
+      {
+        "path": "section_5836/Proc%C3%A8s-verbal%20300120.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 73
+        }
+      },
+      {
+        "path": "section_5847/Proc%C3%A8s-verbal%20300120.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 73
+        }
+      },
+      {
+        "path": "section_5858/Proc%C3%A8s-verbal%20191219.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 87
+        }
+      },
+      {
+        "path": "section_5877/Proc%C3%A8s-verbal%20191219.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 87
+        }
+      },
+      {
+        "path": "section_5896/Proc%C3%A8s-verbal%20CM%2027%20nov.%202019.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 71
+        }
+      },
+      {
+        "path": "section_5905/Proc%C3%A8s-verbal%20CM%2027%20nov.%202019.pdf",
+        "section_title": "Informations annexes au site // \n      Procès-verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 71
+        }
+      },
+      {
+        "path": "section_5914/Proc%C3%A8s-verbal%20s%C3%A9ance%202%20octobre%202019.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_5916/2019-10-02-PJ-02%20-%20Voeu%20pacte-finance%20climat.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nVoeu relatif au pacte finance-climat\n, Séance publique du 2 octobre 2019.",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_5928/Proc%C3%A8s-verbal%20s%C3%A9ance%202%20octobre%202019.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_5930/2019-10-02-PJ-02%20-%20Voeu%20pacte-finance%20climat.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nVoeu relatif au pacte finance-climat\n, Séance publique du 2 octobre 2019.",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_5942/Proc%C3%A8s-verbal%20270619.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_5960/Proc%C3%A8s-verbal%20270619.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_5978/Proc%C3%A8s-verbal%2023%20mai%202019.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 53
+        }
+      },
+      {
+        "path": "section_5992/Proc%C3%A8s-verbal%2023%20mai%202019.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 53
+        }
+      },
+      {
+        "path": "section_6006/Proc%C3%A8s-verbal%20CM%2028%20mars%202019.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_6026/Proc%C3%A8s-verbal%20CM%2028%20mars%202019.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 82
+        }
+      },
+      {
+        "path": "section_6046/Proc%C3%A8s-verbal%20s%C3%A9ance%2014%20f%C3%A9vrier%202019.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 53
+        }
+      },
+      {
+        "path": "section_6057/Proc%C3%A8s-verbal%20s%C3%A9ance%2014%20f%C3%A9vrier%202019.pdf",
+        "section_title": "Informations annexes au site // \n      PROCÈS VERBAL",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 53
+        }
+      },
+      {
+        "path": "section_6068/Proc%C3%A8s-verbal%20CM%20201219.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 71
+        }
+      },
+      {
+        "path": "section_6085/Proc%C3%A8s-verbal%20CM%20201219.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 71
+        }
+      },
+      {
+        "path": "section_6102/Proc%C3%A8s-verbal%2015-11-2018.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6111/Proc%C3%A8s-verbal%2015-11-2018.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6120/Proc%C3%A8s-verbal%20270918_0.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6132/Proc%C3%A8s-verbal%20270918_0.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6144/Proc%C3%A8s-verbal%20s%C3%A9ance%20du%2028%20juin%202018.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6156/Proc%C3%A8s-verbal%20s%C3%A9ance%20du%2028%20juin%202018.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6168/Proc%C3%A8s-verbal%20160518.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6182/Proc%C3%A8s-verbal%20160518.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6196/Proc%C3%A8s-verbal%20120418.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6198/Proc%C3%A8s-verbal%20120418.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword"
+      },
+      {
+        "path": "section_6200/Proc%C3%A8s-verbal%20290318.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6224/Proc%C3%A8s-verbal%20290318.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6248/proces-verbal_cm_150218.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_6261/proces-verbal_cm_150218.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_6274/proces-verbal_14_decembre_2017_0.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6296/proces-verbal_14_decembre_2017_0.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6318/2017-10-05-PV-proces-verbal_051017.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 57
+        }
+      },
+      {
+        "path": "section_6333/2017-10-05-PV-proces-verbal_051017.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 57
+        }
+      },
+      {
+        "path": "section_6348/2017-06-30-PV-proces-verbal_300617.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6365/2017-06-30-PV-proces-verbal_300617.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6382/2017-05-11-PV-proces-verbal_110517.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6390/2017-05-11-PV-proces-verbal_110517.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6398/2017-03-29-PV-proces-verbal_cm_290317.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance"
+          ],
+          "pages": 64
+        }
+      },
+      {
+        "path": "section_6409/2017-03-29-PV-proces-verbal_cm_290317.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance"
+          ],
+          "pages": 64
+        }
+      },
+      {
+        "path": "section_6420/2017-03-02-PV-proces-verbal_cm_020317.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6428/2017-03-02-PV-proces-verbal_cm_020317.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6436/2016-12-15-proces-verbal_seance_151216.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6444/2016-12-15-PJ-18%20-%20Taxes%2C%20redevances%2C%20tarifs%202017.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nApprobation des taxes, redevances et tarifs municipaux à compter du 1er janvier 2017\n, Séance publique du 15 décembre 2016",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_6461/2016-12-15-proces-verbal_seance_151216.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6469/2016-12-15-PJ-18%20-%20Taxes%2C%20redevances%2C%20tarifs%202017.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nApprobation des taxes, redevances et tarifs municipaux à compter du 1er janvier 2017\n, Séance publique du 15 décembre 2016",
+        "reason": "metadata_linktext_combined_report"
+      },
+      {
+        "path": "section_6486/2016-11-03-PV-proces-verbal_031116.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6491/2016-11-03-PV-proces-verbal_031116.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6496/2016-09-29-PV-proces-verbal_29_septembre_2016.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 52
+        }
+      },
+      {
+        "path": "section_6511/2016-09-29-PV-proces-verbal_29_septembre_2016.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 52
+        }
+      },
+      {
+        "path": "section_6526/2016-06-30-PV-proces-verbal_300616.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 53
+        }
+      },
+      {
+        "path": "section_6541/2016-06-30-PV-proces-verbal_300616.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 53
+        }
+      },
+      {
+        "path": "section_6556/2016-05-19-PV-proces-verbal_190516.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6570/2016-05-19-PV-proces-verbal_190516.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword"
+      },
+      {
+        "path": "section_6584/2016-03-31-PV-proces-verbal_310316.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_6603/2016-03-31-PV-proces-verbal_310316.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 85
+        }
+      },
+      {
+        "path": "section_6622/2016-02-11-PV-proces-verbal_seance_11_fevrier_2016.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 50
+        }
+      },
+      {
+        "path": "section_6634/2016-02-11-PV-proces-verbal_seance_11_fevrier_2016.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 50
+        }
+      },
+      {
+        "path": "section_6646/2015-12-17-PV-proces-verbal_17_decembre_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 80
+        }
+      },
+      {
+        "path": "section_6676/2015-12-17-PV-proces-verbal_17_decembre_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 80
+        }
+      },
+      {
+        "path": "section_6706/2015-09-30-PV-proces-verbal_30_septembre_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 84
+        }
+      },
+      {
+        "path": "section_6736/2015-09-30-PV-proces-verbal_30_septembre_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 84
+        }
+      },
+      {
+        "path": "section_6766/2015-06-24-PV-proces-verbal_240615.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_6779/2015-06-24-PV-proces-verbal_240615.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 67
+        }
+      },
+      {
+        "path": "section_6792/2015-05-21-PV-proces-verbal_21-05-2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 62
+        }
+      },
+      {
+        "path": "section_6806/2015-05-21-PV-proces-verbal_21-05-2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 62
+        }
+      },
+      {
+        "path": "section_6820/2015-03-26-PV-proces-verbal_26_mars_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 81
+        }
+      },
+      {
+        "path": "section_6842/2015-03-26-PV-proces-verbal_26_mars_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "deliberation",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 81
+        }
+      },
+      {
+        "path": "section_6864/2015-02-12-PV-proces-verbal_12_fevrier_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6879/2015-02-12-PV-proces-verbal_12_fevrier_2015.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6894/2014-12-18-PV-proces-verbal_18_decembre_2014.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6920/2014-12-18-PV-proces-verbal_18_decembre_2014.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 78
+        }
+      },
+      {
+        "path": "section_6946/2014-09-30-PV-pv_30-09-2014.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6963/2014-09-30-PV-pv_30-09-2014.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nTransfert du marché biologique de Robinson\n, Séance publique du 30 septembre 2014",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6964/2014-09-30-PV-pv_30-09-2014.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6981/2014-09-30-PV-pv_30-09-2014.pdf",
+        "section_title": "Informations annexes au site // Délibération // \nTransfert du marché biologique de Robinson\n, Séance publique du 30 septembre 2014",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_6982/2014-06-19-PV-pv-190614.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 89
+        }
+      },
+      {
+        "path": "section_7010/2014-06-19-PV-pv-190614.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_abbrev",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 89
+        }
+      },
+      {
+        "path": "section_7038/Proc%C3%A8s-verbal%20s%C3%A9ance%20050514.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_7039/Proc%C3%A8s-verbal%20s%C3%A9ance%20050514.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "metadata_linktext_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 54
+        }
+      },
+      {
+        "path": "section_7040/2014-02-11-PV-proces_verbal_seance_110214.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 55
+        }
+      },
+      {
+        "path": "section_7057/2014-02-11-PV-proces_verbal_seance_110214.pdf",
+        "section_title": "Informations annexes au site // \n      Procès verbal",
+        "reason": "filename_crpv_keyword",
+        "validation": {
+          "method": "text_extraction",
+          "categories": [
+            "conseil_municipal",
+            "pv_cr",
+            "seance",
+            "elus",
+            "attendance",
+            "vote"
+          ],
+          "pages": 55
+        }
+      }
+    ]
+  }
+]
