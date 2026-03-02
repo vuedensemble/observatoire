@@ -2,7 +2,7 @@
 
 DB_COMPOSE = docker compose -f docker-compose.db.yml
 DB_DEV_COMPOSE = docker compose -f docker-compose.db.yml -f docker-compose.db.dev.yml
-APP_COMPOSE = docker compose
+APP_COMPOSE = docker compose -f docker-compose.db.yml -f docker-compose.yml
 
 # --- Database (standalone) ---
 
