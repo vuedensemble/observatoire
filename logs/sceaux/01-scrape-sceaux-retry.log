@@ -1,0 +1,167 @@
+INFO - observatoire.processors.e2e - Loaded 1 rows from CSV: sceaux.csv
+INFO - observatoire.processors.e2e - Will process 1 cities with 5 parallel workers
+INFO - observatoire.processors.e2e - [1/1] Sceaux: Starting crawl...
+INFO - observatoire.processors.e2e - Starting scrape for city: Sceaux
+INFO - observatoire.processors.e2e - Original URL: https://www.sceaux.fr/ma-mairie/seances-et-deliberations
+INFO - observatoire.processors.e2e - Created city folder: datasets/cities/Sceaux
+INFO - observatoire.processors.e2e - Crawling website...
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/ma-mairie/seances-et-deliberations (depth=0)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/ (depth=1)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/actualites (depth=2)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Actualit%C3%A9s&url=https%3A//www.sceaux.fr/actualites (depth=3)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=Actualit%C3%A9s&page_url=https%3A//www.sceaux.fr/actualites (depth=3)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/page_url] (depth=4)
+WARNING - observatoire.processors.e2e - HTTP error 404 for: https://www.sceaux.fr/page_url]
+INFO - observatoire.processors.e2e - Skipping external URL: http://example.com
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/actualites#page (depth=3)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Actualit%C3%A9s&url=https%3A//www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/partager-la-page?page_name=Actualit%C3%A9s&page_url=https%3A//www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/actualites
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/actualites#page
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.stratis.fr
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.stratis.fr
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/node/3079 (depth=2)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20La%20ville%20%C3%A0%20votre%20%C3%A9coute&url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute (depth=3)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=La%20ville%20%C3%A0%20votre%20%C3%A9coute&page_url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute (depth=3)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/page_url]
+INFO - observatoire.processors.e2e - Skipping external URL: http://example.com
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/node/3079#page (depth=3)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20La%20ville%20%C3%A0%20votre%20%C3%A9coute&url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/partager-la-page?page_name=La%20ville%20%C3%A0%20votre%20%C3%A9coute&page_url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/node/3079#page
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.stratis.fr
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.stratis.fr
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/node/2946 (depth=2)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Les%20structures%20et%20professionnels%20de%20sant%C3%A9&url=https%3A//www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante (depth=3)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=Les%20structures%20et%20professionnels%20de%20sant%C3%A9&page_url=https%3A//www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante (depth=3)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/page_url]
+INFO - observatoire.processors.e2e - Skipping external URL: http://example.com
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.ameli.fr
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/node/monpharmacien-idf.fr (depth=3)
+WARNING - observatoire.processors.e2e - HTTP error 404 for: https://www.sceaux.fr/node/monpharmacien-idf.fr
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.universite-paris-saclay.fr/
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.filsantejeunes.com/
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.etudiant.gouv.fr/fr
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.avenir-sante.com/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales (depth=3)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Aides%20administratives%20juridiques%20et%20sociales&url=https%3A//www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales (depth=4)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=Aides%20administratives%2C%20juridiques%20et%20sociales&page_url=https%3A//www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales (depth=4)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/page_url]
+INFO - observatoire.processors.e2e - Skipping external URL: http://example.com
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.espace-citoyens.net/sceaux/espace-citoyens/SimulationTarifs
+INFO - observatoire.processors.e2e - Skipping non-HTML resource: https://www.sceaux.fr/sites/default/files/Document%20PDF/2025/allocation-communale-daide-a-la-famille-2025-2026.pdf
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/la-ville-a-votre-ecoute (depth=4)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20La%20ville%20%C3%A0%20votre%20%C3%A9coute&url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/partager-la-page?page_name=La%20ville%20%C3%A0%20votre%20%C3%A9coute&page_url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/la-ville-a-votre-ecoute#page (depth=5)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20La%20ville%20%C3%A0%20votre%20%C3%A9coute&url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/partager-la-page?page_name=La%20ville%20%C3%A0%20votre%20%C3%A9coute&page_url=https%3A//www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/la-ville-a-votre-ecoute#page
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.stratis.fr
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.stratis.fr
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 41 13 33 00
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 46 60 35 38
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 47 02 75 97
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 46 60 56 02
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 41 13 06 06
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.apprentis-auteuil.org/
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 41 13 33 00
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 41 13 33 00
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.caf.fr
+INFO - observatoire.processors.e2e - Skipping external URL: tel:36 46
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.ameli.fr/
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.cramif.fr/
+INFO - observatoire.processors.e2e - Skipping external URL: tel:01 47 91 48 44
+INFO - observatoire.processors.e2e - Skipping non-HTML resource: https://www.sceaux.fr/sites/default/files/violences-femmes-tract-a5150x210mm-web_0.pdf
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.caf.fr/allocataires/actualites/actualites-nationales/violences-conjugales-une-aide-d-urgence-pour-vous-proteger
+INFO - observatoire.processors.e2e - Skipping non-HTML resource: https://www.sceaux.fr/sites/default/files/publications/violences-femmes-tract-a5-150x210mm-2023-bd.pdf
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante (depth=4)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Les%20structures%20et%20professionnels%20de%20sant%C3%A9&url=https%3A//www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/partager-la-page?page_name=Les%20structures%20et%20professionnels%20de%20sant%C3%A9&page_url=https%3A//www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.ameli.fr
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/mon-quotidien/monpharmacien-idf.fr (depth=5)
+WARNING - observatoire.processors.e2e - HTTP error 404 for: https://www.sceaux.fr/mon-quotidien/monpharmacien-idf.fr
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.universite-paris-saclay.fr/
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.filsantejeunes.com/
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.etudiant.gouv.fr/fr
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.avenir-sante.com/
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/mon-quotidien/handicap (depth=5)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Handicap&url=https%3A//www.sceaux.fr/mon-quotidien/handicap (depth=6)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=Handicap&page_url=https%3A//www.sceaux.fr/mon-quotidien/handicap (depth=6)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/page_url]
+INFO - observatoire.processors.e2e - Skipping external URL: http://example.com
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/mon-quotidien/handicap
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/mon-quotidien/handicap
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/mon-quotidien/handicap
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/la-ville-a-votre-ecoute
+INFO - observatoire.processors.e2e - Skipping external URL: https://handicap.gouv.fr/toutes-les-aides-financieres-pour-le-handicap
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.hauts-de-seine.fr/solidarites/handicap-et-autonomie/maison-departementale-des-personnes-handicapees-mdph/
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.apeisud92.org/
+INFO - observatoire.processors.e2e - Skipping external URL: http://sceaux.avh.asso.fr
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/mon-quotidien/violences-intrafamiliales (depth=6)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Lutte%20contre%20les%20violences&url=https%3A//www.sceaux.fr/mon-quotidien/violences-intrafamiliales (depth=7)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=Lutte%20contre%20les%20violences&page_url=https%3A//www.sceaux.fr/mon-quotidien/violences-intrafamiliales (depth=7)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/page_url]
+INFO - observatoire.processors.e2e - Skipping external URL: http://example.com
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/mon-quotidien/violences-intrafamiliales
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/mon-quotidien/violences-intrafamiliales
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/mon-quotidien/violences-intrafamiliales
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.masecurite.interieur.gouv.fr/fr
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.caf.fr/allocataires/actualites/actualites-nationales/violences-conjugales-une-aide-d-urgence-pour-vous-proteger
+INFO - observatoire.processors.e2e - Skipping external URL: https://www.allo119.gouv.fr/
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/mon-quotidien/les-structures-et-professionnels-de-sante
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/mon-quotidien/aides-administratives-juridique-et-sociales
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/mon-quotidien/handicap
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/mes-demarches-en-ligne (depth=7)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Mes%20d%C3%A9marches%20en%20ligne&url=https%3A//www.sceaux.fr/mes-demarches-en-ligne (depth=8)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=Mes%20d%C3%A9marches%20en%20ligne&page_url=https%3A//www.sceaux.fr/mes-demarches-en-ligne (depth=8)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/page_url]
+INFO - observatoire.processors.e2e - Skipping external URL: http://example.com
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.facebook.com/share.php?u=https://www.sceaux.fr/mes-demarches-en-ligne
+INFO - observatoire.processors.e2e - Skipping external URL: https://twitter.com/share?url=https://www.sceaux.fr/mes-demarches-en-ligne
+INFO - observatoire.processors.e2e - Skipping external URL: http://www.linkedin.com/shareArticle?mini=true&url=https://www.sceaux.fr/mes-demarches-en-ligne
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/aides-aux-ukrainiens (depth=8)
+INFO - observatoire.processors.e2e - Skipping already visited: https://www.sceaux.fr/
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/get-page-pdf?file_name=Site%20de%20la%20ville%20de%20Sceaux%20-%20Aides%20aux%20Ukrainiens&url=https%3A//www.sceaux.fr/aides-aux-ukrainiens (depth=9)
+INFO - observatoire.processors.e2e - Crawling: https://www.sceaux.fr/partager-la-page?page_name=Aides%20aux%20Ukrainiens&page_url=https%3A//www.sceaux.fr/aides-aux-ukrainiens (depth=9)

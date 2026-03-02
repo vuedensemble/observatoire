@@ -1,0 +1,16 @@
+
+> webapp@0.1.0 db:dedup
+> npx tsx scripts/dedup-projects.ts --all
+
+[dotenv@17.3.1] injecting env (12) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Deduplicating projects for 1 communes...
+
+Sceaux:
+  3288 ungrouped mentions
+  Step 1/4: Exact match grouping... 1473 groups
+  Step 2/4: Prefix matching (1473 groups)... 206 merges → 1267 groups
+  Step 3/4: Fuzzy matching (1267 groups)... 245 merges → 1022 groups
+  Step 4/4: Writing 1022 groups + 3288 mentions to DB... done
+  1022 groups from 3288 mentions
+
+Total: 1022 groups from 3288 mentions

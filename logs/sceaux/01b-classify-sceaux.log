@@ -1,0 +1,276 @@
+INFO - observatoire.processors.llm - Found 1 cities to process
+INFO - observatoire.processors.llm - Processing city Sceaux (1/1)
+INFO - observatoire.processors.llm - Built 7074 classification requests for datasets/cities/Sceaux
+INFO - observatoire.processors.llm - Creating batch job with 7074 requests
+INFO - httpx - HTTP Request: POST https://api.mistral.ai/v1/files "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Uploaded batch file: 88d1744a-5853-44b3-a8e3-673e7bbcbf1c
+INFO - httpx - HTTP Request: POST https://api.mistral.ai/v1/batch/jobs "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job created: 0056d369-06a5-408c-b79f-01bb8b8a9236
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: QUEUED (0/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (0/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (120/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (120/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (180/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (240/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (300/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (300/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (420/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (420/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (540/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (540/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (660/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (660/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (760/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (800/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (880/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (880/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (980/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1060/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1100/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1100/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1220/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1240/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1340/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1380/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1440/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1500/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1540/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1640/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1660/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1700/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1760/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1780/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1880/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (1980/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2000/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2060/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2100/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2180/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2220/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2320/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2340/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2380/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2480/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2560/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2560/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2640/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2660/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2760/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2780/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2860/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2860/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2920/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (2960/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3000/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3020/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3080/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3100/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3180/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3220/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3320/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3320/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3440/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3460/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3540/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3560/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3640/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3720/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3760/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3760/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3880/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (3880/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4000/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4020/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4120/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4160/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4240/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4340/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4360/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4400/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4440/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4500/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4580/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4640/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4700/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4780/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4820/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4920/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (4940/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5000/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5040/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5120/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5160/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5240/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5260/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5300/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5340/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5440/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5460/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5520/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5540/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5600/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5620/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5680/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5720/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5800/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5800/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5920/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (5920/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6040/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6040/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6160/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6180/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6280/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6280/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6380/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6420/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6460/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6480/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6580/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6580/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6700/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6740/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6800/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6820/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (6920/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (7000/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (7040/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (7054/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: RUNNING (7074/7074)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0056d369-06a5-408c-b79f-01bb8b8a9236 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch job 0056d369-06a5-408c-b79f-01bb8b8a9236 status: SUCCESS (7074/7074)
+INFO - observatoire.processors.llm - Downloading results from file: 5e60a0f9-77c5-471a-830c-1d9271a67191
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/files/5e60a0f9-77c5-471a-830c-1d9271a67191/content "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - Batch complete: 7074 results
+INFO - observatoire.processors.llm - Saved results for Sceaux to datasets/cities/Sceaux/municipal_council_section_check.json

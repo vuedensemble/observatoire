@@ -1,0 +1,363 @@
+INFO - observatoire.processors.llm - Manifest loaded: 266 files listed, 266 found on disk
+INFO - observatoire.processors.llm - Found 266 PDF files in /home/selim/code/vue_ensemble/observatoire/datasets/cities
+INFO - observatoire.processors.llm - Skipped 0 PDFs with existing OCR results, 266 to process
+INFO - observatoire.processors.llm - Building OCR batch requests for 266 PDFs
+INFO - observatoire.processors.llm - Split 266 requests into 2 batches (200MB limit per batch)
+INFO - observatoire.processors.llm - Processing batch 1/2 with 168 requests
+INFO - httpx - HTTP Request: POST https://api.mistral.ai/v1/files "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] Uploaded OCR batch file: 6adad125-ac4e-427b-ad9c-d2b08f0bb441
+INFO - httpx - HTTP Request: POST https://api.mistral.ai/v1/batch/jobs "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job created: bc03350d-987a-4797-924a-508fbd35ac2b
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: QUEUED (0/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (4/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (4/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (8/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (8/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (20/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (20/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (24/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (36/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (36/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (52/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (60/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (72/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (88/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (92/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (100/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (120/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (124/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (148/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (152/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: RUNNING (160/168)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/bc03350d-987a-4797-924a-508fbd35ac2b "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] OCR batch job bc03350d-987a-4797-924a-508fbd35ac2b status: SUCCESS (168/168)
+INFO - observatoire.processors.llm - [1/2] Downloading OCR results from file: ef02ce0e-a5f3-416a-8e8a-c336f1f9afc3
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/files/ef02ce0e-a5f3-416a-8e8a-c336f1f9afc3/content "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_0330/2025-055_dde-subvention-drac_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_0716/2024-066_contrat-conferencier_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_0992/2024-343_assistance-technique-touriz_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1050/2023-02-requete-delib.-cm-16-dec.-2021-requete_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1088/2023-40-requete-projet-place-de-gaulle_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1119/2023-72-dde-subventions-drac_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1157/2023-110-requete-sceaux-ensemble-hono_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1601/2022-200-requete-sceaux-ensemble_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_2125/2020-253_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_2324/2025-055_dde-subvention-drac_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_2710/2024-066_contrat-conferencier_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_2986/2024-343_assistance-technique-touriz_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1674/2022-273_requete-sceaux-ensemble-hono_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1742/2021-07_dc-hono.-requete-annul.-delib.-151118_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_1981/2021-246_dc-requete-delib.projet-degaulle-hono_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_2112/2020-240_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3044/2023-02-requete-delib.-cm-16-dec.-2021-requete_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3082/2023-40-requete-projet-place-de-gaulle_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3113/2023-72-dde-subventions-drac_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3151/2023-110-requete-sceaux-ensemble-hono_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3595/2022-200-requete-sceaux-ensemble_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3668/2022-273_requete-sceaux-ensemble-hono_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3736/2021-07_dc-hono.-requete-annul.-delib.-151118_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_3975/2021-246_dc-requete-delib.projet-degaulle-hono_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4106/2020-240_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4119/2020-253_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4358/proces-verbal-cm-11-decembre-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4376/proces-verbal-cm-11-decembre-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4394/proces-verbal-250925-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4413/proces-verbal-250925-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4432/proces-verbal-approuve-seance-26-juin-2025_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4433/proces-verbal-250925-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4448/proces-verbal-approuve-seance-26-juin-2025_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4449/proces-verbal-250925-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4464/proces-verbal-seance-cm-22-mai-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4465/proces-verbal-approuve-seance-26-juin-2025_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4493/proces-verbal-seance-cm-22-mai-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4494/proces-verbal-approuve-seance-26-juin-2025_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4522/proces-verbal-seance-27-mars-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4523/proces-verbal-seance-cm-22-mai-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4535/proces-verbal-seance-27-mars-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4536/proces-verbal-seance-cm-22-mai-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4548/proces-verbal-seance-6-fevrier-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4549/proces-verbal-seance-27-mars-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4562/proces-verbal-seance-6-fevrier-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4563/proces-verbal-seance-27-mars-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4576/proces-verbal-seance-10-decembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4577/proces-verbal-seance-6-fevrier-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4588/proces-verbal-seance-10-decembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4589/proces-verbal-seance-6-fevrier-2025-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4600/proces-verbal-25-septembre-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4601/proces-verbal-seance-10-decembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4656/13-enregistrement-meuble-tourisme_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4656/13_enregistrement-meubles-tourisme_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4665/proces-verbal-seance-27-juin-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4666/proces-verbal-25-septembre-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4621/proces-verbal-25-septembre-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4622/proces-verbal-seance-10-decembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4642/proces-verbal-seance-27-juin-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4643/proces-verbal-25-septembre-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4679/13-enregistrement-meuble-tourisme_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4679/13_enregistrement-meubles-tourisme_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4688/proces-verbal-seance-du-23-mai-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4689/proces-verbal-seance-27-juin-2024-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4696/07-pj-comptes-dodeca-2023_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4707/proces-verbal-seance-du-23-mai-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4708/proces-verbal-seance-27-juin-2024-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4715/07-pj-comptes-dodeca-2023_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4726/proces-verbal-seance-28-mars-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4727/proces-verbal-seance-du-23-mai-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4742/proces-verbal-seance-28-mars-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4743/proces-verbal-seance-du-23-mai-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4758/proces-verbal-approuve-seance-8-fevrier-2024_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4759/proces-verbal-seance-28-mars-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4776/proces-verbal-approuve-seance-8-fevrier-2024_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4777/proces-verbal-seance-28-mars-2024-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4794/pv-seance-8-decembre-2023_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4795/proces-verbal-approuve-seance-8-fevrier-2024_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4808/pv-seance-8-decembre-2023_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4809/proces-verbal-approuve-seance-8-fevrier-2024_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4822/proces-verbal-27-septembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4823/pv-seance-8-decembre-2023_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4848/proces-verbal-27-septembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4849/pv-seance-8-decembre-2023_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4875/proces-verbal-27-septembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4896/proces-verbal-27-septembre-approuve_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4916/proces-verbal-25-mai-2023-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4917/proces-verbal-seance-du-22-juin-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4939/proces-verbal-25-mai-2023-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4940/proces-verbal-seance-du-22-juin-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4962/proces-verbal-approuve-cm-23-mars-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4963/proces-verbal-25-mai-2023-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4973/proces-verbal-approuve-cm-23-mars-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4974/proces-verbal-25-mai-2023-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4984/proces-verbal-seance-du-9-fevrier-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_4985/proces-verbal-approuve-cm-23-mars-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5009/proces-verbal-seance-du-9-fevrier-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5010/proces-verbal-approuve-cm-23-mars-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5034/proces-verbal-approuve-seance-15-12-22_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5035/proces-verbal-seance-du-9-fevrier-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5091/proces-verbal-seance-11-octobre-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5092/proces-verbal-approuve-seance-15-12-22_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5116/proces-verbal-approuve-cm-23-juin-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5117/proces-verbal-seance-11-octobre-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5210/pv-seance-24-mars-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5211/proces-verbal-seance-du-19-mai-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5226/proces-verbal-3-fevrier-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5227/pv-seance-24-mars-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5132/proces-verbal-approuve-cm-23-juin-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5133/proces-verbal-seance-11-octobre-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5148/proces-verbal-seance-du-19-mai-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5149/proces-verbal-approuve-cm-23-juin-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5050/proces-verbal-approuve-seance-15-12-22_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5051/proces-verbal-seance-du-9-fevrier-2023_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5066/proces-verbal-seance-11-octobre-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5067/proces-verbal-approuve-seance-15-12-22_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5171/proces-verbal-seance-du-19-mai-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5172/proces-verbal-approuve-cm-23-juin-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5194/pv-seance-24-mars-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5195/proces-verbal-seance-du-19-mai-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5245/proces-verbal-3-fevrier-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5246/pv-seance-24-mars-2022-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5264/proces-verbal-cm-16-decembre-2021-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5265/proces-verbal-3-fevrier-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5330/proces-verbal-seance-25-novembre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5348/proces-verbal-seance-du-6-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5349/proces-verbal-seance-du-16-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5350/proces-verbal-seance-25-novembre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5277/proces-verbal-cm-16-decembre-2021-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5278/proces-verbal-3-fevrier-2022_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5290/proces-verbal-seance-25-novembre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5291/proces-verbal-cm-16-decembre-2021-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5309/proces-verbal-seance-25-novembre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5310/proces-verbal-cm-16-decembre-2021-approuve_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5328/proces-verbal-seance-du-6-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5329/proces-verbal-seance-du-16-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5368/proces-verbal-seance-du-16-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5373/proces-verbal-seance-du-16-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5378/proces-verbal-seance-24-juin-2021_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5379/proces-verbal-seance-du-6-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5397/proces-verbal-seance-24-juin-2021_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5398/proces-verbal-seance-du-6-octobre-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5416/proces-verbal-seance-20-mai-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5417/proces-verbal-seance-24-juin-2021_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5436/proces-verbal-seance-20-mai-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5437/proces-verbal-seance-24-juin-2021_0_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5456/proces-verbal-cm-25-mars-2021-adopte_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5457/proces-verbal-seance-20-mai-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5466/20210520-pj-09-voeu-peuple-birman_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5467/20210520-pj-10-voeu-poste-des-blagis_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5470/proces-verbal-cm-25-mars-2021-adopte_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5471/proces-verbal-seance-20-mai-2021_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5480/20210520-pj-09-voeu-peuple-birman_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5481/20210520-pj-10-voeu-poste-des-blagis_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5484/proces-verbal-approuve040221_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5485/proces-verbal-cm-25-mars-2021-adopte_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5650/proces-verbal-cm-8-octobre-2020_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5673/proces-verbal-cm-8-octobre-2020_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5696/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5697/Proc%C3%A8s-verbal%209%20juillet%202020_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5551/proces-verbal-cm-171220_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5552/proces-verbal-approuve040221_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5572/proces-verbal-cm-171220_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5611/proces-verbal-cm-171220_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5507/proces-verbal-approuve040221_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5508/proces-verbal-cm-25-mars-2021-adopte_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5530/proces-verbal-cm-171220_ocr.json
+INFO - observatoire.processors.llm - [1/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5531/proces-verbal-approuve040221_ocr.json
+INFO - observatoire.processors.llm - Processing batch 2/2 with 98 requests
+INFO - httpx - HTTP Request: POST https://api.mistral.ai/v1/files "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] Uploaded OCR batch file: 2121a443-fcd6-4b21-8d40-0ff4ecf38eb1
+INFO - httpx - HTTP Request: POST https://api.mistral.ai/v1/batch/jobs "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job created: 0ff06808-5602-4131-9e0d-0428f91e0a02
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: QUEUED (0/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: QUEUED (0/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (0/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (4/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (4/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (12/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (16/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (28/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (32/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (40/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (52/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (68/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (76/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (88/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: RUNNING (96/98)
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/batch/jobs/0ff06808-5602-4131-9e0d-0428f91e0a02 "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] OCR batch job 0ff06808-5602-4131-9e0d-0428f91e0a02 status: SUCCESS (98/98)
+INFO - observatoire.processors.llm - [2/2] Downloading OCR results from file: bbef6264-8f44-4156-96b4-49f76dba23ba
+INFO - httpx - HTTP Request: GET https://api.mistral.ai/v1/files/bbef6264-8f44-4156-96b4-49f76dba23ba/content "HTTP/1.1 200 OK"
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5698/PV_succinct_s%C3%A9ance_CM_09072020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5730/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5731/Proc%C3%A8s-verbal%209%20juillet%202020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5732/PV_succinct_s%C3%A9ance_CM_09072020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5789/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5790/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5812/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5825/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5765/Proc%C3%A8s-verbal%20CM%203%20juillet%202020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5767/Proc%C3%A8s-verbal%20CM%203%20juillet%202020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5768/Proc%C3%A8s-verbal%20s%C3%A9ance%205%20mars%202020_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5769/2020_06_11_sceaux_conseil_municipal_approuv%C3%A9_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5836/Proc%C3%A8s-verbal%20300120_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5847/Proc%C3%A8s-verbal%20300120_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5858/Proc%C3%A8s-verbal%20191219_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5877/Proc%C3%A8s-verbal%20191219_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5928/Proc%C3%A8s-verbal%20s%C3%A9ance%202%20octobre%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5930/2019-10-02-PJ-02%20-%20Voeu%20pacte-finance%20climat_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5942/Proc%C3%A8s-verbal%20270619_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5960/Proc%C3%A8s-verbal%20270619_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5978/Proc%C3%A8s-verbal%2023%20mai%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5992/Proc%C3%A8s-verbal%2023%20mai%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6006/Proc%C3%A8s-verbal%20CM%2028%20mars%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6026/Proc%C3%A8s-verbal%20CM%2028%20mars%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6102/Proc%C3%A8s-verbal%2015-11-2018_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6111/Proc%C3%A8s-verbal%2015-11-2018_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6120/Proc%C3%A8s-verbal%20270918_0_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6132/Proc%C3%A8s-verbal%20270918_0_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6046/Proc%C3%A8s-verbal%20s%C3%A9ance%2014%20f%C3%A9vrier%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6057/Proc%C3%A8s-verbal%20s%C3%A9ance%2014%20f%C3%A9vrier%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6068/Proc%C3%A8s-verbal%20CM%20201219_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6085/Proc%C3%A8s-verbal%20CM%20201219_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6196/Proc%C3%A8s-verbal%20120418_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6198/Proc%C3%A8s-verbal%20120418_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6200/Proc%C3%A8s-verbal%20290318_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6224/Proc%C3%A8s-verbal%20290318_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6144/Proc%C3%A8s-verbal%20s%C3%A9ance%20du%2028%20juin%202018_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6156/Proc%C3%A8s-verbal%20s%C3%A9ance%20du%2028%20juin%202018_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6168/Proc%C3%A8s-verbal%20160518_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6182/Proc%C3%A8s-verbal%20160518_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6318/2017-10-05-PV-proces-verbal_051017_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6333/2017-10-05-PV-proces-verbal_051017_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6348/2017-06-30-PV-proces-verbal_300617_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6365/2017-06-30-PV-proces-verbal_300617_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6248/proces-verbal_cm_150218_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6261/proces-verbal_cm_150218_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6274/proces-verbal_14_decembre_2017_0_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6296/proces-verbal_14_decembre_2017_0_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5896/Proc%C3%A8s-verbal%20CM%2027%20nov.%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5905/Proc%C3%A8s-verbal%20CM%2027%20nov.%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5914/Proc%C3%A8s-verbal%20s%C3%A9ance%202%20octobre%202019_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_5916/2019-10-02-PJ-02%20-%20Voeu%20pacte-finance%20climat_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6382/2017-05-11-PV-proces-verbal_110517_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6390/2017-05-11-PV-proces-verbal_110517_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6398/2017-03-29-PV-proces-verbal_cm_290317_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6409/2017-03-29-PV-proces-verbal_cm_290317_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6420/2017-03-02-PV-proces-verbal_cm_020317_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6428/2017-03-02-PV-proces-verbal_cm_020317_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6436/2016-12-15-proces-verbal_seance_151216_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6444/2016-12-15-PJ-18%20-%20Taxes%2C%20redevances%2C%20tarifs%202017_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6461/2016-12-15-proces-verbal_seance_151216_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6469/2016-12-15-PJ-18%20-%20Taxes%2C%20redevances%2C%20tarifs%202017_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6486/2016-11-03-PV-proces-verbal_031116_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6491/2016-11-03-PV-proces-verbal_031116_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6496/2016-09-29-PV-proces-verbal_29_septembre_2016_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6511/2016-09-29-PV-proces-verbal_29_septembre_2016_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6526/2016-06-30-PV-proces-verbal_300616_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6541/2016-06-30-PV-proces-verbal_300616_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6556/2016-05-19-PV-proces-verbal_190516_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6570/2016-05-19-PV-proces-verbal_190516_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6584/2016-03-31-PV-proces-verbal_310316_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6603/2016-03-31-PV-proces-verbal_310316_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6622/2016-02-11-PV-proces-verbal_seance_11_fevrier_2016_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6634/2016-02-11-PV-proces-verbal_seance_11_fevrier_2016_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6646/2015-12-17-PV-proces-verbal_17_decembre_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6676/2015-12-17-PV-proces-verbal_17_decembre_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6792/2015-05-21-PV-proces-verbal_21-05-2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6806/2015-05-21-PV-proces-verbal_21-05-2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6820/2015-03-26-PV-proces-verbal_26_mars_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6842/2015-03-26-PV-proces-verbal_26_mars_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6706/2015-09-30-PV-proces-verbal_30_septembre_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6736/2015-09-30-PV-proces-verbal_30_septembre_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6766/2015-06-24-PV-proces-verbal_240615_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6779/2015-06-24-PV-proces-verbal_240615_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6864/2015-02-12-PV-proces-verbal_12_fevrier_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6879/2015-02-12-PV-proces-verbal_12_fevrier_2015_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6894/2014-12-18-PV-proces-verbal_18_decembre_2014_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6920/2014-12-18-PV-proces-verbal_18_decembre_2014_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6946/2014-09-30-PV-pv_30-09-2014_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6963/2014-09-30-PV-pv_30-09-2014_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6964/2014-09-30-PV-pv_30-09-2014_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6981/2014-09-30-PV-pv_30-09-2014_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_6982/2014-06-19-PV-pv-190614_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_7010/2014-06-19-PV-pv-190614_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_7038/Proc%C3%A8s-verbal%20s%C3%A9ance%20050514_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_7039/Proc%C3%A8s-verbal%20s%C3%A9ance%20050514_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_7040/2014-02-11-PV-proces_verbal_seance_110214_ocr.json
+INFO - observatoire.processors.llm - [2/2] Saved OCR result: /home/selim/code/vue_ensemble/observatoire/datasets/cities/Sceaux/section_7057/2014-02-11-PV-proces_verbal_seance_110214_ocr.json
+INFO - observatoire.processors.llm - OCR batch complete: 266 results saved
+Processed 266 PDFs
