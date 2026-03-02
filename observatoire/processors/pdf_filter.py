@@ -223,6 +223,7 @@ def filter_city_pdfs(city_dir: Path) -> dict:
             entry = {
                 "path": relative_path,
                 "section_title": section_title.strip(),
+                "url": file_url,
             }
 
             if is_match:
@@ -367,6 +368,73 @@ def build_manifest(results: dict) -> list[dict]:
             "files": city["files"],
         })
     return manifest
+
+
+def deduplicate_manifest_by_url(manifest: list[dict]) -> tuple[list[dict], dict]:
+    """
+    Remove duplicate PDFs that share the same source URL across sections.
+
+    Some city websites publish the same PDF on multiple pages (e.g. one per
+    deliberation). The scraper downloads it into each section, so the manifest
+    contains N copies. This function keeps only the first occurrence per URL.
+
+    Args:
+        manifest: List of per-city manifest entries from build_manifest().
+
+    Returns:
+        (deduplicated_manifest, stats) where stats contains:
+          - duplicates_removed: total number of duplicate entries removed
+          - per_city: dict of city_name -> duplicates removed count
+    """
+    stats: dict = {"duplicates_removed": 0, "per_city": {}}
+    deduped_manifest = []
+
+    for city_entry in manifest:
+        city_name = city_entry["city"]
+        seen_urls: set[str] = set()
+        kept_files = []
+        removed = 0
+
+        for file_entry in city_entry["files"]:
+            url = file_entry.get("url", "").strip()
+            if url and url in seen_urls:
+                removed += 1
+                continue
+            if url:
+                seen_urls.add(url)
+            kept_files.append(file_entry)
+
+        if removed > 0:
+            stats["per_city"][city_name] = removed
+            stats["duplicates_removed"] += removed
+
+        deduped_entry = dict(city_entry)
+        deduped_entry["files"] = kept_files
+        deduped_entry["matched_pdfs"] = len(kept_files)
+        deduped_manifest.append(deduped_entry)
+
+    return deduped_manifest, stats
+
+
+def generate_dedup_report(stats: dict) -> str:
+    """Produce a human-readable summary of URL deduplication results."""
+    removed = stats["duplicates_removed"]
+    if removed == 0:
+        return "\nURL deduplication: no duplicates found."
+
+    lines = [
+        "",
+        "URL Deduplication Results",
+        "=" * 50,
+        f"Duplicates removed:  {removed:,}",
+    ]
+
+    if stats["per_city"]:
+        lines.append("\nPer city:")
+        for city, count in sorted(stats["per_city"].items(), key=lambda x: -x[1]):
+            lines.append(f"  {city}: {count:,} duplicates removed")
+
+    return "\n".join(lines)
 
 
 # --- Large PDF content validation ---
