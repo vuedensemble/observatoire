@@ -14,6 +14,8 @@ from observatoire.processors.pdf_filter import (
     filter_all_cities,
     generate_report,
     build_manifest,
+    deduplicate_manifest_by_url,
+    generate_dedup_report,
     validate_large_pdfs_in_manifest,
     generate_validation_report,
 )
@@ -202,6 +204,10 @@ def filter_pdfs_command(args):
     print(report)
 
     manifest = build_manifest(results)
+
+    # Deduplicate by source URL (same PDF downloaded into multiple sections)
+    manifest, dedup_stats = deduplicate_manifest_by_url(manifest)
+    print(generate_dedup_report(dedup_stats))
 
     # Validate large PDFs if requested
     if args.validate_large:
